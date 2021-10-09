@@ -4,15 +4,23 @@
   <meta charset="utf-8">
   
   
-  <title>Hexo</title>
+  <title>Hive | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="第一章 Hive基本概念1.1 定义一个数据仓库，解决海量结构化日志的数据统计，本质是将HQL转化成MapReduce程序。 第三章 Hive数据类型3.1 基本数据类型 INT（常用）  BIGINT  DOUBLE  decimal(10, 4) 准确精度类型  STRING（常用）  集合数据类型  STRUCT（和C的struct类似）  MAP  array 赋值 select a[0]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hive">
+<meta property="og:url" content="http://example.com/post/3.BigData/hive.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="第一章 Hive基本概念1.1 定义一个数据仓库，解决海量结构化日志的数据统计，本质是将HQL转化成MapReduce程序。 第三章 Hive数据类型3.1 基本数据类型 INT（常用）  BIGINT  DOUBLE  decimal(10, 4) 准确精度类型  STRING（常用）  集合数据类型  STRUCT（和C的struct类似）  MAP  array 赋值 select a[0]">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/liyunh/image/raw/master/master/202110060744987.png">
+<meta property="og:image" content="https://gitee.com/liyunh/image/raw/master/master/202110060744996.png">
+<meta property="og:image" content="https://gitee.com/liyunh/image/raw/master/master/202110061915481.png">
+<meta property="article:published_time" content="2021-10-05T23:44:14.290Z">
+<meta property="article:modified_time" content="2021-10-09T09:46:29.363Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/liyunh/image/raw/master/master/202110060744987.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -65,186 +73,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-test" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/post/test.html" class="article-date">
-  <time class="dt-published" datetime="2021-10-09T09:15:52.808Z" itemprop="datePublished">2021-10-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/post/test.html">test</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/post/test.html" data-id="ckujl25fb00009u3n5ik7cctb" data-title="test" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-1.Personal/笔记系统搭建" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/post/1.Personal/%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA.html" class="article-date">
-  <time class="dt-published" datetime="2021-10-09T08:47:06.212Z" itemprop="datePublished">2021-10-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>[TOC]</p>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><h1 id="一-现状分析"><a href="#一-现状分析" class="headerlink" title="一 现状分析"></a>一 现状分析</h1><ol>
-<li>Notion：外国软件，支持Web，Window，Mac。很好用，但是图床是存在他自己的服务器上，迁移比较麻烦。</li>
-<li>语雀：阿里出品，支持Web，Window，Mac，思维导图等内容，也挺好用的。</li>
-<li>OneNote：微软出品，没有那没好用</li>
-<li>WizNote：国内软件，付费，无功无过</li>
-<li>幕布：国内软件，付费，制作思维导图不错，处理不了复杂文本</li>
-</ol>
-<h3 id="github-page"><a href="#github-page" class="headerlink" title="github page"></a>github page</h3><h2 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h2><p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">官方文档</a></p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ol>
-<li><p>准备内容</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nodejs</span><br><span class="line">sudo apt-get install npm</span><br><span class="line">sudo apt-get install git </span><br></pre></td></tr></table></figure></li>
-<li><p>安装</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ~/hexo</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-cli -g</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo init blog</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> blog</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo g <span class="comment"># 或者hexo generate</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo s <span class="comment"># 或者hexo server，可以在http://localhost:4000/ 查看</span></span></span><br></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo n == hexo new</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo g == hexo generate</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo s == hexo server</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo d == hexo deploy</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="部署Hexo到Github-Pages"><a href="#部署Hexo到Github-Pages" class="headerlink" title="部署Hexo到Github Pages"></a>部署Hexo到Github Pages</h3><p>部署到github，在_config.yml中最后一行修改：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:username/username.github.io.git  # 修改修改</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-<p>其他平台参考<a target="_blank" rel="noopener" href="https://hexo.io/docs/deployment.html">deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/post/1.Personal/%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA.html" data-id="ckujlxfmj0000p53n9iw54l9i" data-title="" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/post/hello-world.html" class="article-date">
-  <time class="dt-published" datetime="2021-10-09T08:35:57.113Z" itemprop="datePublished">2021-10-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/post/hello-world.html">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/post/hello-world.html" data-id="ckujjnnqi0000ga3ndula9pze" data-title="Hello World" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-10.Body/运动解剖学" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/post/10.Body/%E8%BF%90%E5%8A%A8%E8%A7%A3%E5%89%96%E5%AD%A6.html" class="article-date">
-  <time class="dt-published" datetime="2021-10-06T23:58:50.868Z" itemprop="datePublished">2021-10-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/post/10.Body/%E8%BF%90%E5%8A%A8%E8%A7%A3%E5%89%96%E5%AD%A6.html">运动解剖学</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>[toc]</p>
-<h1 id="一-概论"><a href="#一-概论" class="headerlink" title="一 概论"></a>一 概论</h1><h2 id="1-1-解剖学姿势"><a href="#1-1-解剖学姿势" class="headerlink" title="1.1 解剖学姿势"></a>1.1 解剖学姿势</h2><h2 id="1-2-人体运动面"><a href="#1-2-人体运动面" class="headerlink" title="1.2 人体运动面"></a>1.2 人体运动面</h2><h2 id="1-3-骨骼"><a href="#1-3-骨骼" class="headerlink" title="1.3 骨骼"></a>1.3 骨骼</h2><h2 id="1-4-关节"><a href="#1-4-关节" class="headerlink" title="1.4 关节"></a>1.4 关节</h2><h2 id="1-5-肌肉"><a href="#1-5-肌肉" class="headerlink" title="1.5 肌肉"></a>1.5 肌肉</h2><h2 id="1-6-肌肉收缩形式"><a href="#1-6-肌肉收缩形式" class="headerlink" title="1.6 肌肉收缩形式"></a>1.6 肌肉收缩形式</h2><h1 id="二-躯干"><a href="#二-躯干" class="headerlink" title="二 躯干"></a>二 躯干</h1><h2 id="2-1-人体体态学"><a href="#2-1-人体体态学" class="headerlink" title="2.1 人体体态学"></a>2.1 人体体态学</h2><h2 id="2-2-躯干的整体运动"><a href="#2-2-躯干的整体运动" class="headerlink" title="2.2 躯干的整体运动"></a>2.2 躯干的整体运动</h2><h2 id="2-3-运动中的椎骨"><a href="#2-3-运动中的椎骨" class="headerlink" title="2.3 运动中的椎骨"></a>2.3 运动中的椎骨</h2><h2 id="2-4-盆骨"><a href="#2-4-盆骨" class="headerlink" title="2.4 盆骨"></a>2.4 盆骨</h2><h2 id="2-5-骶骨"><a href="#2-5-骶骨" class="headerlink" title="2.5 骶骨"></a>2.5 骶骨</h2><h2 id="2-6-脊柱腰段"><a href="#2-6-脊柱腰段" class="headerlink" title="2.6 脊柱腰段"></a>2.6 脊柱腰段</h2><h2 id="2-7-脊柱胸段"><a href="#2-7-脊柱胸段" class="headerlink" title="2.7 脊柱胸段"></a>2.7 脊柱胸段</h2><h2 id="2-8-脊柱颈段"><a href="#2-8-脊柱颈段" class="headerlink" title="2.8 脊柱颈段"></a>2.8 脊柱颈段</h2><h2 id="2-9-躯干与颈后部的肌肉"><a href="#2-9-躯干与颈后部的肌肉" class="headerlink" title="2.9 躯干与颈后部的肌肉"></a>2.9 躯干与颈后部的肌肉</h2><h2 id="2-10-颈前面及侧面的肌肉"><a href="#2-10-颈前面及侧面的肌肉" class="headerlink" title="2.10 颈前面及侧面的肌肉"></a>2.10 颈前面及侧面的肌肉</h2><h2 id="2-11-胸肌"><a href="#2-11-胸肌" class="headerlink" title="2.11 胸肌"></a>2.11 胸肌</h2><h1 id="三-肩部"><a href="#三-肩部" class="headerlink" title="三 肩部"></a>三 肩部</h1><h1 id="四-肘"><a href="#四-肘" class="headerlink" title="四 肘"></a>四 肘</h1><h1 id="五-手腕与手掌"><a href="#五-手腕与手掌" class="headerlink" title="五 手腕与手掌"></a>五 手腕与手掌</h1><h1 id="六-髋与膝"><a href="#六-髋与膝" class="headerlink" title="六 髋与膝"></a>六 髋与膝</h1><h1 id="七-踝与足"><a href="#七-踝与足" class="headerlink" title="七 踝与足"></a>七 踝与足</h1>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/post/10.Body/%E8%BF%90%E5%8A%A8%E8%A7%A3%E5%89%96%E5%AD%A6.html" data-id="ckujn7ln50001a53n0og0790b" data-title="运动解剖学" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-3.BigData/hive" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-3.BigData/hive" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/post/3.BigData/hive.html" class="article-date">
   <time class="dt-published" datetime="2021-10-05T23:44:14.290Z" itemprop="datePublished">2021-10-06</time>
@@ -257,8 +86,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/post/3.BigData/hive.html">Hive</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      Hive
     </h1>
   
 
@@ -927,452 +756,28 @@ pmod<span class="token punctuation">(</span>datediff<span class="token punctuati
     </footer>
   </div>
   
-</article>
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-4.Language/markdown" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/post/4.Language/markdown.html" class="article-date">
-  <time class="dt-published" datetime="2021-10-05T12:49:23.450Z" itemprop="datePublished">2021-10-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <a href="/post/10.Body/%E8%BF%90%E5%8A%A8%E8%A7%A3%E5%89%96%E5%AD%A6.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/post/4.Language/markdown.html">Markdown</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>[toc]</p>
-<h1 id="Mermaid"><a href="#Mermaid" class="headerlink" title="Mermaid"></a>Mermaid</h1><pre class="mermaid">classDiagram
-
-  Class01 <|-- AveryLongClass: Cool
-  <<interface>> Class01
-  Class09-->C2: Where am i?
-  Class09 --* C3
-  Class09 --|> Class07
-  Class07: equals()
-  Class07: Object[] elementData
-  Class01: size()
-  Class01: int chimp
-  Class01: int gorilla
-  class Class10 {
-    <<service>>
-    int id
-    size()
-  }</pre>
-
-<pre class="mermaid">classDiagram
-    classA --|> classB : 继承
-    classC --* classD : 组合
-    classE --o classF : 聚合
-    classG --> classH : 单向关联
-    classI -- classJ : 双向关联
-    classK ..> classL : 依赖
-    classM ..|> classN : 接口实现
-    classO .. classP : Link(Dashed)</pre>
-
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/mybdss/p/14958781.html">https://www.cnblogs.com/mybdss/p/14958781.html</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/post/4.Language/markdown.html" data-id="ckujlxfmn0001p53ne4me21zu" data-title="Markdown" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2.Computer Basics/设计模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/post/2.Computer%20Basics/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html" class="article-date">
-  <time class="dt-published" datetime="2021-09-30T09:50:48.396Z" itemprop="datePublished">2021-09-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+          运动解剖学
         
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/post/2.Computer%20Basics/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html">设计模式</a>
-    </h1>
   
+    <a href="/post/4.Language/markdown.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Markdown</div>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>设计模式出现的原因是因为由面向过程编程改成了面向对象编程。面向对象编程的好处有以下几点，以活字印刷为例：</p>
-<ol>
-<li>可维护。改文章的话，只需要改字</li>
-<li>可复用。以前的文字，现在还可以用</li>
-<li>可拓展。如果需要新加字，另外新刻字就可以了</li>
-<li>灵活性好。字是最小单元，可以随意调整</li>
-</ol>
-<h1 id="一-UML知识"><a href="#一-UML知识" class="headerlink" title="一 UML知识"></a>一 UML知识</h1><p><img src="https://gitee.com/liyunh/image/raw/master/master/202110060749537.png" alt="Untitled"></p>
-<hr>
-<h1 id="二-设计原则"><a href="#二-设计原则" class="headerlink" title="二 设计原则"></a>二 设计原则</h1><h2 id="2-1-单一职责原则"><a href="#2-1-单一职责原则" class="headerlink" title="2.1 单一职责原则"></a>2.1 单一职责原则</h2><p>就一个类而言，应该仅有一个引起它变化的原因</p>
-<h2 id="2-2-开放封闭原则"><a href="#2-2-开放封闭原则" class="headerlink" title="2.2 开放封闭原则"></a>2.2 开放封闭原则</h2><p>扩展是开放的，修改是封闭的。面对需求时，对程序的改动是通过增加新代码进行的，而不是更改现有的代码。拒绝不成熟的抽象和抽象本身同样重要。</p>
-<h2 id="2-3-依赖倒转原则"><a href="#2-3-依赖倒转原则" class="headerlink" title="2.3 依赖倒转原则"></a>2.3 依赖倒转原则</h2><p>抽象不依赖细节，细节应该依赖抽象。就是要针对接口编程，不要针对实现编程。程序中所有的依赖关系都应该是终止于抽象类或者接口，那就是面向对象设计，反之就是面向过程设计。</p>
-<h2 id="2-4-里氏代换原则"><a href="#2-4-里氏代换原则" class="headerlink" title="2.4 里氏代换原则"></a>2.4 里氏代换原则</h2><p>子类型必须能够替换掉父类型</p>
-<h1 id="三-创建型模式（5种）"><a href="#三-创建型模式（5种）" class="headerlink" title="三 创建型模式（5种）"></a>三 创建型模式（5种）</h1><p>这些设计模式提供了一种在创建对象的同时隐藏创建逻辑的方式，而不是使用 new 运算符直接实例化对象。这使得程序在判断针对某个给定实例需要创建哪些对象时更加灵活。</p>
-<h2 id="3-1-简单工厂（Simple-Factory）模式（常用）"><a href="#3-1-简单工厂（Simple-Factory）模式（常用）" class="headerlink" title="3.1 简单工厂（Simple Factory）模式（常用）"></a>3.1 简单工厂（Simple Factory）模式（常用）</h2><h3 id="3-1-1-使用场景"><a href="#3-1-1-使用场景" class="headerlink" title="3.1.1 使用场景"></a>3.1.1 使用场景</h3><h3 id="3-1-2-类图"><a href="#3-1-2-类图" class="headerlink" title="3.1.2 类图"></a>3.1.2 类图</h3><pre class="mermaid">classDiagram
-
-class Phone {
-    <<abstract>>
-    +produce() Phone 
-}
-class XiaoMiPhone {
-    +produce() XiaoMiPhone
-}
-class IPhone {
-    +produce() IPhone
-}
-class Factory {
-    +producePhone(String type) Phone
-}
-
-Phone <|-- XiaoMiPhone
-Phone <|-- IPhone
-Phone <.. Factory</pre>
-
-<h3 id="3-1-3-代码实现"><a href="#3-1-3-代码实现" class="headerlink" title="3.1.3 代码实现"></a>3.1.3 代码实现</h3><p><strong>Phone类</strong>：手机标准规范类(AbstractProduct)</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"> <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token class-name">Phone</span> <span class="token punctuation">&#123;</span>
-     <span class="token keyword">void</span> <span class="token function">produce</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
- <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>MiPhone类</strong>：制造小米手机（Product1）</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">XiaoMiPhone</span> extend <span class="token class-name">Phone</span> <span class="token punctuation">&#123;</span>
-     <span class="token keyword">public</span> <span class="token class-name">XiaoMiPhone</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-         <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">produce</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-     <span class="token punctuation">&#125;</span>
-     <span class="token annotation punctuation">@Override</span>
-     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">produce</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-         <span class="token comment">// TODO Auto-generated method stub</span>
-         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"make xiaomi phone!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-     <span class="token punctuation">&#125;</span>
- <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>IPhone类</strong>：制造苹果手机（Product2）</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">IPhone</span> <span class="token keyword">implements</span> <span class="token class-name">Phone</span> <span class="token punctuation">&#123;</span>
-     <span class="token keyword">public</span> <span class="token class-name">IPhone</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-         <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">produce</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-     <span class="token punctuation">&#125;</span>
-     <span class="token annotation punctuation">@Override</span>
-     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">produce</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-         <span class="token comment">// TODO Auto-generated method stub</span>
-         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"make iphone!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-     <span class="token punctuation">&#125;</span>
- <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>PhoneFactory类</strong>：手机代工厂（Factory）</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Factory</span> <span class="token punctuation">&#123;</span>
-     <span class="token keyword">public</span> <span class="token class-name">Phone</span> <span class="token function">producePhone</span><span class="token punctuation">(</span><span class="token class-name">String</span> phoneType<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-         <span class="token keyword">if</span><span class="token punctuation">(</span>phoneType<span class="token punctuation">.</span><span class="token function">equalsIgnoreCase</span><span class="token punctuation">(</span><span class="token string">"MiPhone"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-             <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">MiPhone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-         <span class="token punctuation">&#125;</span>
-         <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>phoneType<span class="token punctuation">.</span><span class="token function">equalsIgnoreCase</span><span class="token punctuation">(</span><span class="token string">"iPhone"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-             <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">IPhone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-         <span class="token punctuation">&#125;</span>
-         <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-     <span class="token punctuation">&#125;</span>
- <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>演示：</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Demo</span> <span class="token punctuation">&#123;</span>
-     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arg<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-         <span class="token class-name">PhoneFactory</span> factory <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PhoneFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-         <span class="token class-name">Phone</span> miPhone <span class="token operator">=</span> factory<span class="token punctuation">.</span><span class="token function">makePhone</span><span class="token punctuation">(</span><span class="token string">"MiPhone"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>            <span class="token comment">// make xiaomi phone!</span>
-         <span class="token class-name">IPhone</span> iPhone <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">IPhone</span><span class="token punctuation">)</span>factory<span class="token punctuation">.</span><span class="token function">makePhone</span><span class="token punctuation">(</span><span class="token string">"iPhone"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// make iphone!</span>
-     <span class="token punctuation">&#125;</span>
- <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="1-1-2-工厂方法模式-Factory-Method"><a href="#1-1-2-工厂方法模式-Factory-Method" class="headerlink" title="1.1.2 工厂方法模式(Factory Method)"></a>1.1.<strong>2 工厂方法模式(Factory Method)</strong></h3><p>和简单工厂模式中工厂负责生产所有产品相比，工厂方法模式将生成具体产品的任务分发给具体的产品工厂，其UML类图如下：</p>
-<p><img src="https://img2018.cnblogs.com/blog/1419489/201906/1419489-20190628154133368-906051111.png" alt="https://img2018.cnblogs.com/blog/1419489/201906/1419489-20190628154133368-906051111.png"></p>
-<p>也就是定义一个抽象工厂，其定义了产品的生产接口，但不负责具体的产品，将生产任务交给不同的派生类工厂。这样不用通过指定类型来创建对象了。</p>
-<p>接下来继续使用生产手机的例子来讲解该模式。</p>
-<p>其中和产品相关的Phone类、MiPhone类和IPhone类的定义不变。</p>
-<p><strong>AbstractFactory类</strong>：生产不同产品的工厂的抽象类</p>
-<pre class="line-numbers language-none"><code class="language-none"> public interface AbstractFactory &#123;
-     Phone makePhone();
- &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>XiaoMiFactory类</strong>：生产小米手机的工厂（ConcreteFactory1）</p>
-<pre class="line-numbers language-none"><code class="language-none"> public class XiaoMiFactory implements AbstractFactory&#123;
-     @Override
-     public Phone makePhone() &#123;
-         return new MiPhone();
-     &#125;
- &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>AppleFactory类</strong>：生产苹果手机的工厂（ConcreteFactory2）</p>
-<pre class="line-numbers language-none"><code class="language-none"> public class AppleFactory implements AbstractFactory &#123;
-     @Override
-     public Phone makePhone() &#123;
-         return new IPhone();
-     &#125;
- &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>演示：</strong></p>
-<pre class="line-numbers language-none"><code class="language-none"> public class Demo &#123;
-     public static void main(String[] arg) &#123;
-         AbstractFactory miFactory &#x3D; new XiaoMiFactory();
-         AbstractFactory appleFactory &#x3D; new AppleFactory();
-         miFactory.makePhone();            &#x2F;&#x2F; make xiaomi phone!
-         appleFactory.makePhone();        &#x2F;&#x2F; make iphone!
-     &#125;
- &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="1-1-3-抽象工厂模式-Abstract-Factory"><a href="#1-1-3-抽象工厂模式-Abstract-Factory" class="headerlink" title="1.1.3 抽象工厂模式(Abstract Factory)"></a>1.1.<strong>3 抽象工厂模式(Abstract Factory)</strong></h3><p>上面两种模式不管工厂怎么拆分抽象，都只是针对一类产品<strong>Phone</strong>（AbstractProduct），如果要生成另一种产品PC，应该怎么表示呢？</p>
-<p>最简单的方式是把2中介绍的工厂方法模式完全复制一份，不过这次生产的是PC。但同时也就意味着我们要完全复制和修改Phone生产管理的所有代码，显然这是一个笨办法，并不利于扩展和维护。</p>
-<p>抽象工厂模式通过在AbstarctFactory中增加创建产品的接口，并在具体子工厂中实现新加产品的创建，当然前提是子工厂支持生产该产品。否则继承的这个接口可以什么也不干。</p>
-<p>其UML类图如下：</p>
-<p><img src="https://gitee.com/liyunh/image/raw/master/master/202110060739224.png" alt="https://img2018.cnblogs.com/blog/1419489/201906/1419489-20190628170705865-1781414242.png"></p>
-<p>从上面类图结构中可以清楚的看到如何在工厂方法模式中通过增加新产品接口来实现产品的增加的。</p>
-<p>接下来我们继续通过小米和苹果产品生产的例子来解释该模式。</p>
-<p>为了弄清楚上面的结构，我们使用具体的产品和工厂来表示上面的UML类图，能更加清晰的看出模式是如何演变的：</p>
-<p><img src="https://gitee.com/liyunh/image/raw/master/master/202110060739252.png" alt="https://img2018.cnblogs.com/blog/1419489/201906/1419489-20190628164001258-637961514.png"></p>
-<p><strong>PC类</strong>：定义PC产品的接口(AbstractPC)</p>
-<pre class="line-numbers language-none"><code class="language-none"> public interface PC &#123;
-     void make();
- &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>MiPC类</strong>：定义小米电脑产品(MIPC)</p>
-<pre class="line-numbers language-none"><code class="language-none"> public class MiPC implements PC &#123;
-     public MiPC() &#123;
-         this.make();
-     &#125;
-     @Override
-     public void make() &#123;
-         &#x2F;&#x2F; TODO Auto-generated method stub
-         System.out.println(&quot;make xiaomi PC!&quot;);
-     &#125;
- &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>MAC类</strong>：定义苹果电脑产品(MAC)</p>
-<pre class="line-numbers language-none"><code class="language-none"> public class MAC implements PC &#123;
-     public MAC() &#123;
-         this.make();
-     &#125;
-     @Override
-     public void make() &#123;
-         &#x2F;&#x2F; TODO Auto-generated method stub
-         System.out.println(&quot;make MAC!&quot;);
-     &#125;
- &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>下面需要修改工厂相关的类的定义：</p>
-<p><strong>AbstractFactory类</strong>：增加PC产品制造接口</p>
-<pre class="line-numbers language-none"><code class="language-none"> public interface AbstractFactory &#123;
-     Phone makePhone();
-     PC makePC();
- &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>XiaoMiFactory类</strong>：增加小米PC的制造（ConcreteFactory1）</p>
-<pre class="line-numbers language-none"><code class="language-none"> public class XiaoMiFactory implements AbstractFactory&#123;
-     @Override
-     public Phone makePhone() &#123;
-         return new MiPhone();
-     &#125;
-     @Override
-     public PC makePC() &#123;
-         return new MiPC();
-     &#125;
- &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>AppleFactory类</strong>：增加苹果PC的制造（ConcreteFactory2）</p>
-<pre class="line-numbers language-none"><code class="language-none"> public class AppleFactory implements AbstractFactory &#123;
-     @Override
-     public Phone makePhone() &#123;
-         return new IPhone();
-     &#125;
-     @Override
-     public PC makePC() &#123;
-         return new MAC();
-     &#125;
- &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>演示：</strong></p>
-<pre class="line-numbers language-none"><code class="language-none"> public class Demo &#123;
-     public static void main(String[] arg) &#123;
-         AbstractFactory miFactory &#x3D; new XiaoMiFactory();
-         AbstractFactory appleFactory &#x3D; new AppleFactory();
-         miFactory.makePhone();            &#x2F;&#x2F; make xiaomi phone!
-         miFactory.makePC();                &#x2F;&#x2F; make xiaomi PC!
-         appleFactory.makePhone();        &#x2F;&#x2F; make iphone!
-         appleFactory.makePC();            &#x2F;&#x2F; make MAC!
-     &#125;
- &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a><strong>总结：</strong></h3><p>上面介绍的三种工厂模式有各自的应用场景，实际应用时能解决问题满足需求即可，可灵活变通，无所谓高级与低级。</p>
-<h2 id="1-2-抽象工厂（Factory-Method）模式（常用）"><a href="#1-2-抽象工厂（Factory-Method）模式（常用）" class="headerlink" title="1.2 抽象工厂（Factory Method）模式（常用）"></a><strong>1.2 抽象工厂（Factory Method）模式（常用）</strong></h2><h2 id="1-3-单例（Singleton）模式（常用）"><a href="#1-3-单例（Singleton）模式（常用）" class="headerlink" title="1.3 单例（Singleton）模式（常用）"></a><strong>1.3 单例（Singleton）模式（常用）</strong></h2><h2 id="1-4-建造者（Builder）模式"><a href="#1-4-建造者（Builder）模式" class="headerlink" title="1.4 建造者（Builder）模式"></a><strong>1.4 建造者（Builder）模式</strong></h2><h2 id="1-5-原型（Prototype）模式"><a href="#1-5-原型（Prototype）模式" class="headerlink" title="1.5 原型（Prototype）模式"></a><strong>1.5 原型（Prototype）模式</strong></h2><h1 id="三-结构型模式（7种）"><a href="#三-结构型模式（7种）" class="headerlink" title="三 结构型模式（7种）"></a><strong>三 结构型模式（7种）</strong></h1><p>这些设计模式关注类和对象的组合。继承的概念被用来组合接口和定义组合对象获得新功能的方式。</p>
-<h2 id="3-1-适配器模式（Adapter）"><a href="#3-1-适配器模式（Adapter）" class="headerlink" title="3.1 适配器模式（Adapter）"></a>3.1 适配器模式（Adapter）</h2><h2 id="2-装饰（Decorator）模式"><a href="#2-装饰（Decorator）模式" class="headerlink" title=".2 装饰（Decorator）模式"></a><strong>.2 装饰（Decorator）模式</strong></h2><h3 id="3-2-1-说明"><a href="#3-2-1-说明" class="headerlink" title="3.2.1 说明"></a>3.2.1 说明</h3><p>装饰器模式（Decorator Pattern）允许向一个现有的对象添加新的功能，同时又不改变其结构。这种类型的设计模式属于结构型模式，它是作为现有的类的一个包装。</p>
-<p>这种模式创建了一个装饰类，用来包装原有的类，并在保持类方法签名完整性的前提下，提供了额外的功能。</p>
-<h3 id="3-2-2-类图"><a href="#3-2-2-类图" class="headerlink" title="3.2.2 类图"></a>3.2.2 类图</h3><h2 id="2-3-代理（Proxy）模式（常用）"><a href="#2-3-代理（Proxy）模式（常用）" class="headerlink" title="2.3 代理（Proxy）模式（常用）"></a><strong>2.3 代理（Proxy）模式（常用）</strong></h2><h2 id="2-4-外观-门面（Facade）模式"><a href="#2-4-外观-门面（Facade）模式" class="headerlink" title="2.4 外观/门面（Facade）模式"></a><strong>2.4 外观/门面（Facade）模式</strong></h2><h2 id="2-5-桥接（Bridge）模式"><a href="#2-5-桥接（Bridge）模式" class="headerlink" title="2.5 桥接（Bridge）模式"></a><strong>2.5 桥接（Bridge）模式</strong></h2><h2 id="2-6-组合-合成（Composite）模式"><a href="#2-6-组合-合成（Composite）模式" class="headerlink" title="2.6 组合/合成（Composite）模式"></a><strong>2.6 组合/合成（Composite）模式</strong></h2><h2 id="2-7-享元（Flyweight-Pattern）模式"><a href="#2-7-享元（Flyweight-Pattern）模式" class="headerlink" title="2.7 享元（Flyweight Pattern）模式"></a><strong>2.7 享元（Flyweight Pattern）模式</strong></h2><h1 id="五-行为型模式（11种）："><a href="#五-行为型模式（11种）：" class="headerlink" title="五 行为型模式（11种）："></a>五 行为型模式（11种）：</h1><p>主要用于描述类或者对象怎样交互和怎样分配职责。</p>
-<h2 id="1-策略（Strategy）模式"><a href="#1-策略（Strategy）模式" class="headerlink" title=".1 策略（Strategy）模式"></a>.1 策略（Strategy）模式</h2><h3 id="5-1-1-说明"><a href="#5-1-1-说明" class="headerlink" title="5.1.1 说明"></a>5.1.1 说明</h3><p>在策略模式（Strategy Pattern）中，一个类的行为或其算法可以在运行时更改。这种类型的设计模式属于行为型模式。</p>
-<p>在策略模式中，我们创建表示各种策略的对象和一个行为随着策略对象改变而改变的 context 对象。策略对象改变 context 对象的执行算法。</p>
-<h3 id="5-1-2-类图"><a href="#5-1-2-类图" class="headerlink" title="5.1.2 类图"></a>5.1.2 类图</h3><pre class="mermaid">classDiagram
-
-class Strategy {
-    <<abstract>>
-    +fun()
-}
-
-class StrategyA {
-    +fun()
-}
-class StrategyB {
-    +fun()
-}
-class Context {
-    +context()
-}
-
-Strategy <|-- StrategyA
-Strategy <|-- StrategyB
-Strategy --o Context</pre>
-
-<h3 id="5-1-3-代码实现"><a href="#5-1-3-代码实现" class="headerlink" title="5.1.3 代码实现"></a>5.1.3 代码实现</h3><p><strong>Strategy</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token class-name">Strategy</span> <span class="token punctuation">&#123;</span>
-
-    <span class="token keyword">int</span> <span class="token function">operation</span><span class="token punctuation">(</span><span class="token keyword">int</span> num1<span class="token punctuation">,</span> <span class="token keyword">int</span> num2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>StrategyA</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Add</span> <span class="token keyword">implements</span> <span class="token class-name">Strategy</span><span class="token punctuation">&#123;</span>
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">operation</span><span class="token punctuation">(</span><span class="token keyword">int</span> num1<span class="token punctuation">,</span> <span class="token keyword">int</span> num2<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> num1 <span class="token operator">+</span> num2<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>StrategyB</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Sub</span> <span class="token keyword">implements</span> <span class="token class-name">Strategy</span><span class="token punctuation">&#123;</span>
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">operation</span><span class="token punctuation">(</span><span class="token keyword">int</span> num1<span class="token punctuation">,</span> <span class="token keyword">int</span> num2<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> num1 <span class="token operator">-</span> num2<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>Context</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Context</span> <span class="token punctuation">&#123;</span>
-    
-    <span class="token keyword">private</span> <span class="token class-name">Strategy</span> strategy<span class="token punctuation">;</span>
-
-    <span class="token keyword">public</span> <span class="token class-name">Context</span><span class="token punctuation">(</span><span class="token class-name">Strategy</span> strategy<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>strategy <span class="token operator">=</span> strategy<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">doStrategy</span><span class="token punctuation">(</span><span class="token keyword">int</span> num1<span class="token punctuation">,</span> <span class="token keyword">int</span> num2<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> strategy<span class="token punctuation">.</span><span class="token function">operation</span><span class="token punctuation">(</span>num1<span class="token punctuation">,</span> num2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>Client</strong></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StrategyTest</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">Context</span> context <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Context</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Add</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span><span class="token function">doStrategy</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="3-2-模板方法（Templete-Method）模式"><a href="#3-2-模板方法（Templete-Method）模式" class="headerlink" title="3.2 模板方法（Templete Method）模式"></a>3.2 模板方法（Templete Method）模式</h2><h2 id="3-3-观察者（Observer）模式"><a href="#3-3-观察者（Observer）模式" class="headerlink" title="3.3 观察者（Observer）模式"></a>3.3 观察者（Observer）模式</h2><h2 id="3-4-迭代子（Iterator）模式"><a href="#3-4-迭代子（Iterator）模式" class="headerlink" title="3.4 迭代子（Iterator）模式"></a>3.4 迭代子（Iterator）模式</h2><h2 id="3-5-责任链（Chain-of-Responsibility）模式"><a href="#3-5-责任链（Chain-of-Responsibility）模式" class="headerlink" title="3.5 责任链（Chain of Responsibility）模式"></a>3.5 责任链（Chain of Responsibility）模式</h2><h2 id="3-6-命令（Command）模式"><a href="#3-6-命令（Command）模式" class="headerlink" title="3.6 命令（Command）模式"></a>3.6 命令（Command）模式</h2><h2 id="3-7备忘录（Memento）模式"><a href="#3-7备忘录（Memento）模式" class="headerlink" title="3.7备忘录（Memento）模式"></a>3.7备忘录（Memento）模式</h2><h2 id="5-8-状态（State）模式"><a href="#5-8-状态（State）模式" class="headerlink" title="5.8 状态（State）模式"></a>5.8 状态（State）模式</h2><h3 id="5-8-1-说明"><a href="#5-8-1-说明" class="headerlink" title="5.8.1 说明"></a>5.8.1 说明</h3><p><strong>意图：</strong>允许对象在内部状态发生改变时改变它的行为，对象看起来好像修改了它的类。</p>
-<p><strong>主要解决：</strong>对象的行为依赖于它的状态（属性），并且可以根据它的状态改变而改变它的相关行为。</p>
-<p><strong>何时使用：</strong>代码中包含大量与对象状态有关的条件语句。</p>
-<p><strong>如何解决：</strong>将各种具体的状态类抽象出来。</p>
-<p><strong>关键代码：</strong>通常命令模式的接口中只有一个方法。而状态模式的接口中有一个或者多个方法。而且，状态模式的实现类的方法，一般返回值，或者是改变实例变量的值。也就是说，状态模式一般和对象的状态有关。实现类的方法有不同的功能，覆盖接口中的方法。状态模式和命令模式一样，也可以用于消除 if…else 等条件选择语句。</p>
-<p><strong>应用实例：</strong> 1、打篮球的时候运动员可以有正常状态、不正常状态和超常状态。 2、曾侯乙编钟中，’钟是抽象接口’,’钟A’等是具体状态，’曾侯乙编钟’是具体环境（Context）。</p>
-<p><strong>优点：</strong> 1、封装了转换规则。 2、枚举可能的状态，在枚举状态之前需要确定状态种类。 3、将所有与某个状态有关的行为放到一个类中，并且可以方便地增加新的状态，只需要改变对象状态即可改变对象的行为。 4、允许状态转换逻辑与状态对象合成一体，而不是某一个巨大的条件语句块。 5、可以让多个环境对象共享一个状态对象，从而减少系统中对象的个数。</p>
-<p><strong>缺点：</strong> 1、状态模式的使用必然会增加系统类和对象的个数。 2、状态模式的结构与实现都较为复杂，如果使用不当将导致程序结构和代码的混乱。 3、状态模式对”开闭原则”的支持并不太好，对于可以切换状态的状态模式，增加新的状态类需要修改那些负责状态转换的源代码，否则无法切换到新增状态，而且修改某个状态类的行为也需修改对应类的源代码。</p>
-<p><strong>使用场景：</strong> 1、行为随状态改变而改变的场景。 2、条件、分支语句的代替者。</p>
-<p><strong>注意事项：</strong>在行为受状态约束的时候使用状态模式，而且状态不超过 5 个。</p>
-<h3 id="5-8-2-类图"><a href="#5-8-2-类图" class="headerlink" title="5.8.2 类图"></a>5.8.2 类图</h3><pre class="mermaid">classDiagram
-
-class State {
-  <<interface>>
-  +doAction()
-}
-
-class StartState {
-    +doAction()
-}
-
-class StopState {
-    +doAction()
-}
-
-class Context {
-    -state: State
-    +Context()
-    +getState(): State
-    +setState(State state)
-}
-
-State <.. StartState
-State <.. StopState
-State --o Context</pre>
-
-<p>就是</p>
-<h2 id="5-9-访问者（Visitor）模式"><a href="#5-9-访问者（Visitor）模式" class="headerlink" title="5.9 访问者（Visitor）模式"></a>5.9 访问者（Visitor）模式</h2><h2 id="5-10-中介者-调停者（Mediator）模式"><a href="#5-10-中介者-调停者（Mediator）模式" class="headerlink" title="5.10 中介者/调停者（Mediator）模式"></a>5.10 中介者/调停者（Mediator）模式</h2><h2 id="5-11-解释器（Interpreter）模式"><a href="#5-11-解释器（Interpreter）模式" class="headerlink" title="5.11 解释器（Interpreter）模式"></a>5.11 解释器（Interpreter）模式</h2><h1 id="一-UML相关知识"><a href="#一-UML相关知识" class="headerlink" title="一 UML相关知识"></a>一 UML相关知识</h1><h2 id="1-1-实体"><a href="#1-1-实体" class="headerlink" title="1.1 实体"></a>1.1 实体</h2><h3 id="1-1-1-类，抽象类"><a href="#1-1-1-类，抽象类" class="headerlink" title="1.1.1 类，抽象类"></a>1.1.1 类，抽象类</h3><p>![Untitled](/Users/liyunhan/Desktop/Export-ceba61ce-4255-4080-bf09-6b46d0cd0d84/设计模式 8c5668a8c6b746559d40a20773eb75da/Untitled 1.png)</p>
-<p>包括类，抽象类（斜体）</p>
-<ol>
-<li><p>第一行：实体名</p>
-</li>
-<li><p>第二行：属性</p>
-<p>+：public</p>
-<p>-：private</p>
-<p>#：protected</p>
-</li>
-<li><p>第三行：方法</p>
-</li>
-</ol>
-<h3 id="1-1-2-接口"><a href="#1-1-2-接口" class="headerlink" title="1.1.2 接口"></a>1.1.2 接口</h3><p><img src="https://gitee.com/liyunh/image/raw/master/master/202110060739164.png" alt="Untitled"></p>
-<h2 id="1-2-关系"><a href="#1-2-关系" class="headerlink" title="1.2 关系"></a>1.2 关系</h2><p>![Untitled](/Users/liyunhan/Desktop/Export-ceba61ce-4255-4080-bf09-6b46d0cd0d84/设计模式 8c5668a8c6b746559d40a20773eb75da/Untitled 3.png)</p>
-<h3 id="1-2-1-继承"><a href="#1-2-1-继承" class="headerlink" title="1.2.1 继承"></a>1.2.1 继承</h3><p>![Untitled](/Users/liyunhan/Desktop/Export-ceba61ce-4255-4080-bf09-6b46d0cd0d84/设计模式 8c5668a8c6b746559d40a20773eb75da/Untitled 4.png)</p>
-<p>A继承B，A指向B，使用空心三角加直线表示。</p>
-<h3 id="1-2-2-关联"><a href="#1-2-2-关联" class="headerlink" title="1.2.2 关联"></a>1.2.2 关联</h3><p>关联是一种“拥有”关系，指一个类需要“知道”另一类的属性或方法。在代码中的表现为在类A的定义中使用类B作为成员变量。</p>
-<p>![Untitled](/Users/liyunhan/Desktop/Export-ceba61ce-4255-4080-bf09-6b46d0cd0d84/设计模式 8c5668a8c6b746559d40a20773eb75da/Untitled 5.png)</p>
-<h3 id="1-2-3-聚合"><a href="#1-2-3-聚合" class="headerlink" title="1.2.3 聚合"></a>1.2.3 聚合</h3><p>聚合属于关联中“弱”的拥有关系，体现的是A可以包含B，但B不是A的一部分，两者的生命周期不同。如企鹅和企鹅群，企鹅组成了企鹅群，企鹅离开企鹅群可以单独存在。其结构图如下：</p>
-<p><img src="https://gitee.com/liyunh/image/raw/master/master/202110060739430.png" alt="Untitled"></p>
-<h3 id="1-2-4-组合"><a href="#1-2-4-组合" class="headerlink" title="1.2.4 组合"></a>1.2.4 组合</h3><p>组合属于关联中“强”的拥有关系，体现的是A包含B，B是A的一部分，两者有相同的生命周期。如企鹅和眼睛、鼻子等。</p>
-<p>![Untitled](/Users/liyunhan/Desktop/Export-ceba61ce-4255-4080-bf09-6b46d0cd0d84/设计模式 8c5668a8c6b746559d40a20773eb75da/Untitled 7.png)</p>
-<p>聚合和组合的区别在于整体与部分的生命周期不同，这在代码中也有所体现。在上述例子中，聚合关系中企鹅群类中引用企鹅类作为参数，并没有实例化Penguin，这就是说当Penguins类撤销时，penguin类存在并可能作为参数引用其他类当中。 组合关系中在Penguin类初始化的同时，创建Eyes和Nose对象，当Penguin类撤销时，Eyes和Nose类同时撤销，表现为三者的生命周期相同。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/post/2.Computer%20Basics/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html" data-id="ckujn7ln90002a53nam3fdvey" data-title="设计模式" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-
-  
 
 
 </section>
