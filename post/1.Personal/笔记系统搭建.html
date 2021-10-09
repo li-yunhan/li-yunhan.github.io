@@ -92,21 +92,35 @@
 <h3 id="github-page"><a href="#github-page" class="headerlink" title="github page"></a>github page</h3><h2 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h2><p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">官方文档</a></p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ol>
 <li><p>准备内容</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nodejs</span><br><span class="line">sudo apt-get install npm</span><br><span class="line">sudo apt-get install git </span><br></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> nodejs
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token function">npm</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token function">git</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
 <li><p>安装</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ~/hexo</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-cli -g</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo init blog</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> blog</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo g <span class="comment"># 或者hexo generate</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo s <span class="comment"># 或者hexo server，可以在http://localhost:4000/ 查看</span></span></span><br></pre></td></tr></table></figure></li>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ <span class="token builtin class-name">cd</span> ~/hexo
+$ <span class="token function">npm</span> <span class="token function">install</span> hexo-cli -g
+$ hexo init blog
+$ <span class="token builtin class-name">cd</span> blog
+$ <span class="token function">npm</span> <span class="token function">install</span>
+$ hexo g <span class="token comment"># 或者hexo generate</span>
+$ hexo s <span class="token comment"># 或者hexo server，可以在http://localhost:4000/ 查看</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ol>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo n == hexo new</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo g == hexo generate</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo s == hexo server</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo d == hexo deploy</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ hexo n <span class="token operator">==</span> hexo new
+$ hexo g <span class="token operator">==</span> hexo generate
+$ hexo s <span class="token operator">==</span> hexo server
+$ hexo d <span class="token operator">==</span> hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="部署Hexo到Github-Pages"><a href="#部署Hexo到Github-Pages" class="headerlink" title="部署Hexo到Github Pages"></a>部署Hexo到Github Pages</h3><p>部署到github，在_config.yml中最后一行修改：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:username/username.github.io.git  # 修改修改</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">deploy:
+  type: <span class="token function">git</span>
+  repo: git@github.com:username/username.github.io.git  <span class="token comment"># 修改修改</span>
+  branch: master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>其他平台参考<a target="_blank" rel="noopener" href="https://hexo.io/docs/deployment.html">deployment</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/post/1.Personal/%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA.html" data-id="ckujlxfmj0000p53n9iw54l9i" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/post/1.Personal/%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA.html" data-id="ckujo0gsr0003t33neya20k3k" data-title="" class="article-share-link">Share</a>
       
       
       
