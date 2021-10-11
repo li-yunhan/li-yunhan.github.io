@@ -1200,7 +1200,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-11 10:20:54" itemprop="dateModified" datetime="2021-10-11T10:20:54+08:00">2021-10-11</time>
+                <time title="Modified: 2021-10-11 10:22:45" itemprop="dateModified" datetime="2021-10-11T10:22:45+08:00">2021-10-11</time>
               </span>
 
           
@@ -1375,6 +1375,16 @@ class State {
 StartState: +adc()</pre>
 
 <p>就是</p>
+<pre class="mermaid">classDiagram
+State <|-- StartState
+<<interface>> State
+State: +doAction()
+
+
+StartState: +adc()</pre>
+
+
+
 <h2 id="5-9-访问者（Visitor）模式"><a href="#5-9-访问者（Visitor）模式" class="headerlink" title="5.9 访问者（Visitor）模式"></a>5.9 访问者（Visitor）模式</h2><h2 id="5-10-中介者-调停者（Mediator）模式"><a href="#5-10-中介者-调停者（Mediator）模式" class="headerlink" title="5.10 中介者/调停者（Mediator）模式"></a>5.10 中介者/调停者（Mediator）模式</h2><h2 id="5-11-解释器（Interpreter）模式"><a href="#5-11-解释器（Interpreter）模式" class="headerlink" title="5.11 解释器（Interpreter）模式"></a>5.11 解释器（Interpreter）模式</h2><h1 id="一-UML相关知识"><a href="#一-UML相关知识" class="headerlink" title="一 UML相关知识"></a>一 UML相关知识</h1><h2 id="1-1-实体"><a href="#1-1-实体" class="headerlink" title="1.1 实体"></a>1.1 实体</h2><h3 id="1-1-1-类，抽象类"><a href="#1-1-1-类，抽象类" class="headerlink" title="1.1.1 类，抽象类"></a>1.1.1 类，抽象类</h3><p>![Untitled](/Users/liyunhan/Desktop/Export-ceba61ce-4255-4080-bf09-6b46d0cd0d84/设计模式 8c5668a8c6b746559d40a20773eb75da/Untitled 1.png)</p>
 <p>包括类，抽象类（斜体）</p>
 <ol>
