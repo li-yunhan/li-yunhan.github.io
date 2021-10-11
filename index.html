@@ -1118,7 +1118,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-09 19:05:20" itemprop="dateModified" datetime="2021-10-09T19:05:20+08:00">2021-10-09</time>
+                <time title="Modified: 2021-10-11 10:16:22" itemprop="dateModified" datetime="2021-10-11T10:16:22+08:00">2021-10-11</time>
               </span>
 
           
@@ -1135,16 +1135,9 @@
           <p>[toc]</p>
 <h1 id="Mermaid"><a href="#Mermaid" class="headerlink" title="Mermaid"></a>Mermaid</h1><pre class="mermaid">classDiagram
 
-  Class01 <|-- AveryLongClass: Cool
+  Class01 <|-- AveryLongClass
   <<interface>> Class01
-  Class09-->C2: Where am i?
-  Class09 --* C3
-  Class09 --|> Class07
-  Class07: equals()
-  Class07: Object[] elementData
-  Class01: size()
-  Class01: int chimp
-  Class01: int gorilla</pre>
+  Class01: int abc</pre>
 
 <pre class="mermaid">classDiagram
     classA --|> classB : 继承
@@ -1207,7 +1200,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-09 18:59:49" itemprop="dateModified" datetime="2021-10-09T18:59:49+08:00">2021-10-09</time>
+                <time title="Modified: 2021-10-11 10:20:54" itemprop="dateModified" datetime="2021-10-11T10:20:54+08:00">2021-10-11</time>
               </span>
 
           
@@ -1372,30 +1365,14 @@ Strategy --o Context</pre>
 <p><strong>使用场景：</strong> 1、行为随状态改变而改变的场景。 2、条件、分支语句的代替者。</p>
 <p><strong>注意事项：</strong>在行为受状态约束的时候使用状态模式，而且状态不超过 5 个。</p>
 <h3 id="5-8-2-类图"><a href="#5-8-2-类图" class="headerlink" title="5.8.2 类图"></a>5.8.2 类图</h3><pre class="mermaid">classDiagram
-
+State <|-- StartState
 class State {
-  <<interface>>
-  +doAction()
-}
-
-class StartState {
+    <<interface>> State
     +doAction()
 }
 
-class StopState {
-    +doAction()
-}
 
-class Context {
-    -state: State
-    +Context()
-    +getState(): State
-    +setState(State state)
-}
-
-State <.. StartState
-State <.. StopState
-State --o Context</pre>
+StartState: +adc()</pre>
 
 <p>就是</p>
 <h2 id="5-9-访问者（Visitor）模式"><a href="#5-9-访问者（Visitor）模式" class="headerlink" title="5.9 访问者（Visitor）模式"></a>5.9 访问者（Visitor）模式</h2><h2 id="5-10-中介者-调停者（Mediator）模式"><a href="#5-10-中介者-调停者（Mediator）模式" class="headerlink" title="5.10 中介者/调停者（Mediator）模式"></a>5.10 中介者/调停者（Mediator）模式</h2><h2 id="5-11-解释器（Interpreter）模式"><a href="#5-11-解释器（Interpreter）模式" class="headerlink" title="5.11 解释器（Interpreter）模式"></a>5.11 解释器（Interpreter）模式</h2><h1 id="一-UML相关知识"><a href="#一-UML相关知识" class="headerlink" title="一 UML相关知识"></a>一 UML相关知识</h1><h2 id="1-1-实体"><a href="#1-1-实体" class="headerlink" title="1.1 实体"></a>1.1 实体</h2><h3 id="1-1-1-类，抽象类"><a href="#1-1-1-类，抽象类" class="headerlink" title="1.1.1 类，抽象类"></a>1.1.1 类，抽象类</h3><p>![Untitled](/Users/liyunhan/Desktop/Export-ceba61ce-4255-4080-bf09-6b46d0cd0d84/设计模式 8c5668a8c6b746559d40a20773eb75da/Untitled 1.png)</p>
