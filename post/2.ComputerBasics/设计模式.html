@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hans">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="引言设计模式出现的原因是因为由面向过程编程改成了面向对象编程。面向对象编程的好处有以下几点，以活字印刷为例：  可维护。改文章的话，只需要改字 可复用。以前的文字，现在还可以用 可拓展。如果需要新加字，另外新刻字就可以了 灵活性好。字是最小单元，可以随意调整  一 UML知识  二 设计原则2.1 单一职责原则就一个类而言，应该仅有一个引起它变化的原因 2.2 开放封闭原则扩展是开放的，修改是封闭">
@@ -26,7 +26,7 @@
 <meta property="og:url" content="http://example.com/post/2.ComputerBasics/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="引言设计模式出现的原因是因为由面向过程编程改成了面向对象编程。面向对象编程的好处有以下几点，以活字印刷为例：  可维护。改文章的话，只需要改字 可复用。以前的文字，现在还可以用 可拓展。如果需要新加字，另外新刻字就可以了 灵活性好。字是最小单元，可以随意调整  一 UML知识  二 设计原则2.1 单一职责原则就一个类而言，应该仅有一个引起它变化的原因 2.2 开放封闭原则扩展是开放的，修改是封闭">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale">
 <meta property="og:image" content="https://gitee.com/liyunh/image/raw/master/master/202110060749537.png">
 <meta property="og:image" content="https://img2018.cnblogs.com/blog/1419489/201906/1419489-20190628154133368-906051111.png">
 <meta property="og:image" content="https://gitee.com/liyunh/image/raw/master/master/202110060739224.png">
@@ -48,7 +48,7 @@
     sidebar: "",
     isHome : false,
     isPost : true,
-    lang   : 'en'
+    lang   : 'zh-Hans'
   };
 </script>
 
@@ -124,9 +124,29 @@
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
 
   </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
 
   </li>
   </ul>
@@ -156,7 +176,7 @@
     
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://example.com/post/2.ComputerBasics/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -521,7 +541,7 @@ StartState: +adc()</pre>
   </span>
   <span class="author" itemprop="copyrightHolder">LiYunHan</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>
 
   <script src='https://unpkg.com/mermaid@/dist/mermaid.min.js'></script>
@@ -555,7 +575,7 @@ StartState: +adc()</pre>
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
 <script src="/js/next-boot.js"></script>
