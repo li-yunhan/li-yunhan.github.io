@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="SpringBoot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="无聊小屋">
+<meta property="og:url" content="http://example.com/post/5.Java/SpringBoot.html">
+<meta property="og:site_name" content="无聊小屋">
+<meta property="og:description" content="SpringBoot">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/liyunh/image/raw/master/master/202110141433781.png">
+<meta property="og:image" content="https://gitee.com/liyunh/image/raw/master/master/202110141433501.png">
+<meta property="article:published_time" content="2021-10-13T22:29:00.000Z">
+<meta property="article:modified_time" content="2021-10-14T06:59:04.133Z">
+<meta property="article:author" content="神奇的小青蛙">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/liyunh/image/raw/master/master/202110141433781.png">
+
+<link rel="canonical" href="http://example.com/post/5.Java/SpringBoot.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title> | 无聊小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">无聊小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/post/5.Java/SpringBoot.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="神奇的小青蛙">
+      <meta itemprop="description" content="什么时候才能暴富呢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="无聊小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-10-14 06:29:00 / 修改时间：14:59:04" itemprop="dateCreated datePublished" datetime="2021-10-14T06:29:00+08:00">2021-10-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h1><span id="more"></span>
+
+<h1 id="一-SpringBoot介绍"><a href="#一-SpringBoot介绍" class="headerlink" title="一 SpringBoot介绍"></a>一 SpringBoot介绍</h1><h1 id="二-SpringBoot使用"><a href="#二-SpringBoot使用" class="headerlink" title="二 SpringBoot使用"></a>二 SpringBoot使用</h1><h2 id="2-1-maven设置"><a href="#2-1-maven设置" class="headerlink" title="2.1 maven设置"></a>2.1 maven设置</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-aliyun<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus aliyun<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">profiles</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">id</span>&gt;</span>jdk-1.8<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">activation</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">activeByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="name">activeByDefault</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">jdk</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;/<span class="name">activation</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">maven.compiler.compilerVersion</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.compilerVersion</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">profiles</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="2、HelloWorld"><a href="#2、HelloWorld" class="headerlink" title="2、HelloWorld"></a>2、HelloWorld</h1><p>需求：浏览发送/hello请求，响应 Hello，Spring Boot 2</p>
+<h2 id="2-1-创建maven工程"><a href="#2-1-创建maven工程" class="headerlink" title="2.1 创建maven工程"></a>2.1 创建maven工程</h2><h2 id="2-2-引入依赖"><a href="#2-2-引入依赖" class="headerlink" title="2.2 引入依赖"></a>2.2 引入依赖</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>spring-boot-starter 是spring-boot提供的一个启动器族，里面有好多种启动器，这个是web的启动器。</p>
+<h3 id="2-3-创建主程序"><a href="#2-3-创建主程序" class="headerlink" title="2.3 创建主程序"></a>2.3 创建主程序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 主程序类</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@SpringBootApplication</span>：这是一个SpringBoot应用</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(MainApplication.class,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-编写业务"><a href="#2-4-编写业务" class="headerlink" title="2.4 编写业务"></a>2.4 编写业务</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/hello&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">handle01</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Hello, Spring Boot 2!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-5-测试"><a href="#2-5-测试" class="headerlink" title="2.5 测试"></a>2.5 测试</h3><p>直接运行main方法</p>
+<h3 id="2-6-简化配置"><a href="#2-6-简化配置" class="headerlink" title="2.6 简化配置"></a>2.6 简化配置</h3><p>application.properties</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server.port=8888</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-7-简化部署"><a href="#2-7-简化部署" class="headerlink" title="2.7 简化部署"></a>2.7 简化部署</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>把项目打成jar包，直接在目标服务器执行即可。</p>
+<p>把版本号加上就可以了</p>
+<h1 id="常用注解："><a href="#常用注解：" class="headerlink" title="常用注解："></a>常用注解：</h1><ol>
+<li><p><strong>@SpringBootApplication</strong></p>
+<p> 这个注解是Spring Boot最核心的注解，用在 Spring Boot的主类上，标识这是一个 Spring Boot 应用，用来开启 Spring Boot 的各项能力。</p>
+<p> 实际上这个注解是</p>
+<ol>
+<li>@Configuration</li>
+<li>@EnableAutoConfiguration</li>
+<li>@ComponentScan三个注解的组合。</li>
+</ol>
+<p> 由于这些注解一般都是一起使用，所以Spring Boot提供了一个统一的注解@SpringBootApplication。</p>
+</li>
+<li><p><strong>@EnableAutoConfiguration</strong></p>
+<p> 允许 Spring Boot 自动配置注解，开启这个注解之后，Spring Boot 就能根据当前类路径下的包或者类来配置 Spring Bean。</p>
+<p> 如：当前类路径下有 Mybatis 这个 JAR 包，MybatisAutoConfiguration 注解就能根据相关参数来配置 Mybatis 的各个 Spring Bean。</p>
+<p> @EnableAutoConfiguration实现的关键在于引入了AutoConfigurationImportSelector，其核心逻辑为selectImports方法，逻辑大致如下：</p>
+<p> ●　从配置文件META-INF/spring.factories加载所有可能用到的自动配置类；</p>
+<p> ●　去重，并将exclude和excludeName属性携带的类排除；</p>
+<p> ●　过滤，将满足条件（@Conditional）的自动配置类返回；</p>
+</li>
+<li><p><strong>@Configuration</strong></p>
+<p> 用于定义配置类，指出该类是 Bean 配置的信息源，相当于传统的xml配置文件，一般加在主类上。如果有些第三方库需要用到xml文件，建议仍然通过@Configuration类作为项目的配置主类——可以使用@ImportResource注解加载xml配置文件。</p>
+</li>
+<li><p><strong>@ComponentScan</strong></p>
+<p> 组件扫描。让spring Boot扫描到Configuration类并把它加入到程序上下文。</p>
+<p> @ComponentScan注解默认就会装配标识了@Controller，@Service，@Repository，@Component注解的类到spring容器中。</p>
+</li>
+<li><p><strong>@Component</strong></p>
+<p> 泛指组件，当组件不好归类的时候，我们可以使用这个注解进行标注。</p>
+</li>
+<li><p><strong>@Repository</strong></p>
+<p> 用于标注数据访问组件，即DAO组件。</p>
+<p> 使用@Repository注解可以确保DAO或者repositories提供异常转译，这个注解修饰的DAO或者repositories类会被ComponetScan发现并配置，同时也不需要为它们提供XML配置项。</p>
+</li>
+<li><p><strong>@Service</strong></p>
+<p> 一般用于修饰service层的组件</p>
+</li>
+<li><p><strong>@RestController</strong></p>
+<p> 用于标注控制层组件(如struts中的action)，表示这是个控制器bean,并且是将函数的返回值直接填入HTTP响应体中,是REST风格的控制器；它是@Controller和@ResponseBody的合集。</p>
+</li>
+<li><p><strong>@ResponseBody</strong></p>
+<p> 表示该方法的返回结果直接写入HTTP response body中</p>
+<p> 一般在异步获取数据时使用，在使用@RequestMapping后，返回值通常解析为跳转路径，加上@responsebody后返回结果不会被解析为跳转路径，而是直接写入HTTP response body中。比如异步获取json数据，加上@responsebody后，会直接返回json数据。</p>
+</li>
+<li><p><strong>@Bean</strong></p>
+<p>相当于XML中的,放在方法的上面，而不是类，意思是产生一个bean,并交给spring管理。</p>
+</li>
+<li><p><strong>@AutoWired</strong></p>
+<p>byType方式。把配置好的Bean拿来用，完成属性、方法的组装，它可以对类成员变量、方法及构造函数进行标注，完成自动装配的工作。</p>
+<p>当加上（required=false）时，就算找不到bean也不报错。</p>
+</li>
+<li><p><strong>@Qualifier</strong></p>
+<p>当有多个同一类型的Bean时，可以用@Qualifier(“name”)来指定。与@Autowired配合使用</p>
+</li>
+<li><p><strong>@Resource(name=”name”,type=”type”)</strong></p>
+<p>没有括号内内容的话，默认byName。与@Autowired干类似的事。</p>
+</li>
+<li><p><strong>@RequestMapping</strong></p>
+</li>
+</ol>
+<p>RequestMapping是一个用来处理请求地址映射的注解；提供路由信息，负责URL到Controller中的具体函数的映射，可用于类或方法上。用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径。</p>
+<ol start="15">
+<li><strong>@Profiles</strong></li>
+</ol>
+<p>Spring Profiles提供了一种隔离应用程序配置的方式，并让这些配置只能在特定的环境下生效。</p>
+<p>任何@Component或@Configuration都能被@Profile标记，从而限制加载它的时机。</p>
+<p>@Configuration</p>
+<p>@Profile(“prod”)</p>
+<p>public class ProductionConfiguration {</p>
+<p>// …</p>
+<p>}</p>
+<p><strong>18、@ConfigurationProperties</strong></p>
+<p>Spring Boot可使用注解的方式将自定义的properties文件映射到实体bean中，比如config.properties文件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(&quot;rocketmq.consumer&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RocketMQConsumerProperties</span> <span class="keyword">extends</span> <span class="title">RocketMQProperties</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> enabled = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">private</span> String consumerGroup;</span><br><span class="line">    <span class="keyword">private</span> MessageModel messageModel = MessageModel.CLUSTERING;</span><br><span class="line">    <span class="keyword">private</span> ConsumeFromWhere consumeFromWhere = ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> consumeThreadMin = <span class="number">20</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> consumeThreadMax = <span class="number">64</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> consumeConcurrentlyMaxSpan = <span class="number">2000</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> pullThresholdForQueue = <span class="number">1000</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> pullInterval = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> consumeMessageBatchMaxSize = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> pullBatchSize = <span class="number">32</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>与前端交互相关的注解：</p>
+<p>其中：</p>
+<p>request：请求，web页面向服务器发送请求（request），服务器给予响应（Response）</p>
+<p>与从前端获得参数相关的注解：</p>
+<ol>
+<li><code>@RequestParam</code> <strong>举例：</strong> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Response <span class="title">delete</span><span class="params">(<span class="meta">@RequestParam</span> Integer id)</span> </span>&#123;</span><br><span class="line">    securityRuleService.delete(id);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Response(<span class="number">200</span>, <span class="string">&quot;删除成功&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ requset表示请求，所以<code>@RequestParam</code>表示的是请求路径中的参数。 <code>localhost:8080/keep/hera/v1/securityrule/delete?id=2</code> 就是一个典型的请求路径，其中方法体中的形参名要与请求路径中<code>?</code>后边的key一致。 如果不一致，也可以使用起别名的方式 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Response <span class="title">delete</span><span class="params">(<span class="meta">@RequestParam(value = &quot;id&quot;)</span> Integer id)</span> </span>&#123;</span><br><span class="line">    securityRuleService.delete(id);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Response(<span class="number">200</span>, <span class="string">&quot;删除成功&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 可以设置默认值 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestParam(value = &quot;lid&quot;, required = false, defaultValue = &quot;0&quot;)</span> <span class="keyword">int</span> id)</span><br></pre></td></tr></table></figure>
+ <strong>特殊情况1：</strong> <code>url?userName=zhangsan&amp;userName=wangwu</code> url传递的时候传递了两个一样的参数，可以使用数组或者list方式解决 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">requestparam8</span><span class="params">(<span class="meta">@RequestParam(value=&quot;userName&quot;)</span> &#123;</span></span></span><br><span class="line"><span class="params"><span class="function">		String []  userNames)</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br><span class="line"><span class="function"><span class="comment">//或者是</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">requestparam8</span><span class="params">(<span class="meta">@RequestParam(value=&quot;list&quot;)</span> &#123;</span></span></span><br><span class="line"><span class="params"><span class="function">		List&lt;String&gt; list)</span></span></span><br><span class="line"><span class="function">&#125; </span></span><br></pre></td></tr></table></figure>
+ <strong>特殊情况2：</strong> 前端传参的URL： url = “${ctx}/main/mm/am/edit?Id=${Id}&amp;name=${name}” 后端使用集合来接受参数，灵活性较好 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/edit&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">edit</span><span class="params">(Model model, <span class="meta">@RequestParam</span> Map&lt;String, Object&gt; paramMap )</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> id = Long.parseLong(paramMap.get(<span class="string">&quot;id&quot;</span>).toString());</span><br><span class="line">    String name = paramMap.get(<span class="string">&quot;name&quot;</span>).toString;</span><br><span class="line">    <span class="keyword">return</span> page(<span class="string">&quot;edit&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><code>@PathVariable</code> <strong>举例：</strong> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/edit/&#123;id&#125;/&#123;name&#125;&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">edit</span><span class="params">(Model model, <span class="meta">@PathVariable</span> <span class="keyword">long</span> id, <span class="meta">@PathVariable</span> String name)</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> page(<span class="string">&quot;edit&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ PathVariable：表示的是路径变量，也就是会写在访问路径中的。<code>&#123;id&#125;、&#123;name&#125;</code> 都是这种情况的。</li>
+<li><code>@RequestHeader</code></li>
+<li><code>@RequestBody</code> <strong>举例：</strong> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Response <span class="title">update</span><span class="params">(<span class="meta">@RequestHeader(value = &quot;ldapUsername&quot;)</span> String operator,</span></span></span><br><span class="line"><span class="params"><span class="function">                       <span class="meta">@RequestBody</span> SecurityRule securityRule)</span> </span>&#123;</span><br><span class="line">    securityRule.setModifier(operator);</span><br><span class="line">    securityRule.setModifyTime(<span class="keyword">new</span> Date());</span><br><span class="line">    securityRuleService.update(securityRule);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Response(securityRule);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 这两个方法是通过请求头和请求体获得参数 请求头： <img src="https://gitee.com/liyunh/image/raw/master/master/202110141433781.png" alt="Untitled"> 请求体： <img src="https://gitee.com/liyunh/image/raw/master/master/202110141433501.png" alt="Untitled 1"></li>
+</ol>
+<p>与返回给前端的相关的注解：</p>
+<ol>
+<li><code>RequestMapping</code> <strong>举例：</strong> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@Log4j</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/rule&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SecurityRuleController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> SecurityRuleService securityRuleService;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <code>@RequestMapping</code>是一个用来处理请求地址映射的注解；提供路由信息，负责URL到Controller中的具体函数的映射，可用于类或方法上。用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径。 通常的做法，都是类上边有一个<code>@RequestMapping</code>，再在方法上边有一个<code>@PostMapping</code> 这样的变种注解。 一共有8个属性（现在只列了6个）<ol>
+<li>value：指定请求的实际地址。</li>
+<li>method：指定请求的method类型（GET,POST,PUT,DELETE）等。 这里的<code>GET,POST,PUT,DELETE</code> 表示的是请求方法的类型，对应着<code>select,insert,update,delete</code></li>
+<li>consumes：指定处理请求的提交内容类型（Context-Type）。</li>
+<li>produces：指定返回的内容类型，还可以设置返回值的字符编码。</li>
+<li>params：指定request中必须包含某些参数值，才让该方法处理。</li>
+<li>headers：指定request中必须包含某些指定的header值，才让该方法处理请求。</li>
+</ol>
+ <strong>变种注解：</strong> <code>@GetMapping = @RequestMapping(method = RequestMethod.GET</code> <code>@PostMapping = @RequestMapping(method = RequestMethod.POST)</code></li>
+</ol>
+<p>Restful风格</p>
+<ol>
+<li><strong>产生背景</strong> 网络应用程序，越来越流行前端和后端的分离设计。当前的发展趋势是前端的设计层出不穷。比如：各种型号的手机、平板灯其他设计。因为必须要一种统一的机制方便不同的前端和后端进行通信。这就导致了API结构的流行。其中Restful API是目前比较成熟的一套互联网应用程序的API设计理论。</li>
+<li><strong>简介</strong> Restful风格是一种软件架构风格，而不是标准，只是提供了一种设计原则和约束条件。主要适用于客户端和服务器端交互的软件。是基于http协议实现。目的是为了提高系统的可伸缩性，降低应用之间的耦合度，方便框架分布式处理程序。基于这个风格的软件可更加的简单、更有层次，更易于实现缓存的机制。 在Restful风格中，用户请求的url使用同一个url值，而请求方式采用get/post/delete/put等对请求的处理方法进行区分。这样可以在前后台分离的开发中让前端开发人员不会对请求的资源地址产生混淆，形成一个统一的接口。</li>
+<li><strong>特点</strong><ol>
+<li>每种url代表了一种资源。</li>
+<li>客户端和服务器之间，传递这个资源的某种表现层。</li>
+<li>客户端通过四个http动词，对服务器资源进行操作。实现表现层状态的转化。</li>
+</ol>
+</li>
+<li><strong>使用规定</strong> 在http协议中，使用Get用来获取资源。Post用来新建立资源，也可以更新资源，Put用来更新资源，Delete用来删除资源。</li>
+<li><strong>举例</strong> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[GET]  /users                    # 查询用户信息列表</span><br><span class="line">[GET]  /users/<span class="number">1001</span>               # 查看某个用户信息</span><br><span class="line">[POST]  /users                   # 新建用户信息</span><br><span class="line">[PUT]  /users/<span class="number">1001</span>               # 更新用户信息(全部字段)</span><br><span class="line">[PATCH]  /users/<span class="number">1001</span>             # 更新用户信息(部分字段)</span><br><span class="line">[DELETE]  /users/<span class="number">1001</span>            # 删除用户信息</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="DataSource理解"><a href="#DataSource理解" class="headerlink" title="DataSource理解"></a>DataSource理解</h1><p>数据源。JDBC2.0 提供了javax.sql.DataSource接口，它负责建立与数据库的连接，当在应用程序中访问数据库时<br>不必编写连接数据库的代码，直接引用DataSource获取数据库的连接对象即可。用于获取操作数据Connection对象。</p>
+<p>连接JDBC通常是7个步骤</p>
+<ol>
+<li>获得连接（这一步可以简化）</li>
+<li>编写SQL</li>
+<li>预编译SQL</li>
+<li>设置参数</li>
+<li>执行SQL</li>
+<li>封装结果</li>
+<li>断开连接</li>
+</ol>
+<p>具体实践：</p>
+<ol>
+<li>编写配置文件</li>
+</ol>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">jdbc.driver</span>=<span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line"><span class="meta">jdbc.url</span>=<span class="string">jdbc:mysql://localhost:3306/login</span></span><br><span class="line"><span class="meta">jdbc.username</span>=<span class="string">root</span></span><br><span class="line"><span class="meta">jdbc.password</span>=<span class="string">123456</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>连接类（这一步可以使用DataSource）代替</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.frog.login.Utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConnectionUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String driver;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String url;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String username;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//配置文件</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Properties properties = <span class="keyword">new</span> Properties();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//ThreadLocal：确保一个线程中只有一个连接</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> ThreadLocal&lt;Connection&gt; tl = <span class="keyword">new</span> ThreadLocal&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            InputStream inputStream = ConnectionUtil.class.getClassLoader().getResourceAsStream(<span class="string">&quot;db.properties&quot;</span>);</span><br><span class="line">            properties.load(inputStream);</span><br><span class="line">            driver = properties.getProperty(<span class="string">&quot;jdbc.driver&quot;</span>);</span><br><span class="line">            url = properties.getProperty(<span class="string">&quot;jdbc.url&quot;</span>);</span><br><span class="line">            username = properties.getProperty(<span class="string">&quot;jdbc.username&quot;</span>);</span><br><span class="line">            password = properties.getProperty(<span class="string">&quot;jdbc.password&quot;</span>);</span><br><span class="line">            Class.forName(driver);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回连接</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> SQLException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        Connection connection = tl.get();</span><br><span class="line">        <span class="keyword">if</span> (connection == <span class="keyword">null</span>)&#123;</span><br><span class="line">            connection = DriverManager.getConnection(url, username, password);</span><br><span class="line">            tl.set(connection);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> connection;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 关闭连接</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> SQLException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">closeConnection</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">        Connection connection = tl.get();</span><br><span class="line">        <span class="keyword">if</span> (connection != <span class="keyword">null</span>)&#123;</span><br><span class="line">            connection.close();</span><br><span class="line">        &#125;</span><br><span class="line">        tl.set(<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>Dao层</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserDao</span> </span>&#123;   </span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getUserByNameAndPassword</span><span class="params">(String username, String passowrd)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>Dao层实现</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="数据源与数据库连接池"><a href="#数据源与数据库连接池" class="headerlink" title="数据源与数据库连接池"></a>数据源与数据库连接池</h3><p>数据源建立多个数据库连接，这些数据库连接会保存在数据库连接池中，当需要访问数据库时，只需要从数据库连接池中 获取空闲的数据库连接，当程序访问数据库结束时，数据库连接会放回数据库连接池中。</p>
+<h3 id="数据库连接池的优势"><a href="#数据库连接池的优势" class="headerlink" title="数据库连接池的优势"></a>数据库连接池的优势</h3><p>传统的JDBC访问数据库技术，每次访问数据库都需要通过数据库驱动器Driver和数据库名称以及密码等等资源建立数据库连接。<br>这样的连接存在两大问题：</p>
+<ol>
+<li>频繁的建立数据库连接与断开数据库，这样会消耗大量的资源和时间，降低性能。</li>
+<li>数据库的连接需要用户名和密码等等，这些需要一定的内存和CPU一定开销。</li>
+</ol>
+<p>连接池基本的思想，原理：</p>
+<p>　　在系统初始化的时候，将数据库连接作为对象存储在内存中，当用户需要访问数据库时，并非建立一个新的连接，而是从连接池中取出一个已建立的空闲连接对象。</p>
+<p>数据库连接池负责分配,管理和释放数据库连接,它允许应用程序重复使用一个现有的数据库连接,而不是重新建立一个。</p>
+<p>连接池通俗理解：　　</p>
+<p>　　数据库连接池就是准备一个池子，里面放着很多生成好的Connection，用户请求获得连接，就不需要getConnection,只要从池子里拿一个给他就行了，这样省掉了生成Connection的时间，效率上会有很大提高，不过当然会占用一些内存<del>稍微大点网站都会用到数据库连接池的</del></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/1.Personal/%E8%AE%A1%E5%88%92.html" rel="prev" title="计划">
+      <i class="fa fa-chevron-left"></i> 计划
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/5.Java/Spring.html" rel="next" title="">
+       <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringBoot"><span class="nav-text">SpringBoot</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-SpringBoot%E4%BB%8B%E7%BB%8D"><span class="nav-text">一 SpringBoot介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-SpringBoot%E4%BD%BF%E7%94%A8"><span class="nav-text">二 SpringBoot使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-maven%E8%AE%BE%E7%BD%AE"><span class="nav-text">2.1 maven设置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2%E3%80%81HelloWorld"><span class="nav-text">2、HelloWorld</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%88%9B%E5%BB%BAmaven%E5%B7%A5%E7%A8%8B"><span class="nav-text">2.1 创建maven工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="nav-text">2.2 引入依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E5%88%9B%E5%BB%BA%E4%B8%BB%E7%A8%8B%E5%BA%8F"><span class="nav-text">2.3 创建主程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E7%BC%96%E5%86%99%E4%B8%9A%E5%8A%A1"><span class="nav-text">2.4 编写业务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-%E6%B5%8B%E8%AF%95"><span class="nav-text">2.5 测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-%E7%AE%80%E5%8C%96%E9%85%8D%E7%BD%AE"><span class="nav-text">2.6 简化配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-%E7%AE%80%E5%8C%96%E9%83%A8%E7%BD%B2"><span class="nav-text">2.7 简化部署</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3%EF%BC%9A"><span class="nav-text">常用注解：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DataSource%E7%90%86%E8%A7%A3"><span class="nav-text">DataSource理解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%BA%90%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="nav-text">数据源与数据库连接池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-text">数据库连接池的优势</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">神奇的小青蛙</p>
+  <div class="site-description" itemprop="description">什么时候才能暴富呢</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">神奇的小青蛙</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+  <script src='https://unpkg.com/mermaid@/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+</body>
+</html>
