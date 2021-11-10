@@ -20,21 +20,25 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="第一章 Hive基本概念1.1 定义一个数据仓库，解决海量结构化日志的数据统计，本质是将HQL转化成MapReduce程序。 第三章 Hive数据类型3.1 基本数据类型 INT（常用）  BIGINT  DOUBLE  decimal(10, 4) 准确精度类型  STRING（常用）  集合数据类型  STRUCT（和C的struct类似）  MAP  array 赋值 1234select">
+  <meta name="description" content="一 Hive基本概念1.1 定义一个数据仓库，解决海量结构化日志的数据统计，本质是将HQL转化成MapReduce程序。 1.2 架构 三 Hive数据类型3.1 基本数据类型 INT（常用）  BIGINT  DOUBLE  decimal(10, 4) 准确精度类型  STRING（常用）  集合数据类型  STRUCT（和C的struct类似）  MAP  array 赋值 1234sele">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hive">
 <meta property="og:url" content="http://example.com/post/3.BigData/hive.html">
 <meta property="og:site_name" content="无聊小屋">
-<meta property="og:description" content="第一章 Hive基本概念1.1 定义一个数据仓库，解决海量结构化日志的数据统计，本质是将HQL转化成MapReduce程序。 第三章 Hive数据类型3.1 基本数据类型 INT（常用）  BIGINT  DOUBLE  decimal(10, 4) 准确精度类型  STRING（常用）  集合数据类型  STRUCT（和C的struct类似）  MAP  array 赋值 1234select">
+<meta property="og:description" content="一 Hive基本概念1.1 定义一个数据仓库，解决海量结构化日志的数据统计，本质是将HQL转化成MapReduce程序。 1.2 架构 三 Hive数据类型3.1 基本数据类型 INT（常用）  BIGINT  DOUBLE  decimal(10, 4) 准确精度类型  STRING（常用）  集合数据类型  STRUCT（和C的struct类似）  MAP  array 赋值 1234sele">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/liyunh/image/raw/master/master/202111091429747.png">
 <meta property="og:image" content="https://gitee.com/liyunh/image/raw/master/master/202110060744987.png">
 <meta property="og:image" content="https://gitee.com/liyunh/image/raw/master/master/202110060744996.png">
 <meta property="og:image" content="https://gitee.com/liyunh/image/raw/master/master/202110061915481.png">
+<meta property="og:image" content="https://gitee.com/liyunh/image/raw/master/master/202111091435688.png">
+<meta property="og:image" content="https://gitee.com/liyunh/image/raw/master/master/202111091440093.png">
+<meta property="og:image" content="https://gitee.com/liyunh/image/raw/master/master/202111091158479.png">
 <meta property="article:published_time" content="2021-10-05T23:44:14.290Z">
-<meta property="article:modified_time" content="2021-10-26T10:57:11.709Z">
+<meta property="article:modified_time" content="2021-11-10T07:30:57.202Z">
 <meta property="article:author" content="神奇的小青蛙">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/liyunh/image/raw/master/master/202110060744987.png">
+<meta name="twitter:image" content="https://gitee.com/liyunh/image/raw/master/master/202111091429747.png">
 
 <link rel="canonical" href="http://example.com/post/3.BigData/hive.html">
 
@@ -194,7 +198,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-26 18:57:11" itemprop="dateModified" datetime="2021-10-26T18:57:11+08:00">2021-10-26</time>
+                <time title="修改时间：2021-11-10 15:30:57" itemprop="dateModified" datetime="2021-11-10T15:30:57+08:00">2021-11-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -217,8 +221,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="第一章-Hive基本概念"><a href="#第一章-Hive基本概念" class="headerlink" title="第一章 Hive基本概念"></a>第一章 Hive基本概念</h1><h2 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1 定义"></a>1.1 定义</h2><p>一个数据仓库，解决海量结构化日志的数据统计，本质是将HQL转化成MapReduce程序。</p>
-<h1 id="第三章-Hive数据类型"><a href="#第三章-Hive数据类型" class="headerlink" title="第三章 Hive数据类型"></a>第三章 Hive数据类型</h1><h2 id="3-1-基本数据类型"><a href="#3-1-基本数据类型" class="headerlink" title="3.1 基本数据类型"></a>3.1 基本数据类型</h2><ol>
+        <h1 id="一-Hive基本概念"><a href="#一-Hive基本概念" class="headerlink" title="一 Hive基本概念"></a>一 Hive基本概念</h1><h2 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1 定义"></a>1.1 定义</h2><p>一个数据仓库，解决海量结构化日志的数据统计，本质是将HQL转化成MapReduce程序。</p>
+<h2 id="1-2-架构"><a href="#1-2-架构" class="headerlink" title="1.2 架构"></a>1.2 架构</h2><p><img src="https://gitee.com/liyunh/image/raw/master/master/202111091429747.png" alt="图片"></p>
+<h1 id="三-Hive数据类型"><a href="#三-Hive数据类型" class="headerlink" title="三 Hive数据类型"></a>三 Hive数据类型</h1><h2 id="3-1-基本数据类型"><a href="#3-1-基本数据类型" class="headerlink" title="3.1 基本数据类型"></a>3.1 基本数据类型</h2><ol>
 <li><p><strong>INT（常用）</strong></p>
 </li>
 <li><p>BIGINT</p>
@@ -255,7 +260,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="第四章-DDL数据定义"><a href="#第四章-DDL数据定义" class="headerlink" title="第四章 DDL数据定义"></a>第四章 DDL数据定义</h1><h2 id="4-1-创建数据库"><a href="#4-1-创建数据库" class="headerlink" title="4.1 创建数据库"></a>4.1 创建数据库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create database <span class="keyword">if</span> not exists db_hive location <span class="string">&#x27;/db_hive.db&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="四-DDL数据定义"><a href="#四-DDL数据定义" class="headerlink" title="四 DDL数据定义"></a>四 DDL数据定义</h1><h2 id="4-1-创建数据库"><a href="#4-1-创建数据库" class="headerlink" title="4.1 创建数据库"></a>4.1 创建数据库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create database <span class="keyword">if</span> not exists db_hive location <span class="string">&#x27;/db_hive.db&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
 <h2 id="4-2-查询数据库"><a href="#4-2-查询数据库" class="headerlink" title="4.2 查询数据库"></a>4.2 查询数据库</h2><h3 id="4-2-1-显示数据库"><a href="#4-2-1-显示数据库" class="headerlink" title="4.2.1 显示数据库"></a>4.2.1 显示数据库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show database;</span><br><span class="line"><span class="comment"># 过滤显示查询的数据库</span></span><br><span class="line">show database like <span class="string">&#x27;db_hive&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
@@ -317,7 +322,7 @@
 <p>我们知道hive有个服务叫metastore，这个服务主要是存储一些元数据信息，比如数据库名，表名或者表的分区等等信息。如果不是通过hive的insert等插入语句，很多分区信息在metastore中是没有的，如果插入分区数据量很多的话，你用 <code>ALTER TABLE table_name ADD PARTITION</code> 一个个分区添加十分麻烦。这时候<code>MSCK REPAIR TABLE</code>就派上用场了。只需要运行<code>MSCK REPAIR TABLE</code>命令，hive就会去检测这个表在hdfs上的文件，把没有写入metastore的分区信息写入metastore。</p>
 <h2 id="4-10-修改表位置"><a href="#4-10-修改表位置" class="headerlink" title="4.10 修改表位置"></a>4.10 修改表位置</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> t_m_cc <span class="keyword">set</span> location <span class="string">&#x27;hdfs://heracles/user/video-mvc/hive/warehouse/t_m_cc&#x27;</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="第五章-DML数据操作"><a href="#第五章-DML数据操作" class="headerlink" title="第五章 DML数据操作"></a>第五章 DML数据操作</h1><h2 id="5-1-数据导入"><a href="#5-1-数据导入" class="headerlink" title="5.1 数据导入"></a>5.1 数据导入</h2><h3 id="5-1-1-向表中装载数据-Load"><a href="#5-1-1-向表中装载数据-Load" class="headerlink" title="5.1.1 向表中装载数据(Load)"></a>5.1.1 向表中装载数据(Load)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load data [<span class="built_in">local</span>] inpath <span class="string">&#x27;filepath&#x27;</span> [overwrite] into table table_name [partition(part1=val1,part2=val2)]</span><br></pre></td></tr></table></figure>
+<h1 id="五-DML数据操作"><a href="#五-DML数据操作" class="headerlink" title="五 DML数据操作"></a>五 DML数据操作</h1><h2 id="5-1-数据导入"><a href="#5-1-数据导入" class="headerlink" title="5.1 数据导入"></a>5.1 数据导入</h2><h3 id="5-1-1-向表中装载数据-Load"><a href="#5-1-1-向表中装载数据-Load" class="headerlink" title="5.1.1 向表中装载数据(Load)"></a>5.1.1 向表中装载数据(Load)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load data [<span class="built_in">local</span>] inpath <span class="string">&#x27;filepath&#x27;</span> [overwrite] into table table_name [partition(part1=val1,part2=val2)]</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">load data <span class="built_in">local</span> inpath <span class="string">&#x27;/opt/moudle/dept.txt&#x27;</span> </span><br><span class="line">into|overwrite into table student partition(partcol1=val1)</span><br><span class="line">row format delimited fields terminated by <span class="string">&#x27;,&#x27;</span></span><br></pre></td></tr></table></figure>
 
@@ -327,7 +332,7 @@
 
 <h3 id="5-1-4-创建表时通过Location指定加载数据路径"><a href="#5-1-4-创建表时通过Location指定加载数据路径" class="headerlink" title="5.1.4 创建表时通过Location指定加载数据路径"></a>5.1.4 创建表时通过Location指定加载数据路径</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.创建表，并指定在hdfs位置上</span></span><br><span class="line">create table <span class="keyword">if</span> not exists student(id int, name string)</span><br><span class="line">row format delimited fields terminated bt <span class="string">&#x27;\t&#x27;</span></span><br><span class="line">location <span class="string">&#x27;/user/hive/warehouse/student&#x27;</span>;</span><br><span class="line"><span class="comment"># 2.上传数据到hdfs上</span></span><br><span class="line">dfs -put /opt/modlue/student /user/hive/warehouse/student;</span><br></pre></td></tr></table></figure>
 
-<h2 id="5-2-数据导出"><a href="#5-2-数据导出" class="headerlink" title="5.2 数据导出"></a>5.2 数据导出</h2><h1 id="第六章-查询"><a href="#第六章-查询" class="headerlink" title="第六章 查询"></a>第六章 查询</h1><h2 id="6-1-基本查询"><a href="#6-1-基本查询" class="headerlink" title="6.1 基本查询"></a>6.1 基本查询</h2><h3 id="6-1-1-全表和特定列查询"><a href="#6-1-1-全表和特定列查询" class="headerlink" title="6.1.1 全表和特定列查询"></a>6.1.1 全表和特定列查询</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from emp;</span><br><span class="line">select empno, enmae from emp;</span><br></pre></td></tr></table></figure>
+<h2 id="5-2-数据导出"><a href="#5-2-数据导出" class="headerlink" title="5.2 数据导出"></a>5.2 数据导出</h2><h1 id="六-查询"><a href="#六-查询" class="headerlink" title="六 查询"></a>六 查询</h1><h2 id="6-1-基本查询"><a href="#6-1-基本查询" class="headerlink" title="6.1 基本查询"></a>6.1 基本查询</h2><h3 id="6-1-1-全表和特定列查询"><a href="#6-1-1-全表和特定列查询" class="headerlink" title="6.1.1 全表和特定列查询"></a>6.1.1 全表和特定列查询</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from emp;</span><br><span class="line">select empno, enmae from emp;</span><br></pre></td></tr></table></figure>
 
 <h3 id="6-1-2-列别名"><a href="#6-1-2-列别名" class="headerlink" title="6.1.2 列别名"></a>6.1.2 列别名</h3><p>就是重命名一个列，紧跟列名就完了</p>
 <h3 id="6-1-3-算术运算符"><a href="#6-1-3-算术运算符" class="headerlink" title="6.1.3 算术运算符"></a>6.1.3 算术运算符</h3><ul>
@@ -462,7 +467,7 @@
 
 <h3 id="6-7-8-补齐函数"><a href="#6-7-8-补齐函数" class="headerlink" title="6.7.8 补齐函数"></a>6.7.8 补齐函数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- string1:源字符串</span></span><br><span class="line"><span class="comment">-- 即最终结果返回的字符串的长度，如果这个值长的话就做截断处理，短的话就拿string2填补</span></span><br><span class="line"><span class="comment">-- string2:用于填充的字符，可以不填，默认为空字符</span></span><br><span class="line"><span class="comment">-- l：从左侧开始补齐； r：从右侧开始补齐</span></span><br><span class="line">lpad(string1, length, string2)</span><br><span class="line">rpad(string1, length, string2)</span><br></pre></td></tr></table></figure>
 
-<h1 id="第七章-函数"><a href="#第七章-函数" class="headerlink" title="第七章 函数"></a>第七章 函数</h1><h2 id="7-1-系统内置函数"><a href="#7-1-系统内置函数" class="headerlink" title="7.1 系统内置函数"></a>7.1 系统内置函数</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看系统自带的函数</span></span><br><span class="line">show <span class="built_in">functions</span>;</span><br><span class="line"><span class="comment"># 显示自带函数的用法</span></span><br><span class="line">desc <span class="keyword">function</span> upper;</span><br><span class="line"><span class="comment"># 显示自带的函数的用法</span></span><br><span class="line">desc <span class="keyword">function</span> extended upper;</span><br></pre></td></tr></table></figure>
+<h1 id="七-函数"><a href="#七-函数" class="headerlink" title="七 函数"></a>七 函数</h1><h2 id="7-1-系统内置函数"><a href="#7-1-系统内置函数" class="headerlink" title="7.1 系统内置函数"></a>7.1 系统内置函数</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看系统自带的函数</span></span><br><span class="line">show <span class="built_in">functions</span>;</span><br><span class="line"><span class="comment"># 显示自带函数的用法</span></span><br><span class="line">desc <span class="keyword">function</span> upper;</span><br><span class="line"><span class="comment"># 显示自带的函数的用法</span></span><br><span class="line">desc <span class="keyword">function</span> extended upper;</span><br></pre></td></tr></table></figure>
 
 <h2 id="7-2-自定义函数"><a href="#7-2-自定义函数" class="headerlink" title="7.2 自定义函数"></a>7.2 自定义函数</h2><ol>
 <li>UDF：一进一出</li>
@@ -482,7 +487,7 @@
 <li>重写initialize，process和close方法</li>
 </ol>
 <h3 id="7-2-3-使用自定义函数"><a href="#7-2-3-使用自定义函数" class="headerlink" title="7.2.3 使用自定义函数"></a>7.2.3 使用自定义函数</h3><p>mysql存储元数据，HDFS存储实际数据，如果两个能对上，hive就可以进行操作</p>
-<h1 id="第八章-高级内容"><a href="#第八章-高级内容" class="headerlink" title="第八章 高级内容"></a>第八章 高级内容</h1><h2 id="8-1-explain"><a href="#8-1-explain" class="headerlink" title="8.1 explain"></a>8.1 explain</h2><h3 id="8-1-1-概述"><a href="#8-1-1-概述" class="headerlink" title="8.1.1 概述"></a>8.1.1 概述</h3><p>HIVE提供了EXPLAIN命令来展示一个查询的执行计划，这个执行计划对于我们了解底层原理，hive 调优，排查数据倾斜等很有帮助</p>
+<h1 id="八-高级内容"><a href="#八-高级内容" class="headerlink" title="八 高级内容"></a>八 高级内容</h1><h2 id="8-1-explain"><a href="#8-1-explain" class="headerlink" title="8.1 explain"></a>8.1 explain</h2><h3 id="8-1-1-概述"><a href="#8-1-1-概述" class="headerlink" title="8.1.1 概述"></a>8.1.1 概述</h3><p>HIVE提供了EXPLAIN命令来展示一个查询的执行计划，这个执行计划对于我们了解底层原理，hive 调优，排查数据倾斜等很有帮助</p>
 <h3 id="8-1-2-语法"><a href="#8-1-2-语法" class="headerlink" title="8.1.2 语法"></a>8.1.2 语法</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN [EXTENDED<span class="operator">|</span>CBO<span class="operator">|</span>AST<span class="operator">|</span>DEPENDENCY<span class="operator">|</span><span class="keyword">AUTHORIZATION</span><span class="operator">|</span>LOCKS<span class="operator">|</span>VECTORIZATION<span class="operator">|</span>ANALYZE] query</span><br></pre></td></tr></table></figure>
 
 <ol>
@@ -597,7 +602,667 @@
 <p> 大家有什么发现，除了表别名不一样，其他的执行计划完全一样，都是先进行 where 条件过滤，在进行 join 条件关联。说明 hive 底层会自动帮我们进行优化，所以这两条sql语句执行效率是一样的。</p>
 </li>
 </ol>
-<h1 id="第八章-报错"><a href="#第八章-报错" class="headerlink" title="第八章 报错"></a>第八章 报错</h1><h2 id="8-1-MismatchedTokenException-318-326"><a href="#8-1-MismatchedTokenException-318-326" class="headerlink" title="8.1 MismatchedTokenException(318!=326)"></a>8.1 MismatchedTokenException(318!=326)</h2><p>这个问题是因为没有使用dt=’2020-02-13’这个格式。</p>
+<h2 id="8-2-底层原理"><a href="#8-2-底层原理" class="headerlink" title="8.2 底层原理"></a>8.2 底层原理</h2><p><img src="https://gitee.com/liyunh/image/raw/master/master/202111091435688.png" alt="图片"></p>
+<p>在 Hive 这一侧，总共有五个组件：</p>
+<ol>
+<li>UI：用户界面。可看作我们提交SQL语句的命令行界面。</li>
+<li>DRIVER：驱动程序。接收查询的组件。该组件实现了会话句柄的概念。</li>
+<li>COMPILER：编译器。负责将 SQL 转化为平台可执行的执行计划。对不同的查询块和查询表达式进行语义分析，并最终借助表和从 metastore 查找的分区元数据来生成执行计划。</li>
+<li>METASTORE：元数据库。存储 Hive 中各种表和分区的所有结构信息。</li>
+<li>EXECUTION ENGINE：执行引擎。负责提交 COMPILER 阶段编译好的执行计划到不同的平台上。</li>
+</ol>
+<p>上图的基本流程是：</p>
+<p><strong>步骤1</strong>：UI 调用 DRIVER 的接口；</p>
+<p><strong>步骤2</strong>：DRIVER 为查询创建会话句柄，并将查询发送到 COMPILER(编译器)生成执行计划；</p>
+<p><strong>步骤3和4</strong>：编译器从元数据存储中获取本次查询所需要的元数据，该元数据用于对查询树中的表达式进行类型检查，以及基于查询谓词修建分区；</p>
+<p><strong>步骤5</strong>：编译器生成的计划是分阶段的DAG，每个阶段要么是 map/reduce 作业，要么是一个元数据或者HDFS上的操作。将生成的计划发给 DRIVER。</p>
+<p>如果是 map/reduce 作业，该计划包括 map operator trees 和一个  reduce operator tree，执行引擎将会把这些作业发送给 MapReduce ：</p>
+<p><strong>步骤6、6.1、6.2和6.3</strong>：执行引擎将这些阶段提交给适当的组件。在每个 task(mapper/reducer) 中，从HDFS文件中读取与表或中间输出相关联的数据，并通过相关算子树传递这些数据。最终这些数据通过序列化器写入到一个临时HDFS文件中（如果不需要 reduce 阶段，则在 map 中操作）。临时文件用于向计划中后面的 map/reduce 阶段提供数据。</p>
+<p><strong>步骤7、8和9</strong>：最终的临时文件将移动到表的位置，确保不读取脏数据(文件重命名在HDFS中是原子操作)。对于用户的查询，临时文件的内容由执行引擎直接从HDFS读取，然后通过Driver发送到UI。</p>
+<h3 id="Hive-SQL-编译成-MapReduce-过程"><a href="#Hive-SQL-编译成-MapReduce-过程" class="headerlink" title="Hive SQL 编译成 MapReduce 过程"></a>Hive SQL 编译成 MapReduce 过程</h3><p>编译 SQL 的任务是在上节中介绍的 COMPILER（编译器组件）中完成的。Hive将SQL转化为MapReduce任务，整个编译过程分为六个阶段：</p>
+<p><img src="https://gitee.com/liyunh/image/raw/master/master/202111091440093.png" alt="图片"></p>
+<ol>
+<li><strong>词法、语法解析：</strong> Antlr 定义 SQL 的语法规则，完成 SQL 词法，语法解析，将 SQL 转化为抽象语法树 AST Tree；</li>
+</ol>
+<blockquote>
+<p>Antlr是一种语言识别的工具，可以用来构造领域语言。使用Antlr构造特定的语言只需要编写一个语法文件，定义词法和语法替换规则即可，Antlr完成了词法分析、语法分析、语义分析、中间代码生成的过程。</p>
+</blockquote>
+<ol start="2">
+<li><p><strong>语义解析</strong>: 遍历 AST Tree，抽象出查询的基本组成单元 QueryBlock；</p>
+</li>
+<li><p><strong>生成逻辑执行计划</strong>: 遍历 QueryBlock，翻译为执行操作树 OperatorTree；</p>
+</li>
+<li><p><strong>优化逻辑执行计划</strong>: 逻辑层优化器进行 OperatorTree 变换，合并 Operator，达到减少 MapReduce Job，减少数据传输及 shuffle 数据量；</p>
+</li>
+<li><p><strong>生成物理执行计划</strong>: 遍历 OperatorTree，翻译为 MapReduce 任务；</p>
+</li>
+<li><p><strong>优化物理执行计划</strong>: 物理层优化器进行 MapReduce 任务的变换，生成最终的执行计划。</p>
+</li>
+</ol>
+<h2 id="8-3-Hook"><a href="#8-3-Hook" class="headerlink" title="8.3 Hook"></a>8.3 Hook</h2><p>Hook是一种在处理过程中拦截事件，消息或函数调用的机制。 <strong>Hive hooks是绑定到了Hive内部的工作机制，无需重新编译Hive。所以Hive Hook提供了使用hive扩展和集成外部功能的能力。</strong> 我们可以通过Hive Hooks在查询处理的各个步骤中运行/注入一些代码，帮助我们实现想要实现的功能。</p>
+<p>根据钩子的类型，它可以在查询处理期间的不同点调用：</p>
+<p><code>Pre-semantic-analyzer hooks</code>：在Hive在查询字符串上运行语义分析器之前调用。</p>
+<p><code>Post-semantic-analyzer hooks</code>：在Hive在查询字符串上运行语义分析器之后调用。</p>
+<p><code>Pre-driver-run hooks</code>：在driver执行查询之前调用。</p>
+<p><code>Post-driver-run hooks</code>：在driver执行查询之后调用。</p>
+<p><code>Pre-execution hooks</code>：在执行引擎执行查询之前调用。请注意，这个目的是此时已经为Hive准备了一个优化的查询计划。</p>
+<p><code>Post-execution hooks</code>：在查询执行完成之后以及将结果返回给用户之前调用。</p>
+<p><code>Failure-execution hooks</code>：当查询执行失败时调用。</p>
+<p>由以上的Hive Hooks我们都可以得出Hive SQL执行的生命周期了，而Hive Hooks则完整的贯穿了Hive查询的整个生命周期。</p>
+<p><img src="https://gitee.com/liyunh/image/raw/master/master/202111091158479.png" alt="img"></p>
+<p>对于Hive Hooks有了初步理解之后，后面我们会通过示例介绍如何实现一个Hive Hook，并且尝试一下如何基于Hive实现统一的SQL查询服务。</p>
+<h2 id="8-4-元数据管理"><a href="#8-4-元数据管理" class="headerlink" title="8.4 元数据管理"></a>8.4 元数据管理</h2><h3 id="8-4-1-概述"><a href="#8-4-1-概述" class="headerlink" title="8.4.1 概述"></a>8.4.1 概述</h3><p>Hive 的元数据信息通常存储在关系型数据库中，常用MySQL数据库作为元数据库管理。上一篇hive的安装也是将元数据信息存放在MySQL数据库中。</p>
+<p>Hive的元数据信息在MySQL数据中有57张表</p>
+<h3 id="8-4-2-存储Hive版本的元数据表"><a href="#8-4-2-存储Hive版本的元数据表" class="headerlink" title="8.4.2 存储Hive版本的元数据表"></a>8.4.2 存储Hive版本的元数据表</h3><p>VERSION</p>
+<table>
+<thead>
+<tr>
+<th><strong>VER_ID</strong></th>
+<th><strong>SCHEMA_VERSION</strong></th>
+<th><strong>VERSION_COMMENT</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ID主键</td>
+<td>Hive版本</td>
+<td>版本说明</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0.13.0</td>
+<td>Set by MetaStore</td>
+</tr>
+</tbody></table>
+<p>如果这个表出问题了，是进不了Hive-Client的</p>
+<h3 id="8-4-3-Hive数据库相关的元数据表"><a href="#8-4-3-Hive数据库相关的元数据表" class="headerlink" title="8.4.3 Hive数据库相关的元数据表"></a>8.4.3 Hive数据库相关的元数据表</h3><ol>
+<li><p><strong>DBS</strong></p>
+<p>存储Hive中所有数据库的基本信息</p>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>DB_ID</strong></td>
+<td>数据库ID</td>
+<td>2</td>
+</tr>
+<tr>
+<td><strong>DESC</strong></td>
+<td>数据库描述</td>
+<td>测试库</td>
+</tr>
+<tr>
+<td><strong>DB_LOCATION_URI</strong></td>
+<td>数据库HDFS路径</td>
+<td>hdfs://namenode/user/hive/warehouse/lxw1234.db</td>
+</tr>
+<tr>
+<td><strong>NAME</strong></td>
+<td>数据库名</td>
+<td>lxw1234</td>
+</tr>
+<tr>
+<td><strong>OWNER_NAME</strong></td>
+<td>数据库所有者用户名</td>
+<td>lxw1234</td>
+</tr>
+<tr>
+<td><strong>OWNER_TYPE</strong></td>
+<td>所有者角色</td>
+<td>USER</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>DATABASE_PARAMS</strong></p>
+<p>该表存储数据库的相关参数，在CREATE DATABASE时候用</p>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>DB_ID</strong></td>
+<td>数据库ID</td>
+<td>2</td>
+</tr>
+<tr>
+<td><strong>PARAM_KEY</strong></td>
+<td>参数名</td>
+<td>createdby</td>
+</tr>
+<tr>
+<td><strong>PARAM_VALUE</strong></td>
+<td>参数值</td>
+<td>lxw1234</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<h3 id="8-4-4-Hive表和视图相关的元数据表"><a href="#8-4-4-Hive表和视图相关的元数据表" class="headerlink" title="8.4.4 Hive表和视图相关的元数据表"></a>8.4.4 Hive表和视图相关的元数据表</h3><ol>
+<li><p><strong>TBLS</strong></p>
+<p> 该表中存储Hive表、视图、索引表的基本信息。</p>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>TBL_ID</strong></td>
+<td>表ID</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>CREATE_TIME</strong></td>
+<td>创建时间</td>
+<td>1436317071</td>
+</tr>
+<tr>
+<td><strong>DB_ID</strong></td>
+<td>数据库ID</td>
+<td>2，对应DBS中的DB_ID</td>
+</tr>
+<tr>
+<td><strong>LAST_ACCESS_TIME</strong></td>
+<td>上次访问时间</td>
+<td>1436317071</td>
+</tr>
+<tr>
+<td><strong>OWNER</strong></td>
+<td>所有者</td>
+<td>liuxiaowen</td>
+</tr>
+<tr>
+<td><strong>RETENTION</strong></td>
+<td>保留字段</td>
+<td>0</td>
+</tr>
+<tr>
+<td><strong>SD_ID</strong></td>
+<td>序列化配置信息</td>
+<td>86，对应SDS表中的SD_ID</td>
+</tr>
+<tr>
+<td><strong>TBL_NAME</strong></td>
+<td>表名</td>
+<td>lxw1234</td>
+</tr>
+<tr>
+<td><strong>TBL_TYPE</strong></td>
+<td>表类型</td>
+<td>MANAGED_TABLE、EXTERNAL_TABLE、INDEX_TABLE、VIRTUAL_VIEW</td>
+</tr>
+<tr>
+<td><strong>VIEW_EXPANDED_TEXT</strong></td>
+<td>视图的详细HQL语句</td>
+<td>select <code>lxw1234</code>.<code>pt</code>, <code>lxw1234</code>.<code>pcid</code> from <code>liuxiaowen</code>.<code>lxw1234</code></td>
+</tr>
+<tr>
+<td><strong>VIEW_ORIGINAL_TEXT</strong></td>
+<td>视图的原始HQL语句</td>
+<td>select * from lxw1234</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>TABLE_PARAMS</strong></p>
+<p>该表存储表/视图的属性信息。</p>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>TBL_ID</strong></td>
+<td>表ID</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>PARAM_KEY</strong></td>
+<td>属性名</td>
+<td>totalSize、numRows、EXTERNAL</td>
+</tr>
+<tr>
+<td><strong>PARAM_VALUE</strong></td>
+<td>属性值</td>
+<td>970107336、21231028、TRUE</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>TBL_PRIVS</strong></p>
+<p> 该表存储表/视图的授权信息</p>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>TBL_GRANT_ID</strong></td>
+<td>授权ID</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>CREATE_TIME</strong></td>
+<td>授权时间</td>
+<td>1436320455</td>
+</tr>
+<tr>
+<td><strong>GRANT_OPTION</strong></td>
+<td></td>
+<td>0</td>
+</tr>
+<tr>
+<td><strong>GRANTOR</strong></td>
+<td>授权执行用户</td>
+<td>liuxiaowen</td>
+</tr>
+<tr>
+<td><strong>GRANTOR_TYPE</strong></td>
+<td>授权者类型</td>
+<td>USER</td>
+</tr>
+<tr>
+<td><strong>PRINCIPAL_NAME</strong></td>
+<td>被授权用户</td>
+<td>username</td>
+</tr>
+<tr>
+<td><strong>PRINCIPAL_TYPE</strong></td>
+<td>被授权用户类型</td>
+<td>USER</td>
+</tr>
+<tr>
+<td><strong>TBL_PRIV</strong></td>
+<td>权限</td>
+<td>Select、Alter</td>
+</tr>
+<tr>
+<td><strong>TBL_ID</strong></td>
+<td>表ID</td>
+<td>22，对应TBLS表中的TBL_ID</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<h3 id="8-4-5-Hive文件存储信息相关的元数据表"><a href="#8-4-5-Hive文件存储信息相关的元数据表" class="headerlink" title="8.4.5 Hive文件存储信息相关的元数据表"></a>8.4.5 Hive文件存储信息相关的元数据表</h3><p>　　主要涉及SDS、SD_PARAMS、SERDES、SERDE_PARAMS</p>
+<p>　　由于HDFS支持的文件格式很多，而建Hive表时候也可以指定各种文件格式，Hive在将HQL解析成MapReduce时候，需要知道去哪里，使用哪种格式去读写HDFS文件，而这些信息就保存在这几张表中。</p>
+<ol>
+<li><p>SDS</p>
+<p>该表保存文件存储的基本信息，如INPUT_FORMAT、OUTPUT_FORMAT、是否压缩等。</p>
+</li>
+</ol>
+<p>　　<strong>TBLS表中的SD_ID与该表关联，可以获取Hive表的存储信息。</strong></p>
+<table>
+<thead>
+<tr>
+<th>元数据表字段</th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>SD_ID</strong></td>
+<td>存储信息ID</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>CD_ID</strong></td>
+<td>字段信息ID</td>
+<td>21，对应CDS表</td>
+</tr>
+<tr>
+<td><strong>INPUT_FORMAT</strong></td>
+<td>文件输入格式</td>
+<td>org.apache.hadoop.mapred.TextInputFormat</td>
+</tr>
+<tr>
+<td><strong>IS_COMPRESSED</strong></td>
+<td>是否压缩</td>
+<td>0</td>
+</tr>
+<tr>
+<td><strong>IS_STOREDASSUBDIRECTORIES</strong></td>
+<td>是否以子目录存储</td>
+<td>0</td>
+</tr>
+<tr>
+<td><strong>LOCATION</strong></td>
+<td>HDFS路径</td>
+<td>hdfs://namenode/hivedata/warehouse/ut.db/t_lxw</td>
+</tr>
+<tr>
+<td><strong>NUM_BUCKETS</strong></td>
+<td>分桶数量</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>OUTPUT_FORMAT</strong></td>
+<td>文件输出格式</td>
+<td>org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat</td>
+</tr>
+<tr>
+<td><strong>SERDE_ID</strong></td>
+<td>序列化类ID</td>
+<td>3，对应SERDES表</td>
+</tr>
+</tbody></table>
+<ol start="2">
+<li><p>SD_PARAMS</p>
+<p>该表存储Hive存储的属性信息，在创建表时候使用</p>
+<p>STORED BY ‘storage.handler.class.name’ [WITH SERDEPROPERTIES (…)指定。</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th>说明</th>
+<th>示例数据</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>SD_ID</strong></td>
+<td>存储配置ID</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>PARAM_KEY</strong></td>
+<td>存储属性名</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>PARAM_VALUE</strong></td>
+<td>存储属性值</td>
+<td></td>
+</tr>
+</tbody></table>
+<ol start="3">
+<li><p>SERDES</p>
+<p>该表存储序列化使用的类信息</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>SERDE_ID</strong></td>
+<td>序列化类配置ID</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>NAME</strong></td>
+<td>序列化类别名</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>SLIB</strong></td>
+<td>序列化类</td>
+<td>org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe</td>
+</tr>
+</tbody></table>
+<ol start="4">
+<li><p>SERDE_PARAMS</p>
+<p>该表存储序列化的一些属性、格式信息,比如：行、列分隔符</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>SERDE_ID</strong></td>
+<td>序列化类配置ID</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>PARAM_KEY</strong></td>
+<td>属性名</td>
+<td>field.delim</td>
+</tr>
+<tr>
+<td><strong>PARAM_VALUE</strong></td>
+<td>属性值</td>
+<td>,</td>
+</tr>
+</tbody></table>
+<h3 id="8-4-6-Hive表字段相关的元数据表"><a href="#8-4-6-Hive表字段相关的元数据表" class="headerlink" title="8.4.6 Hive表字段相关的元数据表"></a>8.4.6 Hive表字段相关的元数据表</h3><p>主要涉及COLUMNS_V2</p>
+<ol>
+<li><p>COLUMNS_V2</p>
+<p>该表存储表对应的字段信息。</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>CD_ID</strong></td>
+<td>字段信息ID</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>COMMENT</strong></td>
+<td>字段注释</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>COLUMN_NAME</strong></td>
+<td>字段名</td>
+<td>pt</td>
+</tr>
+<tr>
+<td><strong>TYPE_NAME</strong></td>
+<td>字段类型</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>INTEGER_IDX</strong></td>
+<td>字段顺序</td>
+<td>2</td>
+</tr>
+</tbody></table>
+<h3 id="8-4-7-Hive表分区相关的元数据表"><a href="#8-4-7-Hive表分区相关的元数据表" class="headerlink" title="8.4.7 Hive表分区相关的元数据表"></a>8.4.7 Hive表分区相关的元数据表</h3><p>主要涉及PARTITIONS、PARTITION_KEYS、PARTITION_KEY_VALS、PARTITION_PARAMS</p>
+<ol>
+<li><p>PARTITIONS</p>
+<p>该表存储表分区的基本信息。</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PART_ID</strong></td>
+<td>分区ID</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>CREATE_TIME</strong></td>
+<td>分区创建时间</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>LAST_ACCESS_TIME</strong></td>
+<td>最后一次访问时间</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>PART_NAME</strong></td>
+<td>分区名</td>
+<td>pt=2015-06-12</td>
+</tr>
+<tr>
+<td><strong>SD_ID</strong></td>
+<td>分区存储ID</td>
+<td>21</td>
+</tr>
+<tr>
+<td><strong>TBL_ID</strong></td>
+<td>表ID</td>
+<td>2</td>
+</tr>
+</tbody></table>
+<ol start="2">
+<li><p>PARTITION_KEYS</p>
+<p>该表存储分区的字段信息</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>TBL_ID</strong></td>
+<td>表ID</td>
+<td>2</td>
+</tr>
+<tr>
+<td><strong>PKEY_COMMENT</strong></td>
+<td>分区字段说明</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>PKEY_NAME</strong></td>
+<td>分区字段名</td>
+<td>pt</td>
+</tr>
+<tr>
+<td><strong>PKEY_TYPE</strong></td>
+<td>分区字段类型</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>INTEGER_IDX</strong></td>
+<td>分区字段顺序</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<ol start="3">
+<li><p>PARTITION_KEY_VALS</p>
+<p>该表存储分区字段值。</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PART_ID</strong></td>
+<td>分区ID</td>
+<td>2</td>
+</tr>
+<tr>
+<td><strong>PART_KEY_VAL</strong></td>
+<td>分区字段值</td>
+<td>2015-06-12</td>
+</tr>
+<tr>
+<td><strong>INTEGER_IDX</strong></td>
+<td>分区字段值顺序</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<ol start="4">
+<li><p>PARTITION_PARAMS</p>
+<p>该表存储分区的属性信息。</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PART_ID</strong></td>
+<td>分区ID</td>
+<td>2</td>
+</tr>
+<tr>
+<td><strong>PARAM_KEY</strong></td>
+<td>分区属性名</td>
+<td>numFiles、numRows</td>
+</tr>
+<tr>
+<td><strong>PARAM_VALUE</strong></td>
+<td>分区属性值</td>
+<td>15、502195</td>
+</tr>
+</tbody></table>
+<h3 id="8-4-8-其他不常用的元数据表"><a href="#8-4-8-其他不常用的元数据表" class="headerlink" title="8.4.8 其他不常用的元数据表"></a>8.4.8 其他不常用的元数据表</h3><ol>
+<li><p><strong>DB_PRIVS</strong></p>
+<p>数据库权限信息表。通过GRANT语句对数据库授权后，将会在这里存储。</p>
+</li>
+<li><p><strong>IDXS</strong></p>
+<p>索引表，存储Hive索引相关的元数据</p>
+</li>
+<li><p><strong>INDEX_PARAMS</strong></p>
+<p>索引相关的属性信息。</p>
+</li>
+<li><p><strong>TAB_COL_STATS</strong></p>
+<p>表字段的统计信息。使用ANALYZE语句对表字段分析后记录在这里。</p>
+</li>
+<li><p><strong>TBL_COL_PRIVS</strong></p>
+<p>表字段的授权信息</p>
+</li>
+<li><p><strong>PART_PRIVS</strong></p>
+<p>分区的授权信息</p>
+</li>
+<li><p><strong>PART_COL_STATS</strong></p>
+<p>分区字段的统计信息。</p>
+</li>
+<li><p><strong>PART_COL_PRIVS</strong></p>
+<p>分区字段的权限信息。</p>
+</li>
+<li><p><strong>FUNCS</strong></p>
+<p>用户注册的函数信息</p>
+</li>
+<li><p><strong>FUNC_RU</strong></p>
+<p>用户注册函数的资源信息</p>
+</li>
+</ol>
+<h1 id="九-报错"><a href="#九-报错" class="headerlink" title="九 报错"></a>九 报错</h1><h2 id="8-1-MismatchedTokenException-318-326"><a href="#8-1-MismatchedTokenException-318-326" class="headerlink" title="8.1 MismatchedTokenException(318!=326)"></a>8.1 MismatchedTokenException(318!=326)</h2><p>这个问题是因为没有使用dt=’2020-02-13’这个格式。</p>
 <h2 id="8-2-cannot-recognize-input-near-‘2020’-‘-‘-‘09’-in-function-specification"><a href="#8-2-cannot-recognize-input-near-‘2020’-‘-‘-‘09’-in-function-specification" class="headerlink" title="8.2 cannot recognize input near ‘2020’ ‘-‘ ‘09’ in function specification"></a>8.2 cannot recognize input near ‘2020’ ‘-‘ ‘09’ in function specification</h2><p>对半是因为少逗号之类的</p>
 <h2 id="8-3-7-missing-EOF-at-‘by’-near-‘group’"><a href="#8-3-7-missing-EOF-at-‘by’-near-‘group’" class="headerlink" title="8.3 7 missing EOF at ‘by’ near ‘group’"></a>8.3 7 missing EOF at ‘by’ near ‘group’</h2><p>hive本身缺陷，需要在每个子查询后面加别名。</p>
 <h2 id="8-经验"><a href="#8-经验" class="headerlink" title="8. 经验"></a>8. 经验</h2><h3 id="8-2-1-hive和MySQL之间数据对不上"><a href="#8-2-1-hive和MySQL之间数据对不上" class="headerlink" title="8.2.1 hive和MySQL之间数据对不上"></a>8.2.1 hive和MySQL之间数据对不上</h3><ol>
@@ -709,7 +1374,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-Hive%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">第一章 Hive基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%AE%9A%E4%B9%89"><span class="nav-text">1.1 定义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-Hive%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-text">第三章 Hive数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-text">3.1 基本数据类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-DDL%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89"><span class="nav-text">第四章 DDL数据定义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">4.1 创建数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">4.2 查询数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1-%E6%98%BE%E7%A4%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">4.2.1 显示数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-2-%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E6%83%85"><span class="nav-text">4.2.2 查看数据库详情</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-3-%E5%88%87%E6%8D%A2%E5%BD%93%E5%89%8D%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">4.2.3 切换当前数据库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">4.3 修改数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">4.4 删除数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-%E5%88%9B%E5%BB%BA%E8%A1%A8"><span class="nav-text">4.5 创建表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-1-%E7%AE%A1%E7%90%86%E8%A1%A8"><span class="nav-text">4.5.1 管理表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-2-%E5%A4%96%E9%83%A8%E8%A1%A8"><span class="nav-text">4.5.2 外部表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-3-%E5%A4%96%E9%83%A8%E8%A1%A8%E5%92%8C%E5%86%85%E9%83%A8%E8%A1%A8%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-text">4.5.3 外部表和内部表的转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-4-%E5%88%9B%E5%BB%BA%E5%A4%96%E8%A1%A8"><span class="nav-text">4.5.4 创建外表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-5-%E4%B8%B4%E6%97%B6%E8%A1%A8"><span class="nav-text">4.5.5 临时表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6-%E5%88%86%E5%8C%BA%E8%A1%A8"><span class="nav-text">4.6 分区表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-1-%E5%88%86%E5%8C%BA%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-text">4.6.1 分区表的基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-2-%E4%BA%8C%E7%BA%A7%E5%88%86%E5%8C%BA"><span class="nav-text">4.6.2 二级分区</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-7-%E4%BF%AE%E6%94%B9%E8%A1%A8"><span class="nav-text">4.7 修改表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-1-%E9%87%8D%E5%91%BD%E5%90%8D%E8%A1%A8"><span class="nav-text">4.7.1 重命名表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-2-%E5%A2%9E%E5%8A%A0%E3%80%81%E4%BF%AE%E6%94%B9%E5%92%8C%E5%88%A0%E9%99%A4%E8%A1%A8%E5%88%86%E5%8C%BA"><span class="nav-text">4.7.2 增加、修改和删除表分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-3-%E5%A2%9E%E5%8A%A0%E3%80%81%E4%BF%AE%E6%94%B9%E3%80%81%E6%9B%BF%E6%8D%A2%E5%88%97%E4%BF%A1%E6%81%AF"><span class="nav-text">4.7.3 增加、修改、替换列信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-8-%E5%88%A0%E9%99%A4%E8%A1%A8"><span class="nav-text">4.8 删除表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-9-%E4%BF%AE%E5%A4%8D%E8%A1%A8"><span class="nav-text">4.9 修复表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-10-%E4%BF%AE%E6%94%B9%E8%A1%A8%E4%BD%8D%E7%BD%AE"><span class="nav-text">4.10 修改表位置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0-DML%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C"><span class="nav-text">第五章 DML数据操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5"><span class="nav-text">5.1 数据导入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-1-%E5%90%91%E8%A1%A8%E4%B8%AD%E8%A3%85%E8%BD%BD%E6%95%B0%E6%8D%AE-Load"><span class="nav-text">5.1.1 向表中装载数据(Load)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-2-%E9%80%9A%E8%BF%87%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%E5%90%91%E8%A1%A8%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE%EF%BC%88Insert%EF%BC%89"><span class="nav-text">5.1.2 通过查询语句向表插入数据（Insert）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-3-%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%E4%B8%AD%E5%88%9B%E5%BB%BA%E8%A1%A8%E5%B9%B6%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE%EF%BC%88As-Select%EF%BC%89"><span class="nav-text">5.1.3 查询语句中创建表并加载数据（As Select）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-4-%E5%88%9B%E5%BB%BA%E8%A1%A8%E6%97%B6%E9%80%9A%E8%BF%87Location%E6%8C%87%E5%AE%9A%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE%E8%B7%AF%E5%BE%84"><span class="nav-text">5.1.4 创建表时通过Location指定加载数据路径</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%87%BA"><span class="nav-text">5.2 数据导出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%9F%A5%E8%AF%A2"><span class="nav-text">第六章 查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-%E5%9F%BA%E6%9C%AC%E6%9F%A5%E8%AF%A2"><span class="nav-text">6.1 基本查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-1-%E5%85%A8%E8%A1%A8%E5%92%8C%E7%89%B9%E5%AE%9A%E5%88%97%E6%9F%A5%E8%AF%A2"><span class="nav-text">6.1.1 全表和特定列查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-2-%E5%88%97%E5%88%AB%E5%90%8D"><span class="nav-text">6.1.2 列别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-3-%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">6.1.3 算术运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-4-%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-text">6.1.4 常用函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-5-Limit%E8%AF%AD%E5%8F%A5"><span class="nav-text">6.1.5 Limit语句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-Where%E8%AF%AD%E5%8F%A5"><span class="nav-text">6.2 Where语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-1-%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">6.2.1 比较运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-2-Like%E5%92%8CRLike"><span class="nav-text">6.2.2 Like和RLike</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-3-%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">6.2.3 逻辑运算符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-%E5%88%86%E7%BB%84"><span class="nav-text">6.3 分组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-1-Group-By%E8%AF%AD%E5%8F%A5"><span class="nav-text">6.3.1 Group By语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-2-Having%E8%AF%AD%E5%8F%A5"><span class="nav-text">6.3.2 Having语句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4-Join%E8%AF%AD%E5%8F%A5"><span class="nav-text">6.4 Join语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-1-%E7%AD%89%E5%80%BCJoin"><span class="nav-text">6.4.1 等值Join</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-2-%E5%86%85%E8%BF%9E%E6%8E%A5"><span class="nav-text">6.4.2 内连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-3-%E5%B7%A6%E5%A4%96%E8%BF%9E%E6%8E%A5"><span class="nav-text">6.4.3 左外连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-4-%E5%8F%B3%E5%A4%96%E8%BF%9E%E6%8E%A5"><span class="nav-text">6.4.4 右外连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-5-%E6%BB%A1%E5%A4%96%E8%BF%9E%E6%8E%A5"><span class="nav-text">6.4.5 满外连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-6-%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A7%AF"><span class="nav-text">6.4.6 笛卡尔积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-7-%E8%BF%9E%E6%8E%A5%E8%B0%93%E8%AF%8Don%E4%B8%AD%E4%B8%8D%E6%94%AF%E6%8C%81or"><span class="nav-text">6.4.7 连接谓词on中不支持or</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-5-%E6%8E%92%E5%BA%8F"><span class="nav-text">6.5 排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-1-%E5%85%A8%E5%B1%80%E6%8E%92%E5%BA%8F%EF%BC%88Order-By%EF%BC%89"><span class="nav-text">6.5.1 全局排序（Order By）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-2-%E6%AF%8F%E4%B8%AAMapReduce%E5%86%85%E9%83%A8%E6%8E%92%E5%BA%8F"><span class="nav-text">6.5.2 每个MapReduce内部排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-3-%E5%88%86%E5%8C%BA%E6%8E%92%E5%BA%8F%EF%BC%88Distribute-By%EF%BC%89"><span class="nav-text">6.5.3 分区排序（Distribute By）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-4-Cluster-By"><span class="nav-text">6.5.4 Cluster By</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-6-%E5%88%86%E6%A1%B6%E5%8F%8A%E6%8A%BD%E6%A0%B7%E6%9F%A5%E8%AF%A2"><span class="nav-text">6.6 分桶及抽样查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-1-%E5%88%86%E6%A1%B6%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="nav-text">6.6.1 分桶表数据存储</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-7-%E5%85%B6%E4%BB%96%E5%B8%B8%E7%94%A8%E6%9F%A5%E8%AF%A2%E5%87%BD%E6%95%B0"><span class="nav-text">6.7 其他常用查询函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-1-%E7%A9%BA%E5%AD%97%E6%AE%B5%E8%B5%8B%E5%80%BC"><span class="nav-text">6.7.1 空字段赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-2-%E6%97%B6%E9%97%B4%E7%B1%BB"><span class="nav-text">6.7.2 时间类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-3-CASE-WHEN"><span class="nav-text">6.7.3 CASE WHEN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-4-%E8%A1%8C%E8%BD%AC%E5%88%97"><span class="nav-text">6.7.4 行转列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-5-%E5%88%97%E8%BD%AC%E8%A1%8C"><span class="nav-text">6.7.5 列转行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-6-%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0"><span class="nav-text">6.7.6 窗口函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-7-%E5%B0%8F%E6%95%B0%E7%82%B9%E8%BD%AC%E6%8D%A2"><span class="nav-text">6.7.7 小数点转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-8-%E8%A1%A5%E9%BD%90%E5%87%BD%E6%95%B0"><span class="nav-text">6.7.8 补齐函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E5%87%BD%E6%95%B0"><span class="nav-text">第七章 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-%E7%B3%BB%E7%BB%9F%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="nav-text">7.1 系统内置函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="nav-text">7.2 自定义函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-1-%E8%87%AA%E5%AE%9A%E4%B9%89UDF%E5%87%BD%E6%95%B0"><span class="nav-text">7.2.1 自定义UDF函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-2-%E8%87%AA%E5%AE%9A%E4%B9%89UDTF%E5%87%BD%E6%95%B0"><span class="nav-text">7.2.2 自定义UDTF函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-3-%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="nav-text">7.2.3 使用自定义函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E9%AB%98%E7%BA%A7%E5%86%85%E5%AE%B9"><span class="nav-text">第八章 高级内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-explain"><span class="nav-text">8.1 explain</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-1-%E6%A6%82%E8%BF%B0"><span class="nav-text">8.1.1 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-2-%E8%AF%AD%E6%B3%95"><span class="nav-text">8.1.2 语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-3-%E7%BB%93%E6%9E%9C%E8%AF%B4%E6%98%8E"><span class="nav-text">8.1.3 结果说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-4-%E5%AE%9E%E8%B7%B5"><span class="nav-text">8.1.4 实践</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%8A%A5%E9%94%99"><span class="nav-text">第八章 报错</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-MismatchedTokenException-318-326"><span class="nav-text">8.1 MismatchedTokenException(318!&#x3D;326)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-cannot-recognize-input-near-%E2%80%982020%E2%80%99-%E2%80%98-%E2%80%98-%E2%80%9809%E2%80%99-in-function-specification"><span class="nav-text">8.2 cannot recognize input near ‘2020’ ‘-‘ ‘09’ in function specification</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3-7-missing-EOF-at-%E2%80%98by%E2%80%99-near-%E2%80%98group%E2%80%99"><span class="nav-text">8.3 7 missing EOF at ‘by’ near ‘group’</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E7%BB%8F%E9%AA%8C"><span class="nav-text">8. 经验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-1-hive%E5%92%8CMySQL%E4%B9%8B%E9%97%B4%E6%95%B0%E6%8D%AE%E5%AF%B9%E4%B8%8D%E4%B8%8A"><span class="nav-text">8.2.1 hive和MySQL之间数据对不上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-2-%E6%97%B6%E9%97%B4%E7%BB%B4%E8%A1%A8"><span class="nav-text">8.2.2 时间维表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-3-%E8%87%AA%E7%84%B6%E5%91%A8%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95"><span class="nav-text">8.3.3 自然周计算方法</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-Hive%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">一 Hive基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%AE%9A%E4%B9%89"><span class="nav-text">1.1 定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E6%9E%B6%E6%9E%84"><span class="nav-text">1.2 架构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89-Hive%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-text">三 Hive数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-text">3.1 基本数据类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B-DDL%E6%95%B0%E6%8D%AE%E5%AE%9A%E4%B9%89"><span class="nav-text">四 DDL数据定义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">4.1 创建数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">4.2 查询数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1-%E6%98%BE%E7%A4%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">4.2.1 显示数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-2-%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E6%83%85"><span class="nav-text">4.2.2 查看数据库详情</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-3-%E5%88%87%E6%8D%A2%E5%BD%93%E5%89%8D%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">4.2.3 切换当前数据库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">4.3 修改数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">4.4 删除数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-%E5%88%9B%E5%BB%BA%E8%A1%A8"><span class="nav-text">4.5 创建表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-1-%E7%AE%A1%E7%90%86%E8%A1%A8"><span class="nav-text">4.5.1 管理表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-2-%E5%A4%96%E9%83%A8%E8%A1%A8"><span class="nav-text">4.5.2 外部表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-3-%E5%A4%96%E9%83%A8%E8%A1%A8%E5%92%8C%E5%86%85%E9%83%A8%E8%A1%A8%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-text">4.5.3 外部表和内部表的转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-4-%E5%88%9B%E5%BB%BA%E5%A4%96%E8%A1%A8"><span class="nav-text">4.5.4 创建外表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-5-%E4%B8%B4%E6%97%B6%E8%A1%A8"><span class="nav-text">4.5.5 临时表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6-%E5%88%86%E5%8C%BA%E8%A1%A8"><span class="nav-text">4.6 分区表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-1-%E5%88%86%E5%8C%BA%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-text">4.6.1 分区表的基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-2-%E4%BA%8C%E7%BA%A7%E5%88%86%E5%8C%BA"><span class="nav-text">4.6.2 二级分区</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-7-%E4%BF%AE%E6%94%B9%E8%A1%A8"><span class="nav-text">4.7 修改表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-1-%E9%87%8D%E5%91%BD%E5%90%8D%E8%A1%A8"><span class="nav-text">4.7.1 重命名表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-2-%E5%A2%9E%E5%8A%A0%E3%80%81%E4%BF%AE%E6%94%B9%E5%92%8C%E5%88%A0%E9%99%A4%E8%A1%A8%E5%88%86%E5%8C%BA"><span class="nav-text">4.7.2 增加、修改和删除表分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-3-%E5%A2%9E%E5%8A%A0%E3%80%81%E4%BF%AE%E6%94%B9%E3%80%81%E6%9B%BF%E6%8D%A2%E5%88%97%E4%BF%A1%E6%81%AF"><span class="nav-text">4.7.3 增加、修改、替换列信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-8-%E5%88%A0%E9%99%A4%E8%A1%A8"><span class="nav-text">4.8 删除表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-9-%E4%BF%AE%E5%A4%8D%E8%A1%A8"><span class="nav-text">4.9 修复表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-10-%E4%BF%AE%E6%94%B9%E8%A1%A8%E4%BD%8D%E7%BD%AE"><span class="nav-text">4.10 修改表位置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94-DML%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C"><span class="nav-text">五 DML数据操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5"><span class="nav-text">5.1 数据导入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-1-%E5%90%91%E8%A1%A8%E4%B8%AD%E8%A3%85%E8%BD%BD%E6%95%B0%E6%8D%AE-Load"><span class="nav-text">5.1.1 向表中装载数据(Load)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-2-%E9%80%9A%E8%BF%87%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%E5%90%91%E8%A1%A8%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE%EF%BC%88Insert%EF%BC%89"><span class="nav-text">5.1.2 通过查询语句向表插入数据（Insert）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-3-%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%E4%B8%AD%E5%88%9B%E5%BB%BA%E8%A1%A8%E5%B9%B6%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE%EF%BC%88As-Select%EF%BC%89"><span class="nav-text">5.1.3 查询语句中创建表并加载数据（As Select）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-4-%E5%88%9B%E5%BB%BA%E8%A1%A8%E6%97%B6%E9%80%9A%E8%BF%87Location%E6%8C%87%E5%AE%9A%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE%E8%B7%AF%E5%BE%84"><span class="nav-text">5.1.4 创建表时通过Location指定加载数据路径</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%87%BA"><span class="nav-text">5.2 数据导出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD-%E6%9F%A5%E8%AF%A2"><span class="nav-text">六 查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-%E5%9F%BA%E6%9C%AC%E6%9F%A5%E8%AF%A2"><span class="nav-text">6.1 基本查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-1-%E5%85%A8%E8%A1%A8%E5%92%8C%E7%89%B9%E5%AE%9A%E5%88%97%E6%9F%A5%E8%AF%A2"><span class="nav-text">6.1.1 全表和特定列查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-2-%E5%88%97%E5%88%AB%E5%90%8D"><span class="nav-text">6.1.2 列别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-3-%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">6.1.3 算术运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-4-%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-text">6.1.4 常用函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-5-Limit%E8%AF%AD%E5%8F%A5"><span class="nav-text">6.1.5 Limit语句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-Where%E8%AF%AD%E5%8F%A5"><span class="nav-text">6.2 Where语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-1-%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">6.2.1 比较运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-2-Like%E5%92%8CRLike"><span class="nav-text">6.2.2 Like和RLike</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-3-%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">6.2.3 逻辑运算符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-%E5%88%86%E7%BB%84"><span class="nav-text">6.3 分组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-1-Group-By%E8%AF%AD%E5%8F%A5"><span class="nav-text">6.3.1 Group By语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-2-Having%E8%AF%AD%E5%8F%A5"><span class="nav-text">6.3.2 Having语句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4-Join%E8%AF%AD%E5%8F%A5"><span class="nav-text">6.4 Join语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-1-%E7%AD%89%E5%80%BCJoin"><span class="nav-text">6.4.1 等值Join</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-2-%E5%86%85%E8%BF%9E%E6%8E%A5"><span class="nav-text">6.4.2 内连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-3-%E5%B7%A6%E5%A4%96%E8%BF%9E%E6%8E%A5"><span class="nav-text">6.4.3 左外连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-4-%E5%8F%B3%E5%A4%96%E8%BF%9E%E6%8E%A5"><span class="nav-text">6.4.4 右外连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-5-%E6%BB%A1%E5%A4%96%E8%BF%9E%E6%8E%A5"><span class="nav-text">6.4.5 满外连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-6-%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A7%AF"><span class="nav-text">6.4.6 笛卡尔积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-7-%E8%BF%9E%E6%8E%A5%E8%B0%93%E8%AF%8Don%E4%B8%AD%E4%B8%8D%E6%94%AF%E6%8C%81or"><span class="nav-text">6.4.7 连接谓词on中不支持or</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-5-%E6%8E%92%E5%BA%8F"><span class="nav-text">6.5 排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-1-%E5%85%A8%E5%B1%80%E6%8E%92%E5%BA%8F%EF%BC%88Order-By%EF%BC%89"><span class="nav-text">6.5.1 全局排序（Order By）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-2-%E6%AF%8F%E4%B8%AAMapReduce%E5%86%85%E9%83%A8%E6%8E%92%E5%BA%8F"><span class="nav-text">6.5.2 每个MapReduce内部排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-3-%E5%88%86%E5%8C%BA%E6%8E%92%E5%BA%8F%EF%BC%88Distribute-By%EF%BC%89"><span class="nav-text">6.5.3 分区排序（Distribute By）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-4-Cluster-By"><span class="nav-text">6.5.4 Cluster By</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-6-%E5%88%86%E6%A1%B6%E5%8F%8A%E6%8A%BD%E6%A0%B7%E6%9F%A5%E8%AF%A2"><span class="nav-text">6.6 分桶及抽样查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-1-%E5%88%86%E6%A1%B6%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="nav-text">6.6.1 分桶表数据存储</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-7-%E5%85%B6%E4%BB%96%E5%B8%B8%E7%94%A8%E6%9F%A5%E8%AF%A2%E5%87%BD%E6%95%B0"><span class="nav-text">6.7 其他常用查询函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-1-%E7%A9%BA%E5%AD%97%E6%AE%B5%E8%B5%8B%E5%80%BC"><span class="nav-text">6.7.1 空字段赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-2-%E6%97%B6%E9%97%B4%E7%B1%BB"><span class="nav-text">6.7.2 时间类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-3-CASE-WHEN"><span class="nav-text">6.7.3 CASE WHEN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-4-%E8%A1%8C%E8%BD%AC%E5%88%97"><span class="nav-text">6.7.4 行转列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-5-%E5%88%97%E8%BD%AC%E8%A1%8C"><span class="nav-text">6.7.5 列转行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-6-%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0"><span class="nav-text">6.7.6 窗口函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-7-%E5%B0%8F%E6%95%B0%E7%82%B9%E8%BD%AC%E6%8D%A2"><span class="nav-text">6.7.7 小数点转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-8-%E8%A1%A5%E9%BD%90%E5%87%BD%E6%95%B0"><span class="nav-text">6.7.8 补齐函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%83-%E5%87%BD%E6%95%B0"><span class="nav-text">七 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-%E7%B3%BB%E7%BB%9F%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="nav-text">7.1 系统内置函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="nav-text">7.2 自定义函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-1-%E8%87%AA%E5%AE%9A%E4%B9%89UDF%E5%87%BD%E6%95%B0"><span class="nav-text">7.2.1 自定义UDF函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-2-%E8%87%AA%E5%AE%9A%E4%B9%89UDTF%E5%87%BD%E6%95%B0"><span class="nav-text">7.2.2 自定义UDTF函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-3-%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="nav-text">7.2.3 使用自定义函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AB-%E9%AB%98%E7%BA%A7%E5%86%85%E5%AE%B9"><span class="nav-text">八 高级内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-explain"><span class="nav-text">8.1 explain</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-1-%E6%A6%82%E8%BF%B0"><span class="nav-text">8.1.1 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-2-%E8%AF%AD%E6%B3%95"><span class="nav-text">8.1.2 语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-3-%E7%BB%93%E6%9E%9C%E8%AF%B4%E6%98%8E"><span class="nav-text">8.1.3 结果说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-4-%E5%AE%9E%E8%B7%B5"><span class="nav-text">8.1.4 实践</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86"><span class="nav-text">8.2 底层原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hive-SQL-%E7%BC%96%E8%AF%91%E6%88%90-MapReduce-%E8%BF%87%E7%A8%8B"><span class="nav-text">Hive SQL 编译成 MapReduce 过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3-Hook"><span class="nav-text">8.3 Hook</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-4-%E5%85%83%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86"><span class="nav-text">8.4 元数据管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-4-1-%E6%A6%82%E8%BF%B0"><span class="nav-text">8.4.1 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-4-2-%E5%AD%98%E5%82%A8Hive%E7%89%88%E6%9C%AC%E7%9A%84%E5%85%83%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-text">8.4.2 存储Hive版本的元数据表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-4-3-Hive%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3%E7%9A%84%E5%85%83%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-text">8.4.3 Hive数据库相关的元数据表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-4-4-Hive%E8%A1%A8%E5%92%8C%E8%A7%86%E5%9B%BE%E7%9B%B8%E5%85%B3%E7%9A%84%E5%85%83%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-text">8.4.4 Hive表和视图相关的元数据表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-4-5-Hive%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E4%BF%A1%E6%81%AF%E7%9B%B8%E5%85%B3%E7%9A%84%E5%85%83%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-text">8.4.5 Hive文件存储信息相关的元数据表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-4-6-Hive%E8%A1%A8%E5%AD%97%E6%AE%B5%E7%9B%B8%E5%85%B3%E7%9A%84%E5%85%83%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-text">8.4.6 Hive表字段相关的元数据表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-4-7-Hive%E8%A1%A8%E5%88%86%E5%8C%BA%E7%9B%B8%E5%85%B3%E7%9A%84%E5%85%83%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-text">8.4.7 Hive表分区相关的元数据表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-4-8-%E5%85%B6%E4%BB%96%E4%B8%8D%E5%B8%B8%E7%94%A8%E7%9A%84%E5%85%83%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-text">8.4.8 其他不常用的元数据表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B9%9D-%E6%8A%A5%E9%94%99"><span class="nav-text">九 报错</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-MismatchedTokenException-318-326"><span class="nav-text">8.1 MismatchedTokenException(318!&#x3D;326)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-cannot-recognize-input-near-%E2%80%982020%E2%80%99-%E2%80%98-%E2%80%98-%E2%80%9809%E2%80%99-in-function-specification"><span class="nav-text">8.2 cannot recognize input near ‘2020’ ‘-‘ ‘09’ in function specification</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3-7-missing-EOF-at-%E2%80%98by%E2%80%99-near-%E2%80%98group%E2%80%99"><span class="nav-text">8.3 7 missing EOF at ‘by’ near ‘group’</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E7%BB%8F%E9%AA%8C"><span class="nav-text">8. 经验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-1-hive%E5%92%8CMySQL%E4%B9%8B%E9%97%B4%E6%95%B0%E6%8D%AE%E5%AF%B9%E4%B8%8D%E4%B8%8A"><span class="nav-text">8.2.1 hive和MySQL之间数据对不上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-2-%E6%97%B6%E9%97%B4%E7%BB%B4%E8%A1%A8"><span class="nav-text">8.2.2 时间维表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-3-%E8%87%AA%E7%84%B6%E5%91%A8%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95"><span class="nav-text">8.3.3 自然周计算方法</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -723,14 +1388,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>

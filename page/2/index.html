@@ -157,6 +157,389 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/post/5.Java/Mybatis.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="神奇的小青蛙">
+      <meta itemprop="description" content="什么时候才能暴富呢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="无聊小屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/post/5.Java/Mybatis.html" class="post-title-link" itemprop="url">Mybatis</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-08 16:58:00" itemprop="dateCreated datePublished" datetime="2021-10-08T16:58:00+08:00">2021-10-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-13 17:44:17" itemprop="dateModified" datetime="2021-10-13T17:44:17+08:00">2021-10-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://mybatis.org/mybatis-3/zh/dynamic-sql.html">官方文档</a></p>
+<h1 id="一-概述"><a href="#一-概述" class="headerlink" title="一 概述"></a>一 概述</h1><h2 id="1-1-JDBC连接"><a href="#1-1-JDBC连接" class="headerlink" title="1.1 JDBC连接"></a>1.1 JDBC连接</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Evan</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Connection connection = <span class="keyword">null</span>;</span><br><span class="line">        PreparedStatement prepareStatement = <span class="keyword">null</span>;</span><br><span class="line">        ResultSet rs = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 加载驱动</span></span><br><span class="line">            Class.forName(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);</span><br><span class="line">            <span class="comment">// 获取连接</span></span><br><span class="line">            String url = <span class="string">&quot;jdbc:mysql://127.0.0.1:3306/ssmdemo&quot;</span>;</span><br><span class="line">            String user = <span class="string">&quot;root&quot;</span>;</span><br><span class="line">            String password = <span class="string">&quot;123456&quot;</span>;</span><br><span class="line">            connection = DriverManager.getConnection(url, user, password);</span><br><span class="line">            <span class="comment">// 获取statement，preparedStatement</span></span><br><span class="line">            String sql = <span class="string">&quot;select * from tb_user where id=?&quot;</span>;</span><br><span class="line">            prepareStatement = connection.prepareStatement(sql);</span><br><span class="line">            <span class="comment">// 设置参数</span></span><br><span class="line">            prepareStatement.setLong(<span class="number">1</span>, <span class="number">1l</span>);</span><br><span class="line">            <span class="comment">// 执行查询</span></span><br><span class="line">            rs = prepareStatement.executeQuery();</span><br><span class="line">            <span class="comment">// 处理结果集</span></span><br><span class="line">            <span class="keyword">while</span> (rs.next()) &#123;</span><br><span class="line">                System.out.println(rs.getString(<span class="string">&quot;userName&quot;</span>));</span><br><span class="line">                System.out.println(rs.getString(<span class="string">&quot;name&quot;</span>));</span><br><span class="line">                System.out.println(rs.getInt(<span class="string">&quot;age&quot;</span>));</span><br><span class="line">                System.out.println(rs.getDate(<span class="string">&quot;birthday&quot;</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">// 关闭连接，释放资源</span></span><br><span class="line">            <span class="keyword">if</span> (rs != <span class="keyword">null</span>) &#123;</span><br><span class="line">                rs.close();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (prepareStatement != <span class="keyword">null</span>) &#123;</span><br><span class="line">                prepareStatement.close();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (connection != <span class="keyword">null</span>) &#123;</span><br><span class="line">                connection.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2-mybaits"><a href="#1-2-mybaits" class="headerlink" title="1.2 mybaits"></a>1.2 mybaits</h2><p>mybatis是优秀的基于java持久层的框架（半自动），它内部封装了jdbc，sql与java编码分离（sql单独提取到配置文件中，由开发者控制），开发者只需要关注sql语句本身（剩下的预编译、设置参数、执行sql、封装结果由框架完成）。它使用了ORM的思想实现了结果集的封装。</p>
+<h1 id="二-HelloWorld"><a href="#二-HelloWorld" class="headerlink" title="二 HelloWorld"></a>二 HelloWorld</h1><h2 id="2-1-创建mybatis核心配置文件"><a href="#2-1-创建mybatis核心配置文件" class="headerlink" title="2.1 创建mybatis核心配置文件"></a>2.1 创建mybatis核心配置文件</h2><p>可以通过properties标签引入外部properties文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">driver=com.mysql.jdbc.Driver</span><br><span class="line">url=jdbc:mysql://localhost:3306/mybatis?userSSL=true<span class="symbol">&amp;amp;</span>useUnicode=true<span class="symbol">&amp;amp;</span>characterEncoding=UTF-8</span><br><span class="line">username=root</span><br><span class="line">password=1234</span><br><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">configuration</span></span></span><br><span class="line"><span class="meta">        <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;&lt;http://mybatis.org/dtd/mybatis-3-config.dtd&gt;&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- configuration: 核心配置文件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">		properties: 引入外部properties文件 必须放在最前面,否则会报错</span></span><br><span class="line"><span class="comment">			resource: 类路径下</span></span><br><span class="line"><span class="comment">			url: 磁盘路径或网络路径</span></span><br><span class="line"><span class="comment"> 	--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span> <span class="attr">resource</span>=<span class="string">&quot;jdbc.properties&quot;</span>/&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!-- 设置日志输出, 方便观察sql语句和参数 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;logImpl&quot;</span> <span class="attr">value</span>=<span class="string">&quot;LOG4J&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        environments配置项目的运行环境, 可以配置多个</span></span><br><span class="line"><span class="comment">        default: 启用的环境</span></span><br><span class="line"><span class="comment">     --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">&quot;development&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">&quot;development&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">&quot;JDBC&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">&quot;POOLED&quot;</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 数据库连接信息 --&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;driver&#125;&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;url&#125;&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;username&#125;&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;password&#125;&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 每一个Mapper.xml都需要在MyBatis核心配置文件中注册!!! --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;org/hong/mapper/UserMapper.xml&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-创建实体类"><a href="#2-2-创建实体类" class="headerlink" title="2.2 创建实体类"></a>2.2 创建实体类</h2><p>就是在entity层或者pojo层创建数据库对应的实体类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.hong.pojo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.AllArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.NoArgsConstructor;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String pwd;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-创建接口"><a href="#2-3-创建接口" class="headerlink" title="2.3 创建接口"></a>2.3 创建接口</h2><p>在mapper文件中创建一个接口(UserMapper.java)</p>
+<p>相当于dto层，在这个类中定义抽象方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.hong.mapper;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.hong.pojo.User;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserMapper</span> </span>&#123;</span><br><span class="line">    <span class="function">List&lt;User&gt; <span class="title">getAll</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-4-创建mapper-xml"><a href="#2-4-创建mapper-xml" class="headerlink" title="2.4 创建mapper.xml"></a>2.4 创建mapper.xml</h2><p>将EmployeeMapper.xml中的namespace改为接口的全类名，将标签中的”id”改为与接口中定义的抽象方法相同的方法名</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span></span></span><br><span class="line"><span class="meta">        <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;&lt;http://mybatis.org/dtd/mybatis-3-mapper.dtd&gt;&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">    namespace:名称空间, 对应接口的全类名</span></span><br><span class="line"><span class="comment"> --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;org.hong.mapper.UserMapper&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        select: 配置查询</span></span><br><span class="line"><span class="comment">        id: 唯一标识, 对应接口中的方法名</span></span><br><span class="line"><span class="comment">        resultType: 返回值类型, 类的全类名, 如果返回值是集合写集合中泛型的类型</span></span><br><span class="line"><span class="comment">     --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getAll&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;org.hong.pojo.User&quot;</span>&gt;</span></span><br><span class="line">        select * from user</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-5-测试"><a href="#2-5-测试" class="headerlink" title="2.5 测试"></a>2.5 测试</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.hong.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.io.Resources;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSession;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSessionFactory;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSessionFactoryBuilder;</span><br><span class="line"><span class="keyword">import</span> org.hong.mapper.UserMapper;</span><br><span class="line"><span class="keyword">import</span> org.hong.pojo.User;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> SqlSessionFactory <span class="title">getSqlSessionFactory</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// MyBatis全局配置文件路径</span></span><br><span class="line">        String resource = <span class="string">&quot;mybatis-config.xml&quot;</span>;</span><br><span class="line">        <span class="comment">// 获取MyBatis全局配置文件的输入流</span></span><br><span class="line">        InputStream is = Resources.getResourceAsStream(resource);</span><br><span class="line">        <span class="comment">// 获取SqlSessionFactory对象</span></span><br><span class="line">        SqlSessionFactory factory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(is);</span><br><span class="line">        <span class="keyword">return</span> factory;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testHello</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 1、获取SqlSessionFactory对象</span></span><br><span class="line">        SqlSessionFactory factory = getSqlSessionFactory();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2、获取SqlSession对象</span></span><br><span class="line">        SqlSession openSession = factory.openSession();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 3、获取接口的实现类对象</span></span><br><span class="line">            <span class="comment">// 会为接口自动创建代理对象, 代理对象去执行增删改查方法, sql语句会从mapper.xml中获取</span></span><br><span class="line">            UserMapper mapper = openSession.getMapper(UserMapper.class);</span><br><span class="line">            List&lt;User&gt; list = mapper.getAll();</span><br><span class="line">            list.forEach(System.out::println);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">// 4、SqlSession代表和数据库的一次对话, 用完必须关闭</span></span><br><span class="line">            openSession.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>整个mybatis一共有两个重要的配置文件</p>
+<ol>
+<li>mybatis-config.xml</li>
+<li>用户类Mapper.xml</li>
+</ol>
+<h1 id="三-核心配置文件"><a href="#三-核心配置文件" class="headerlink" title="三 核心配置文件"></a>三 核心配置文件</h1><p>标签说明</p>
+<h2 id="3-1-properties"><a href="#3-1-properties" class="headerlink" title="3.1 properties"></a>3.1 properties</h2><p>mybatis可以使用properties标签来引入外部properties配置文件的内容。</p>
+<p>比如上边提到的demo</p>
+<h2 id="3-2-settings"><a href="#3-2-settings" class="headerlink" title="3.2 settings"></a>3.2 settings</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 开启驼峰命名 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;mapUnderscoreToCamelCase&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-3-environments"><a href="#3-3-environments" class="headerlink" title="3.3 environments"></a>3.3 environments</h2><p>MyBatis 可以配置成适应多种环境</p>
+<p><strong>尽管可以配置多个环境，但每个 SqlSessionFactory 实例只能选择一种环境。</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- default: 表示使用哪种环境 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">&quot;test&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- MySql环境 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">&quot;mysql&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">&quot;JDBC&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">&quot;POOLED&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;jdbc:mysql://localhost:3306/mybatis?userSSL=true<span class="symbol">&amp;amp;</span>useUnicode=true<span class="symbol">&amp;amp;</span>characterEncoding=UTF-8&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;root&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;1234&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Oracle环境 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">&quot;oracle环境&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">&quot;JDBC&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">&quot;POOLED&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Driver: com.ibm.db2.jdbc.app.DB2Driver&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;jdbc:db2://localhost:5000/orcl&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;scott&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;ccat&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-4-typeAliases"><a href="#3-4-typeAliases" class="headerlink" title="3.4 typeAliases"></a>3.4 typeAliases</h2><p>类型别名可为 Java 类型设置一个缩写名字。存在的意义仅在于用来<strong>降低冗余的全限定类名书写，MyBatis中的别名是不区分大小写的</strong></p>
+<p>有三种方法</p>
+<ol>
+<li><p>给实体类起别名</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 可以给实体类起别名 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">type</span>=<span class="string">&quot;pojo.User&quot;</span> <span class="attr">alias</span>=<span class="string">&quot;User&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>指定包名</p>
+<p>也可以指定一个包名，MyBatis 会在包名下面搜索需要的 Java Bean每一个在包 <code>org.hong.pojo</code> 中的 Java Bean，在<strong>没有注解</strong>的情况下，会使用 <strong>Bean 的首字母小写的非限定类名来作为它的别名</strong>，比如 <code>org.hong.pojo.User</code> 的别名为 <code>user</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">&quot;org.hong.pojo&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>使用注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Alias(&quot;author&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Author</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="3-5-Mapper"><a href="#3-5-Mapper" class="headerlink" title="3.5 Mapper"></a>3.5 Mapper</h2><ol>
+<li><p>使用相对于类路径的资源引用</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 使用相对于类路径的资源引用 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;org/hong/mapper/UserMapper.xml&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>使用映射器接口实现类的完全限定类名</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 使用映射器接口实现类的完全限定类名 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">class</span>=<span class="string">&quot;org.hong.mapper.UserMapper&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>将包内的映射器接口实现全部注册为映射器</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 将包内的映射器接口实现全部注册为映射器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">&quot;org.hong.mapper&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>方式二&amp;方式三的<strong>注意点</strong>：</p>
+<ol>
+<li><p>接口和对应的Mapper配置文件<strong>必须同名</strong></p>
+</li>
+<li><p>接口和对应的Mapper配置文件</p>
+<p>编译后必须在同一个文件夹下</p>
+<ol>
+<li>可以把接口和对应的Mapper<strong>创建在同一个包下</strong></li>
+<li>可以在<strong>resources文件加中创建和接口相同层数并且名称相同的包，然后创建接口对应的Mapper</strong></li>
+<li>也可以使用spring-boot指定文件</li>
+</ol>
+</li>
+</ol>
+<h1 id="四-映射文件Mapper-xml"><a href="#四-映射文件Mapper-xml" class="headerlink" title="四 映射文件Mapper.xml"></a>四 映射文件Mapper.xml</h1><p>文件样式</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span> <span class="meta-string">&quot;&lt;http://mybatis.org/dtd/mybatis-3-mapper.dtd&gt;&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;com.frog.dao.ShopDao&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Mybatis支持增删改返回Integer、Long、Boolean类型返回值，在接口中直接在方法上中定义即可，Mybatis会自动封装</p>
+<h2 id="4-1-CRUD标签"><a href="#4-1-CRUD标签" class="headerlink" title="4.1 CRUD标签"></a>4.1 CRUD标签</h2><h3 id="4-1-1-select"><a href="#4-1-1-select" class="headerlink" title="4.1.1 select"></a>4.1.1 select</h3><p>select – 书写查询sql语句</p>
+<p>select中的几个属性说明：</p>
+<p>id属性：当前名称空间下的statement的唯一标识。<strong>要求</strong>id和mapper接口中的方法的名字一致。</p>
+<p>resultType：将结果集映射为java的对象类型。必须（和 resultMap 二选一）</p>
+<p>parameterType：传入参数类型。可以省略</p>
+<h3 id="4-1-2-insert"><a href="#4-1-2-insert" class="headerlink" title="4**.1.2.insert**"></a>4**.1.2.insert**</h3><p>insert 的几个属性说明：</p>
+<p>id：唯一标识，随便写，在同一个命名空间下保持唯一，使用动态代理之后要求和方法名保持一致parameterType：参数的类型，使用动态代理之后和方法的参数类型一致</p>
+<p>useGeneratedKeys: 开启主键回写</p>
+<p>keyColumn：指定数据库的主键</p>
+<p>keyProperty：主键对应的pojo属性名</p>
+<p>标签内部：具体的sql语句。</p>
+<h3 id="4-1-3-update"><a href="#4-1-3-update" class="headerlink" title="4**.1.3.update**"></a>4**.1.3.update**</h3><p>id属性：当前名称空间下的statement的唯一标识(必须属性)；</p>
+<p>parameterType：传入的参数类型，可以省略。</p>
+<p>标签内部：具体的sql语句。</p>
+<h3 id="4-1-4-delete"><a href="#4-1-4-delete" class="headerlink" title="4**.1.4.delete**"></a>4**.1.4.delete**</h3><p>delete 的几个属性说明：</p>
+<p>id属性：当前名称空间下的statement的唯一标识(必须属性)；</p>
+<p>parameterType：传入的参数类型，可以省略。</p>
+<p>标签内部：具体的sql语句。</p>
+<h1 id="五-动态sql"><a href="#五-动态sql" class="headerlink" title="五 动态sql"></a>五 动态sql</h1><h2 id="5-1-常用标签"><a href="#5-1-常用标签" class="headerlink" title="5.1 常用标签"></a>5.1 常用标签</h2><h3 id="5-1-1-if"><a href="#5-1-1-if" class="headerlink" title="5.1.1 if"></a>5.1.1 if</h3><h1 id="逆向工程"><a href="#逆向工程" class="headerlink" title="逆向工程"></a>逆向工程</h1><p>MyBatis generator</p>
+<p>MyBatis generator用数据库表生成代码的时候，除了生成pojo以外，同时会生成Example文件，以及在mapper.xml文件中生成相应的sql语句。</p>
+<p>Example类中包含一个静态类Criteria，利用Criteria我们可以在类中根据自己的需求动态生成sql where字句，不用在进行修改mapper文件，或者添加sql语句了。</p>
+<p>依赖</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&lt;</span>dependency<span class="operator">&gt;</span></span><br><span class="line">    <span class="operator">&lt;</span>groupId<span class="operator">&gt;</span>org.mybatis.generator<span class="operator">&lt;</span><span class="operator">/</span>groupId<span class="operator">&gt;</span></span><br><span class="line">    <span class="operator">&lt;</span>artifactId<span class="operator">&gt;</span>mybatis<span class="operator">-</span>generator<span class="operator">-</span>core<span class="operator">&lt;</span><span class="operator">/</span>artifactId<span class="operator">&gt;</span></span><br><span class="line">    <span class="operator">&lt;</span>version<span class="operator">&gt;</span><span class="number">1.3</span><span class="number">.5</span><span class="operator">&lt;</span><span class="operator">/</span>version<span class="operator">&gt;</span></span><br><span class="line"><span class="operator">&lt;</span><span class="operator">/</span>dependency<span class="operator">&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>几种常用的方法：</p>
+<ol>
+<li><p>模糊查询</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String name =<span class="string">&quot;成&quot;</span>；</span><br><span class="line">UsernameExample ex=<span class="keyword">new</span> UsernameExample();</span><br><span class="line">ex.createCriteria.andNameLike(<span class="string">&#x27;%&#x27;</span>+name+<span class="string">&#x27;%&#x27;</span>);</span><br><span class="line">List userList=userMapper.selectByExamle(ex);</span><br></pre></td></tr></table></figure></li>
+<li><p>通过某个字段排序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String orderByClause=<span class="string">&quot;id DESC&quot;</span>；</span><br><span class="line">UsernameExample ex=<span class="keyword">new</span> UsernameExample();</span><br><span class="line">ex.setOrderByClause(orderByClause);</span><br><span class="line">List userList=userMapper.selectByExamle(ex);</span><br></pre></td></tr></table></figure></li>
+<li><p>条件搜索，不确定条件个数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">UserDaoExample ex=<span class="keyword">new</span> UserExample();</span><br><span class="line">Criteria criteria=ex.createCriterria();</span><br><span class="line"><span class="keyword">if</span>(StringUtils.isNotBlank(user.getAddress()))&#123;</span><br><span class="line">  criteria.andnameEqualTo(user.getAddress());</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(StringUtils.isNotBlank(user.getName()))&#123;</span><br><span class="line"> criteria.andNameEqualTo(user.getName());</span><br><span class="line">&#125;</span><br><span class="line">List&lt;User&gt; userList=userMapper.selectByExample(ex);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>Example This example tells MyBatis to ignore every column in the Foo table that begins with the characters “col” (case-insensitive) except for “col01” and “col13”.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">tableName</span>=<span class="string">&quot;Foo&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ignoreColumnsByRegex</span> <span class="attr">pattern</span>=<span class="string">&quot;(?i)col.*&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">except</span> <span class="attr">column</span>=<span class="string">&quot;col01&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">except</span> <span class="attr">column</span>=<span class="string">&quot;col13&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ignoreColumnsByRegex</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中example中</p>
+<ul>
+<li><strong>Criterion</strong> Criterion是最基本,最底层的Where条件，用于字段级的筛选，feild用于指代字段名字,列举如下: 只有一个条件,不需要其他参考值 feild IS NOLL feild IS NOT NULL 与一个参考值进行算数运算 feild &gt; value feild &gt;= value feild = value feild &lt;&gt; value feild &lt;= value feild &lt; value 与一个参考值进行模糊查询,参值中的%,?只能在构造查询条件时手动指定。 feild LIKE value feild NOT LIKE value 介于两个参考值之间 feild BETWEEN value AND secondValue 在或不在一个参考值集合中,item来自于value集合 feild IN (item,item,item,…) feild NOT IN (item,item,item,…) MyBatis Generator会为每个字段产生如上的Criterion，如果表的字段比较多,产生的Example类会十分庞大。理论上通过Example类可以构造你想到的任何筛选条件。</li>
+<li><strong>Criteria</strong> Criteria包含一个Cretiron的集合,每一个Criteria对象内包含的Cretiron之间是由AND连接的,是逻辑与的关系。</li>
+<li><strong>oredCriteria</strong> Example内有一个成员叫oredCriteria,是Criteria的集合,就想其名字所预示的一样，这个集合中的Criteria是由OR连接的，是逻辑或关系。oredCriteria就是ORed Criteria。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">TestTableExample example = <span class="keyword">new</span> TestTableExample();</span><br><span class="line"></span><br><span class="line">  example.or()</span><br><span class="line">    .andField1EqualTo(<span class="number">5</span>)</span><br><span class="line">    .andField2IsNull();</span><br><span class="line"></span><br><span class="line">  example.or()</span><br><span class="line">    .andField3NotEqualTo(<span class="number">9</span>)</span><br><span class="line">    .andField4IsNotNull();</span><br><span class="line"></span><br><span class="line">  List&lt;Integer&gt; field5Values = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">  field5Values.add(<span class="number">8</span>);</span><br><span class="line">  field5Values.add(<span class="number">11</span>);</span><br><span class="line">  field5Values.add(<span class="number">14</span>);</span><br><span class="line">  field5Values.add(<span class="number">22</span>);</span><br><span class="line"></span><br><span class="line">  example.or()</span><br><span class="line">    .andField5In(field5Values);</span><br><span class="line"></span><br><span class="line">  example.or()</span><br><span class="line">    .andField6Between(<span class="number">3</span>, <span class="number">7</span>);</span><br></pre></td></tr></table></figure>
+
+<p>or()方法会产生一个新的Criteria对象,添加到oredCriteria中,并返回这个Criteria对象，从而可以链式表达，为其添加Criterion。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">where</span> (field1 <span class="operator">=</span> <span class="number">5</span> <span class="keyword">and</span> field2 <span class="keyword">is</span> <span class="keyword">null</span>)</span><br><span class="line">     <span class="keyword">or</span> (field3 <span class="operator">&lt;&gt;</span> <span class="number">9</span> <span class="keyword">and</span> field4 <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">null</span>)</span><br><span class="line">     <span class="keyword">or</span> (field5 <span class="keyword">in</span> (<span class="number">8</span>, <span class="number">11</span>, <span class="number">14</span>, <span class="number">22</span>))</span><br><span class="line">     <span class="keyword">or</span> (field6 <span class="keyword">between</span> <span class="number">3</span> <span class="keyword">and</span> <span class="number">7</span>)</span><br></pre></td></tr></table></figure>
+
+<p>实现 a=x and (b=xx or b=xxx)这样的查询条件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">AccountExample accountExample = <span class="keyword">new</span> AccountExample();</span><br><span class="line">AccountExample.Criteria criteria = accountExample.createCriteria().andTypeEqualTo(<span class="string">&quot;4&quot;</span>);</span><br><span class="line">criteria.addCriterion(String.format(<span class="string">&quot; (ID=%d or ID=%d) &quot;</span>,<span class="number">34</span>,<span class="number">35</span>));</span><br><span class="line">List&lt;Account&gt; accounts = accountMapper.selectByExample(accountExample);</span><br><span class="line"><span class="keyword">return</span> accounts;</span><br></pre></td></tr></table></figure>
+
+<p>Mapper文件中方法</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>int countByExample(UserExample example)</td>
+<td>按条件计数</td>
+</tr>
+<tr>
+<td>int deleteByPrimaryKey(Integer id)</td>
+<td>按主键删除</td>
+</tr>
+<tr>
+<td>int deleteByExample(UserExample example)</td>
+<td>按条件删除</td>
+</tr>
+<tr>
+<td>String/Integer insert(User record)</td>
+<td>插入数据，返回值的ID</td>
+</tr>
+<tr>
+<td>String/Integer insertSelective(User record)</td>
+<td>插入一条数据,只插入不为null的字段</td>
+</tr>
+<tr>
+<td>User selectByPrimaryKey(Integer id)</td>
+<td>按主键查询</td>
+</tr>
+<tr>
+<td>List selectByExampleWithBLOGs(UserExample example)</td>
+<td>按条件查询（包括BLOB字段）。text类型会走</td>
+</tr>
+<tr>
+<td>int updateByPrimaryKey(User record)</td>
+<td>按主键更新</td>
+</tr>
+<tr>
+<td>int updateByPrimaryKeySelective(User record)</td>
+<td>按主键更新值不为null的字段</td>
+</tr>
+<tr>
+<td>int updateByExample(User record, UserExample example)</td>
+<td>按条件更新</td>
+</tr>
+<tr>
+<td>int updateByExampleSelective(User record, UserExample example)</td>
+<td>按条件更新值不为null的字段</td>
+</tr>
+</tbody></table>
+<p>Xxx表示的是字段</p>
+<p>Example常用方法</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>example.setOrderByClause(“字段名 ASC”);</td>
+<td>添加升序排列条件，DESC为降序</td>
+</tr>
+<tr>
+<td>example.setDistinct(false)</td>
+<td>去除重复，boolean型，true为选择不重复的记录。</td>
+</tr>
+<tr>
+<td>criteria.andXxxIsNull</td>
+<td>添加字段xxx为null的条件</td>
+</tr>
+<tr>
+<td>criteria.andXxxIsNotNull</td>
+<td>添加字段xxx不为null的条件</td>
+</tr>
+<tr>
+<td>criteria.andXxxNotEqualTo(value)</td>
+<td>添加xxx字段不等于value条件</td>
+</tr>
+<tr>
+<td>criteria.andXxxGreaterThan(value)</td>
+<td>添加xxx字段大于value条件</td>
+</tr>
+<tr>
+<td>criteria.andXxxGreaterThanOrEqualTo(value)</td>
+<td>添加xxx字段大于等于value条件</td>
+</tr>
+<tr>
+<td>criteria.andXxxLessThan(value)</td>
+<td>添加xxx字段小于value条件</td>
+</tr>
+<tr>
+<td>criteria.andXxxLessThanOrEqualTo(value)</td>
+<td>添加xxx字段小于等于value条件</td>
+</tr>
+<tr>
+<td>criteria.andXxxIn(List&lt;？&gt;)</td>
+<td>添加xxx字段值在List&lt;？&gt;条件</td>
+</tr>
+<tr>
+<td>criteria.andXxxNotIn(List&lt;？&gt;)</td>
+<td>添加xxx字段值不在List&lt;？&gt;条件</td>
+</tr>
+<tr>
+<td>criteria.andXxxLike(“%”+value+”%”)</td>
+<td>添加xxx字段值为value的模糊查询条件</td>
+</tr>
+<tr>
+<td>criteria.andXxxNotLike(“%”+value+”%”)</td>
+<td>添加xxx字段值不为value的模糊查询条件</td>
+</tr>
+<tr>
+<td>criteria.andXxxBetween(value1,value2)</td>
+<td>添加xxx字段值在value1和value2之间条件</td>
+</tr>
+<tr>
+<td>criteria.andXxxNotBetween(value1,value2)</td>
+<td>添加xxx字段值不在value1和value2之间条件</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/post/10.Body/%E8%BF%90%E5%8A%A8%E8%A7%A3%E5%89%96%E5%AD%A6.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="神奇的小青蛙">
+      <meta itemprop="description" content="什么时候才能暴富呢">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="无聊小屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/post/10.Body/%E8%BF%90%E5%8A%A8%E8%A7%A3%E5%89%96%E5%AD%A6.html" class="post-title-link" itemprop="url">运动解剖学</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-07 07:58:50" itemprop="dateCreated datePublished" datetime="2021-10-07T07:58:50+08:00">2021-10-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-09 17:47:18" itemprop="dateModified" datetime="2021-10-09T17:47:18+08:00">2021-10-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[toc]</p>
+<h1 id="一-概论"><a href="#一-概论" class="headerlink" title="一 概论"></a>一 概论</h1><h2 id="1-1-解剖学姿势"><a href="#1-1-解剖学姿势" class="headerlink" title="1.1 解剖学姿势"></a>1.1 解剖学姿势</h2><h2 id="1-2-人体运动面"><a href="#1-2-人体运动面" class="headerlink" title="1.2 人体运动面"></a>1.2 人体运动面</h2><h2 id="1-3-骨骼"><a href="#1-3-骨骼" class="headerlink" title="1.3 骨骼"></a>1.3 骨骼</h2><h2 id="1-4-关节"><a href="#1-4-关节" class="headerlink" title="1.4 关节"></a>1.4 关节</h2><h2 id="1-5-肌肉"><a href="#1-5-肌肉" class="headerlink" title="1.5 肌肉"></a>1.5 肌肉</h2><h2 id="1-6-肌肉收缩形式"><a href="#1-6-肌肉收缩形式" class="headerlink" title="1.6 肌肉收缩形式"></a>1.6 肌肉收缩形式</h2><h1 id="二-躯干"><a href="#二-躯干" class="headerlink" title="二 躯干"></a>二 躯干</h1><h2 id="2-1-人体体态学"><a href="#2-1-人体体态学" class="headerlink" title="2.1 人体体态学"></a>2.1 人体体态学</h2><h2 id="2-2-躯干的整体运动"><a href="#2-2-躯干的整体运动" class="headerlink" title="2.2 躯干的整体运动"></a>2.2 躯干的整体运动</h2><h2 id="2-3-运动中的椎骨"><a href="#2-3-运动中的椎骨" class="headerlink" title="2.3 运动中的椎骨"></a>2.3 运动中的椎骨</h2><h2 id="2-4-盆骨"><a href="#2-4-盆骨" class="headerlink" title="2.4 盆骨"></a>2.4 盆骨</h2><h2 id="2-5-骶骨"><a href="#2-5-骶骨" class="headerlink" title="2.5 骶骨"></a>2.5 骶骨</h2><h2 id="2-6-脊柱腰段"><a href="#2-6-脊柱腰段" class="headerlink" title="2.6 脊柱腰段"></a>2.6 脊柱腰段</h2><h2 id="2-7-脊柱胸段"><a href="#2-7-脊柱胸段" class="headerlink" title="2.7 脊柱胸段"></a>2.7 脊柱胸段</h2><h2 id="2-8-脊柱颈段"><a href="#2-8-脊柱颈段" class="headerlink" title="2.8 脊柱颈段"></a>2.8 脊柱颈段</h2><h2 id="2-9-躯干与颈后部的肌肉"><a href="#2-9-躯干与颈后部的肌肉" class="headerlink" title="2.9 躯干与颈后部的肌肉"></a>2.9 躯干与颈后部的肌肉</h2><h2 id="2-10-颈前面及侧面的肌肉"><a href="#2-10-颈前面及侧面的肌肉" class="headerlink" title="2.10 颈前面及侧面的肌肉"></a>2.10 颈前面及侧面的肌肉</h2><h2 id="2-11-胸肌"><a href="#2-11-胸肌" class="headerlink" title="2.11 胸肌"></a>2.11 胸肌</h2><h1 id="三-肩部"><a href="#三-肩部" class="headerlink" title="三 肩部"></a>三 肩部</h1><h1 id="四-肘"><a href="#四-肘" class="headerlink" title="四 肘"></a>四 肘</h1><h1 id="五-手腕与手掌"><a href="#五-手腕与手掌" class="headerlink" title="五 手腕与手掌"></a>五 手腕与手掌</h1><h1 id="六-髋与膝"><a href="#六-髋与膝" class="headerlink" title="六 髋与膝"></a>六 髋与膝</h1><h1 id="七-踝与足"><a href="#七-踝与足" class="headerlink" title="七 踝与足"></a>七 踝与足</h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/post/3.BigData/hive.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -188,7 +571,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-10-26 18:57:11" itemprop="dateModified" datetime="2021-10-26T18:57:11+08:00">2021-10-26</time>
+                <time title="修改时间：2021-11-10 15:30:57" itemprop="dateModified" datetime="2021-11-10T15:30:57+08:00">2021-11-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -211,8 +594,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="第一章-Hive基本概念"><a href="#第一章-Hive基本概念" class="headerlink" title="第一章 Hive基本概念"></a>第一章 Hive基本概念</h1><h2 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1 定义"></a>1.1 定义</h2><p>一个数据仓库，解决海量结构化日志的数据统计，本质是将HQL转化成MapReduce程序。</p>
-<h1 id="第三章-Hive数据类型"><a href="#第三章-Hive数据类型" class="headerlink" title="第三章 Hive数据类型"></a>第三章 Hive数据类型</h1><h2 id="3-1-基本数据类型"><a href="#3-1-基本数据类型" class="headerlink" title="3.1 基本数据类型"></a>3.1 基本数据类型</h2><ol>
+          <h1 id="一-Hive基本概念"><a href="#一-Hive基本概念" class="headerlink" title="一 Hive基本概念"></a>一 Hive基本概念</h1><h2 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1 定义"></a>1.1 定义</h2><p>一个数据仓库，解决海量结构化日志的数据统计，本质是将HQL转化成MapReduce程序。</p>
+<h2 id="1-2-架构"><a href="#1-2-架构" class="headerlink" title="1.2 架构"></a>1.2 架构</h2><p><img src="https://gitee.com/liyunh/image/raw/master/master/202111091429747.png" alt="图片"></p>
+<h1 id="三-Hive数据类型"><a href="#三-Hive数据类型" class="headerlink" title="三 Hive数据类型"></a>三 Hive数据类型</h1><h2 id="3-1-基本数据类型"><a href="#3-1-基本数据类型" class="headerlink" title="3.1 基本数据类型"></a>3.1 基本数据类型</h2><ol>
 <li><p><strong>INT（常用）</strong></p>
 </li>
 <li><p>BIGINT</p>
@@ -249,7 +633,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="第四章-DDL数据定义"><a href="#第四章-DDL数据定义" class="headerlink" title="第四章 DDL数据定义"></a>第四章 DDL数据定义</h1><h2 id="4-1-创建数据库"><a href="#4-1-创建数据库" class="headerlink" title="4.1 创建数据库"></a>4.1 创建数据库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create database <span class="keyword">if</span> not exists db_hive location <span class="string">&#x27;/db_hive.db&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="四-DDL数据定义"><a href="#四-DDL数据定义" class="headerlink" title="四 DDL数据定义"></a>四 DDL数据定义</h1><h2 id="4-1-创建数据库"><a href="#4-1-创建数据库" class="headerlink" title="4.1 创建数据库"></a>4.1 创建数据库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create database <span class="keyword">if</span> not exists db_hive location <span class="string">&#x27;/db_hive.db&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
 <h2 id="4-2-查询数据库"><a href="#4-2-查询数据库" class="headerlink" title="4.2 查询数据库"></a>4.2 查询数据库</h2><h3 id="4-2-1-显示数据库"><a href="#4-2-1-显示数据库" class="headerlink" title="4.2.1 显示数据库"></a>4.2.1 显示数据库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show database;</span><br><span class="line"><span class="comment"># 过滤显示查询的数据库</span></span><br><span class="line">show database like <span class="string">&#x27;db_hive&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
@@ -311,7 +695,7 @@
 <p>我们知道hive有个服务叫metastore，这个服务主要是存储一些元数据信息，比如数据库名，表名或者表的分区等等信息。如果不是通过hive的insert等插入语句，很多分区信息在metastore中是没有的，如果插入分区数据量很多的话，你用 <code>ALTER TABLE table_name ADD PARTITION</code> 一个个分区添加十分麻烦。这时候<code>MSCK REPAIR TABLE</code>就派上用场了。只需要运行<code>MSCK REPAIR TABLE</code>命令，hive就会去检测这个表在hdfs上的文件，把没有写入metastore的分区信息写入metastore。</p>
 <h2 id="4-10-修改表位置"><a href="#4-10-修改表位置" class="headerlink" title="4.10 修改表位置"></a>4.10 修改表位置</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> t_m_cc <span class="keyword">set</span> location <span class="string">&#x27;hdfs://heracles/user/video-mvc/hive/warehouse/t_m_cc&#x27;</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="第五章-DML数据操作"><a href="#第五章-DML数据操作" class="headerlink" title="第五章 DML数据操作"></a>第五章 DML数据操作</h1><h2 id="5-1-数据导入"><a href="#5-1-数据导入" class="headerlink" title="5.1 数据导入"></a>5.1 数据导入</h2><h3 id="5-1-1-向表中装载数据-Load"><a href="#5-1-1-向表中装载数据-Load" class="headerlink" title="5.1.1 向表中装载数据(Load)"></a>5.1.1 向表中装载数据(Load)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load data [<span class="built_in">local</span>] inpath <span class="string">&#x27;filepath&#x27;</span> [overwrite] into table table_name [partition(part1=val1,part2=val2)]</span><br></pre></td></tr></table></figure>
+<h1 id="五-DML数据操作"><a href="#五-DML数据操作" class="headerlink" title="五 DML数据操作"></a>五 DML数据操作</h1><h2 id="5-1-数据导入"><a href="#5-1-数据导入" class="headerlink" title="5.1 数据导入"></a>5.1 数据导入</h2><h3 id="5-1-1-向表中装载数据-Load"><a href="#5-1-1-向表中装载数据-Load" class="headerlink" title="5.1.1 向表中装载数据(Load)"></a>5.1.1 向表中装载数据(Load)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load data [<span class="built_in">local</span>] inpath <span class="string">&#x27;filepath&#x27;</span> [overwrite] into table table_name [partition(part1=val1,part2=val2)]</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">load data <span class="built_in">local</span> inpath <span class="string">&#x27;/opt/moudle/dept.txt&#x27;</span> </span><br><span class="line">into|overwrite into table student partition(partcol1=val1)</span><br><span class="line">row format delimited fields terminated by <span class="string">&#x27;,&#x27;</span></span><br></pre></td></tr></table></figure>
 
@@ -321,7 +705,7 @@
 
 <h3 id="5-1-4-创建表时通过Location指定加载数据路径"><a href="#5-1-4-创建表时通过Location指定加载数据路径" class="headerlink" title="5.1.4 创建表时通过Location指定加载数据路径"></a>5.1.4 创建表时通过Location指定加载数据路径</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.创建表，并指定在hdfs位置上</span></span><br><span class="line">create table <span class="keyword">if</span> not exists student(id int, name string)</span><br><span class="line">row format delimited fields terminated bt <span class="string">&#x27;\t&#x27;</span></span><br><span class="line">location <span class="string">&#x27;/user/hive/warehouse/student&#x27;</span>;</span><br><span class="line"><span class="comment"># 2.上传数据到hdfs上</span></span><br><span class="line">dfs -put /opt/modlue/student /user/hive/warehouse/student;</span><br></pre></td></tr></table></figure>
 
-<h2 id="5-2-数据导出"><a href="#5-2-数据导出" class="headerlink" title="5.2 数据导出"></a>5.2 数据导出</h2><h1 id="第六章-查询"><a href="#第六章-查询" class="headerlink" title="第六章 查询"></a>第六章 查询</h1><h2 id="6-1-基本查询"><a href="#6-1-基本查询" class="headerlink" title="6.1 基本查询"></a>6.1 基本查询</h2><h3 id="6-1-1-全表和特定列查询"><a href="#6-1-1-全表和特定列查询" class="headerlink" title="6.1.1 全表和特定列查询"></a>6.1.1 全表和特定列查询</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from emp;</span><br><span class="line">select empno, enmae from emp;</span><br></pre></td></tr></table></figure>
+<h2 id="5-2-数据导出"><a href="#5-2-数据导出" class="headerlink" title="5.2 数据导出"></a>5.2 数据导出</h2><h1 id="六-查询"><a href="#六-查询" class="headerlink" title="六 查询"></a>六 查询</h1><h2 id="6-1-基本查询"><a href="#6-1-基本查询" class="headerlink" title="6.1 基本查询"></a>6.1 基本查询</h2><h3 id="6-1-1-全表和特定列查询"><a href="#6-1-1-全表和特定列查询" class="headerlink" title="6.1.1 全表和特定列查询"></a>6.1.1 全表和特定列查询</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from emp;</span><br><span class="line">select empno, enmae from emp;</span><br></pre></td></tr></table></figure>
 
 <h3 id="6-1-2-列别名"><a href="#6-1-2-列别名" class="headerlink" title="6.1.2 列别名"></a>6.1.2 列别名</h3><p>就是重命名一个列，紧跟列名就完了</p>
 <h3 id="6-1-3-算术运算符"><a href="#6-1-3-算术运算符" class="headerlink" title="6.1.3 算术运算符"></a>6.1.3 算术运算符</h3><ul>
@@ -456,7 +840,7 @@
 
 <h3 id="6-7-8-补齐函数"><a href="#6-7-8-补齐函数" class="headerlink" title="6.7.8 补齐函数"></a>6.7.8 补齐函数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- string1:源字符串</span></span><br><span class="line"><span class="comment">-- 即最终结果返回的字符串的长度，如果这个值长的话就做截断处理，短的话就拿string2填补</span></span><br><span class="line"><span class="comment">-- string2:用于填充的字符，可以不填，默认为空字符</span></span><br><span class="line"><span class="comment">-- l：从左侧开始补齐； r：从右侧开始补齐</span></span><br><span class="line">lpad(string1, length, string2)</span><br><span class="line">rpad(string1, length, string2)</span><br></pre></td></tr></table></figure>
 
-<h1 id="第七章-函数"><a href="#第七章-函数" class="headerlink" title="第七章 函数"></a>第七章 函数</h1><h2 id="7-1-系统内置函数"><a href="#7-1-系统内置函数" class="headerlink" title="7.1 系统内置函数"></a>7.1 系统内置函数</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看系统自带的函数</span></span><br><span class="line">show <span class="built_in">functions</span>;</span><br><span class="line"><span class="comment"># 显示自带函数的用法</span></span><br><span class="line">desc <span class="keyword">function</span> upper;</span><br><span class="line"><span class="comment"># 显示自带的函数的用法</span></span><br><span class="line">desc <span class="keyword">function</span> extended upper;</span><br></pre></td></tr></table></figure>
+<h1 id="七-函数"><a href="#七-函数" class="headerlink" title="七 函数"></a>七 函数</h1><h2 id="7-1-系统内置函数"><a href="#7-1-系统内置函数" class="headerlink" title="7.1 系统内置函数"></a>7.1 系统内置函数</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看系统自带的函数</span></span><br><span class="line">show <span class="built_in">functions</span>;</span><br><span class="line"><span class="comment"># 显示自带函数的用法</span></span><br><span class="line">desc <span class="keyword">function</span> upper;</span><br><span class="line"><span class="comment"># 显示自带的函数的用法</span></span><br><span class="line">desc <span class="keyword">function</span> extended upper;</span><br></pre></td></tr></table></figure>
 
 <h2 id="7-2-自定义函数"><a href="#7-2-自定义函数" class="headerlink" title="7.2 自定义函数"></a>7.2 自定义函数</h2><ol>
 <li>UDF：一进一出</li>
@@ -476,7 +860,7 @@
 <li>重写initialize，process和close方法</li>
 </ol>
 <h3 id="7-2-3-使用自定义函数"><a href="#7-2-3-使用自定义函数" class="headerlink" title="7.2.3 使用自定义函数"></a>7.2.3 使用自定义函数</h3><p>mysql存储元数据，HDFS存储实际数据，如果两个能对上，hive就可以进行操作</p>
-<h1 id="第八章-高级内容"><a href="#第八章-高级内容" class="headerlink" title="第八章 高级内容"></a>第八章 高级内容</h1><h2 id="8-1-explain"><a href="#8-1-explain" class="headerlink" title="8.1 explain"></a>8.1 explain</h2><h3 id="8-1-1-概述"><a href="#8-1-1-概述" class="headerlink" title="8.1.1 概述"></a>8.1.1 概述</h3><p>HIVE提供了EXPLAIN命令来展示一个查询的执行计划，这个执行计划对于我们了解底层原理，hive 调优，排查数据倾斜等很有帮助</p>
+<h1 id="八-高级内容"><a href="#八-高级内容" class="headerlink" title="八 高级内容"></a>八 高级内容</h1><h2 id="8-1-explain"><a href="#8-1-explain" class="headerlink" title="8.1 explain"></a>8.1 explain</h2><h3 id="8-1-1-概述"><a href="#8-1-1-概述" class="headerlink" title="8.1.1 概述"></a>8.1.1 概述</h3><p>HIVE提供了EXPLAIN命令来展示一个查询的执行计划，这个执行计划对于我们了解底层原理，hive 调优，排查数据倾斜等很有帮助</p>
 <h3 id="8-1-2-语法"><a href="#8-1-2-语法" class="headerlink" title="8.1.2 语法"></a>8.1.2 语法</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPLAIN [EXTENDED<span class="operator">|</span>CBO<span class="operator">|</span>AST<span class="operator">|</span>DEPENDENCY<span class="operator">|</span><span class="keyword">AUTHORIZATION</span><span class="operator">|</span>LOCKS<span class="operator">|</span>VECTORIZATION<span class="operator">|</span>ANALYZE] query</span><br></pre></td></tr></table></figure>
 
 <ol>
@@ -591,7 +975,667 @@
 <p> 大家有什么发现，除了表别名不一样，其他的执行计划完全一样，都是先进行 where 条件过滤，在进行 join 条件关联。说明 hive 底层会自动帮我们进行优化，所以这两条sql语句执行效率是一样的。</p>
 </li>
 </ol>
-<h1 id="第八章-报错"><a href="#第八章-报错" class="headerlink" title="第八章 报错"></a>第八章 报错</h1><h2 id="8-1-MismatchedTokenException-318-326"><a href="#8-1-MismatchedTokenException-318-326" class="headerlink" title="8.1 MismatchedTokenException(318!=326)"></a>8.1 MismatchedTokenException(318!=326)</h2><p>这个问题是因为没有使用dt=’2020-02-13’这个格式。</p>
+<h2 id="8-2-底层原理"><a href="#8-2-底层原理" class="headerlink" title="8.2 底层原理"></a>8.2 底层原理</h2><p><img src="https://gitee.com/liyunh/image/raw/master/master/202111091435688.png" alt="图片"></p>
+<p>在 Hive 这一侧，总共有五个组件：</p>
+<ol>
+<li>UI：用户界面。可看作我们提交SQL语句的命令行界面。</li>
+<li>DRIVER：驱动程序。接收查询的组件。该组件实现了会话句柄的概念。</li>
+<li>COMPILER：编译器。负责将 SQL 转化为平台可执行的执行计划。对不同的查询块和查询表达式进行语义分析，并最终借助表和从 metastore 查找的分区元数据来生成执行计划。</li>
+<li>METASTORE：元数据库。存储 Hive 中各种表和分区的所有结构信息。</li>
+<li>EXECUTION ENGINE：执行引擎。负责提交 COMPILER 阶段编译好的执行计划到不同的平台上。</li>
+</ol>
+<p>上图的基本流程是：</p>
+<p><strong>步骤1</strong>：UI 调用 DRIVER 的接口；</p>
+<p><strong>步骤2</strong>：DRIVER 为查询创建会话句柄，并将查询发送到 COMPILER(编译器)生成执行计划；</p>
+<p><strong>步骤3和4</strong>：编译器从元数据存储中获取本次查询所需要的元数据，该元数据用于对查询树中的表达式进行类型检查，以及基于查询谓词修建分区；</p>
+<p><strong>步骤5</strong>：编译器生成的计划是分阶段的DAG，每个阶段要么是 map/reduce 作业，要么是一个元数据或者HDFS上的操作。将生成的计划发给 DRIVER。</p>
+<p>如果是 map/reduce 作业，该计划包括 map operator trees 和一个  reduce operator tree，执行引擎将会把这些作业发送给 MapReduce ：</p>
+<p><strong>步骤6、6.1、6.2和6.3</strong>：执行引擎将这些阶段提交给适当的组件。在每个 task(mapper/reducer) 中，从HDFS文件中读取与表或中间输出相关联的数据，并通过相关算子树传递这些数据。最终这些数据通过序列化器写入到一个临时HDFS文件中（如果不需要 reduce 阶段，则在 map 中操作）。临时文件用于向计划中后面的 map/reduce 阶段提供数据。</p>
+<p><strong>步骤7、8和9</strong>：最终的临时文件将移动到表的位置，确保不读取脏数据(文件重命名在HDFS中是原子操作)。对于用户的查询，临时文件的内容由执行引擎直接从HDFS读取，然后通过Driver发送到UI。</p>
+<h3 id="Hive-SQL-编译成-MapReduce-过程"><a href="#Hive-SQL-编译成-MapReduce-过程" class="headerlink" title="Hive SQL 编译成 MapReduce 过程"></a>Hive SQL 编译成 MapReduce 过程</h3><p>编译 SQL 的任务是在上节中介绍的 COMPILER（编译器组件）中完成的。Hive将SQL转化为MapReduce任务，整个编译过程分为六个阶段：</p>
+<p><img src="https://gitee.com/liyunh/image/raw/master/master/202111091440093.png" alt="图片"></p>
+<ol>
+<li><strong>词法、语法解析：</strong> Antlr 定义 SQL 的语法规则，完成 SQL 词法，语法解析，将 SQL 转化为抽象语法树 AST Tree；</li>
+</ol>
+<blockquote>
+<p>Antlr是一种语言识别的工具，可以用来构造领域语言。使用Antlr构造特定的语言只需要编写一个语法文件，定义词法和语法替换规则即可，Antlr完成了词法分析、语法分析、语义分析、中间代码生成的过程。</p>
+</blockquote>
+<ol start="2">
+<li><p><strong>语义解析</strong>: 遍历 AST Tree，抽象出查询的基本组成单元 QueryBlock；</p>
+</li>
+<li><p><strong>生成逻辑执行计划</strong>: 遍历 QueryBlock，翻译为执行操作树 OperatorTree；</p>
+</li>
+<li><p><strong>优化逻辑执行计划</strong>: 逻辑层优化器进行 OperatorTree 变换，合并 Operator，达到减少 MapReduce Job，减少数据传输及 shuffle 数据量；</p>
+</li>
+<li><p><strong>生成物理执行计划</strong>: 遍历 OperatorTree，翻译为 MapReduce 任务；</p>
+</li>
+<li><p><strong>优化物理执行计划</strong>: 物理层优化器进行 MapReduce 任务的变换，生成最终的执行计划。</p>
+</li>
+</ol>
+<h2 id="8-3-Hook"><a href="#8-3-Hook" class="headerlink" title="8.3 Hook"></a>8.3 Hook</h2><p>Hook是一种在处理过程中拦截事件，消息或函数调用的机制。 <strong>Hive hooks是绑定到了Hive内部的工作机制，无需重新编译Hive。所以Hive Hook提供了使用hive扩展和集成外部功能的能力。</strong> 我们可以通过Hive Hooks在查询处理的各个步骤中运行/注入一些代码，帮助我们实现想要实现的功能。</p>
+<p>根据钩子的类型，它可以在查询处理期间的不同点调用：</p>
+<p><code>Pre-semantic-analyzer hooks</code>：在Hive在查询字符串上运行语义分析器之前调用。</p>
+<p><code>Post-semantic-analyzer hooks</code>：在Hive在查询字符串上运行语义分析器之后调用。</p>
+<p><code>Pre-driver-run hooks</code>：在driver执行查询之前调用。</p>
+<p><code>Post-driver-run hooks</code>：在driver执行查询之后调用。</p>
+<p><code>Pre-execution hooks</code>：在执行引擎执行查询之前调用。请注意，这个目的是此时已经为Hive准备了一个优化的查询计划。</p>
+<p><code>Post-execution hooks</code>：在查询执行完成之后以及将结果返回给用户之前调用。</p>
+<p><code>Failure-execution hooks</code>：当查询执行失败时调用。</p>
+<p>由以上的Hive Hooks我们都可以得出Hive SQL执行的生命周期了，而Hive Hooks则完整的贯穿了Hive查询的整个生命周期。</p>
+<p><img src="https://gitee.com/liyunh/image/raw/master/master/202111091158479.png" alt="img"></p>
+<p>对于Hive Hooks有了初步理解之后，后面我们会通过示例介绍如何实现一个Hive Hook，并且尝试一下如何基于Hive实现统一的SQL查询服务。</p>
+<h2 id="8-4-元数据管理"><a href="#8-4-元数据管理" class="headerlink" title="8.4 元数据管理"></a>8.4 元数据管理</h2><h3 id="8-4-1-概述"><a href="#8-4-1-概述" class="headerlink" title="8.4.1 概述"></a>8.4.1 概述</h3><p>Hive 的元数据信息通常存储在关系型数据库中，常用MySQL数据库作为元数据库管理。上一篇hive的安装也是将元数据信息存放在MySQL数据库中。</p>
+<p>Hive的元数据信息在MySQL数据中有57张表</p>
+<h3 id="8-4-2-存储Hive版本的元数据表"><a href="#8-4-2-存储Hive版本的元数据表" class="headerlink" title="8.4.2 存储Hive版本的元数据表"></a>8.4.2 存储Hive版本的元数据表</h3><p>VERSION</p>
+<table>
+<thead>
+<tr>
+<th><strong>VER_ID</strong></th>
+<th><strong>SCHEMA_VERSION</strong></th>
+<th><strong>VERSION_COMMENT</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ID主键</td>
+<td>Hive版本</td>
+<td>版本说明</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0.13.0</td>
+<td>Set by MetaStore</td>
+</tr>
+</tbody></table>
+<p>如果这个表出问题了，是进不了Hive-Client的</p>
+<h3 id="8-4-3-Hive数据库相关的元数据表"><a href="#8-4-3-Hive数据库相关的元数据表" class="headerlink" title="8.4.3 Hive数据库相关的元数据表"></a>8.4.3 Hive数据库相关的元数据表</h3><ol>
+<li><p><strong>DBS</strong></p>
+<p>存储Hive中所有数据库的基本信息</p>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>DB_ID</strong></td>
+<td>数据库ID</td>
+<td>2</td>
+</tr>
+<tr>
+<td><strong>DESC</strong></td>
+<td>数据库描述</td>
+<td>测试库</td>
+</tr>
+<tr>
+<td><strong>DB_LOCATION_URI</strong></td>
+<td>数据库HDFS路径</td>
+<td>hdfs://namenode/user/hive/warehouse/lxw1234.db</td>
+</tr>
+<tr>
+<td><strong>NAME</strong></td>
+<td>数据库名</td>
+<td>lxw1234</td>
+</tr>
+<tr>
+<td><strong>OWNER_NAME</strong></td>
+<td>数据库所有者用户名</td>
+<td>lxw1234</td>
+</tr>
+<tr>
+<td><strong>OWNER_TYPE</strong></td>
+<td>所有者角色</td>
+<td>USER</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>DATABASE_PARAMS</strong></p>
+<p>该表存储数据库的相关参数，在CREATE DATABASE时候用</p>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>DB_ID</strong></td>
+<td>数据库ID</td>
+<td>2</td>
+</tr>
+<tr>
+<td><strong>PARAM_KEY</strong></td>
+<td>参数名</td>
+<td>createdby</td>
+</tr>
+<tr>
+<td><strong>PARAM_VALUE</strong></td>
+<td>参数值</td>
+<td>lxw1234</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<h3 id="8-4-4-Hive表和视图相关的元数据表"><a href="#8-4-4-Hive表和视图相关的元数据表" class="headerlink" title="8.4.4 Hive表和视图相关的元数据表"></a>8.4.4 Hive表和视图相关的元数据表</h3><ol>
+<li><p><strong>TBLS</strong></p>
+<p> 该表中存储Hive表、视图、索引表的基本信息。</p>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>TBL_ID</strong></td>
+<td>表ID</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>CREATE_TIME</strong></td>
+<td>创建时间</td>
+<td>1436317071</td>
+</tr>
+<tr>
+<td><strong>DB_ID</strong></td>
+<td>数据库ID</td>
+<td>2，对应DBS中的DB_ID</td>
+</tr>
+<tr>
+<td><strong>LAST_ACCESS_TIME</strong></td>
+<td>上次访问时间</td>
+<td>1436317071</td>
+</tr>
+<tr>
+<td><strong>OWNER</strong></td>
+<td>所有者</td>
+<td>liuxiaowen</td>
+</tr>
+<tr>
+<td><strong>RETENTION</strong></td>
+<td>保留字段</td>
+<td>0</td>
+</tr>
+<tr>
+<td><strong>SD_ID</strong></td>
+<td>序列化配置信息</td>
+<td>86，对应SDS表中的SD_ID</td>
+</tr>
+<tr>
+<td><strong>TBL_NAME</strong></td>
+<td>表名</td>
+<td>lxw1234</td>
+</tr>
+<tr>
+<td><strong>TBL_TYPE</strong></td>
+<td>表类型</td>
+<td>MANAGED_TABLE、EXTERNAL_TABLE、INDEX_TABLE、VIRTUAL_VIEW</td>
+</tr>
+<tr>
+<td><strong>VIEW_EXPANDED_TEXT</strong></td>
+<td>视图的详细HQL语句</td>
+<td>select <code>lxw1234</code>.<code>pt</code>, <code>lxw1234</code>.<code>pcid</code> from <code>liuxiaowen</code>.<code>lxw1234</code></td>
+</tr>
+<tr>
+<td><strong>VIEW_ORIGINAL_TEXT</strong></td>
+<td>视图的原始HQL语句</td>
+<td>select * from lxw1234</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>TABLE_PARAMS</strong></p>
+<p>该表存储表/视图的属性信息。</p>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>TBL_ID</strong></td>
+<td>表ID</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>PARAM_KEY</strong></td>
+<td>属性名</td>
+<td>totalSize、numRows、EXTERNAL</td>
+</tr>
+<tr>
+<td><strong>PARAM_VALUE</strong></td>
+<td>属性值</td>
+<td>970107336、21231028、TRUE</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>TBL_PRIVS</strong></p>
+<p> 该表存储表/视图的授权信息</p>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>TBL_GRANT_ID</strong></td>
+<td>授权ID</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>CREATE_TIME</strong></td>
+<td>授权时间</td>
+<td>1436320455</td>
+</tr>
+<tr>
+<td><strong>GRANT_OPTION</strong></td>
+<td></td>
+<td>0</td>
+</tr>
+<tr>
+<td><strong>GRANTOR</strong></td>
+<td>授权执行用户</td>
+<td>liuxiaowen</td>
+</tr>
+<tr>
+<td><strong>GRANTOR_TYPE</strong></td>
+<td>授权者类型</td>
+<td>USER</td>
+</tr>
+<tr>
+<td><strong>PRINCIPAL_NAME</strong></td>
+<td>被授权用户</td>
+<td>username</td>
+</tr>
+<tr>
+<td><strong>PRINCIPAL_TYPE</strong></td>
+<td>被授权用户类型</td>
+<td>USER</td>
+</tr>
+<tr>
+<td><strong>TBL_PRIV</strong></td>
+<td>权限</td>
+<td>Select、Alter</td>
+</tr>
+<tr>
+<td><strong>TBL_ID</strong></td>
+<td>表ID</td>
+<td>22，对应TBLS表中的TBL_ID</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<h3 id="8-4-5-Hive文件存储信息相关的元数据表"><a href="#8-4-5-Hive文件存储信息相关的元数据表" class="headerlink" title="8.4.5 Hive文件存储信息相关的元数据表"></a>8.4.5 Hive文件存储信息相关的元数据表</h3><p>　　主要涉及SDS、SD_PARAMS、SERDES、SERDE_PARAMS</p>
+<p>　　由于HDFS支持的文件格式很多，而建Hive表时候也可以指定各种文件格式，Hive在将HQL解析成MapReduce时候，需要知道去哪里，使用哪种格式去读写HDFS文件，而这些信息就保存在这几张表中。</p>
+<ol>
+<li><p>SDS</p>
+<p>该表保存文件存储的基本信息，如INPUT_FORMAT、OUTPUT_FORMAT、是否压缩等。</p>
+</li>
+</ol>
+<p>　　<strong>TBLS表中的SD_ID与该表关联，可以获取Hive表的存储信息。</strong></p>
+<table>
+<thead>
+<tr>
+<th>元数据表字段</th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>SD_ID</strong></td>
+<td>存储信息ID</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>CD_ID</strong></td>
+<td>字段信息ID</td>
+<td>21，对应CDS表</td>
+</tr>
+<tr>
+<td><strong>INPUT_FORMAT</strong></td>
+<td>文件输入格式</td>
+<td>org.apache.hadoop.mapred.TextInputFormat</td>
+</tr>
+<tr>
+<td><strong>IS_COMPRESSED</strong></td>
+<td>是否压缩</td>
+<td>0</td>
+</tr>
+<tr>
+<td><strong>IS_STOREDASSUBDIRECTORIES</strong></td>
+<td>是否以子目录存储</td>
+<td>0</td>
+</tr>
+<tr>
+<td><strong>LOCATION</strong></td>
+<td>HDFS路径</td>
+<td>hdfs://namenode/hivedata/warehouse/ut.db/t_lxw</td>
+</tr>
+<tr>
+<td><strong>NUM_BUCKETS</strong></td>
+<td>分桶数量</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>OUTPUT_FORMAT</strong></td>
+<td>文件输出格式</td>
+<td>org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat</td>
+</tr>
+<tr>
+<td><strong>SERDE_ID</strong></td>
+<td>序列化类ID</td>
+<td>3，对应SERDES表</td>
+</tr>
+</tbody></table>
+<ol start="2">
+<li><p>SD_PARAMS</p>
+<p>该表存储Hive存储的属性信息，在创建表时候使用</p>
+<p>STORED BY ‘storage.handler.class.name’ [WITH SERDEPROPERTIES (…)指定。</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th>说明</th>
+<th>示例数据</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>SD_ID</strong></td>
+<td>存储配置ID</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>PARAM_KEY</strong></td>
+<td>存储属性名</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>PARAM_VALUE</strong></td>
+<td>存储属性值</td>
+<td></td>
+</tr>
+</tbody></table>
+<ol start="3">
+<li><p>SERDES</p>
+<p>该表存储序列化使用的类信息</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>SERDE_ID</strong></td>
+<td>序列化类配置ID</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>NAME</strong></td>
+<td>序列化类别名</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>SLIB</strong></td>
+<td>序列化类</td>
+<td>org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe</td>
+</tr>
+</tbody></table>
+<ol start="4">
+<li><p>SERDE_PARAMS</p>
+<p>该表存储序列化的一些属性、格式信息,比如：行、列分隔符</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>SERDE_ID</strong></td>
+<td>序列化类配置ID</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>PARAM_KEY</strong></td>
+<td>属性名</td>
+<td>field.delim</td>
+</tr>
+<tr>
+<td><strong>PARAM_VALUE</strong></td>
+<td>属性值</td>
+<td>,</td>
+</tr>
+</tbody></table>
+<h3 id="8-4-6-Hive表字段相关的元数据表"><a href="#8-4-6-Hive表字段相关的元数据表" class="headerlink" title="8.4.6 Hive表字段相关的元数据表"></a>8.4.6 Hive表字段相关的元数据表</h3><p>主要涉及COLUMNS_V2</p>
+<ol>
+<li><p>COLUMNS_V2</p>
+<p>该表存储表对应的字段信息。</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>CD_ID</strong></td>
+<td>字段信息ID</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>COMMENT</strong></td>
+<td>字段注释</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>COLUMN_NAME</strong></td>
+<td>字段名</td>
+<td>pt</td>
+</tr>
+<tr>
+<td><strong>TYPE_NAME</strong></td>
+<td>字段类型</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>INTEGER_IDX</strong></td>
+<td>字段顺序</td>
+<td>2</td>
+</tr>
+</tbody></table>
+<h3 id="8-4-7-Hive表分区相关的元数据表"><a href="#8-4-7-Hive表分区相关的元数据表" class="headerlink" title="8.4.7 Hive表分区相关的元数据表"></a>8.4.7 Hive表分区相关的元数据表</h3><p>主要涉及PARTITIONS、PARTITION_KEYS、PARTITION_KEY_VALS、PARTITION_PARAMS</p>
+<ol>
+<li><p>PARTITIONS</p>
+<p>该表存储表分区的基本信息。</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PART_ID</strong></td>
+<td>分区ID</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>CREATE_TIME</strong></td>
+<td>分区创建时间</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>LAST_ACCESS_TIME</strong></td>
+<td>最后一次访问时间</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>PART_NAME</strong></td>
+<td>分区名</td>
+<td>pt=2015-06-12</td>
+</tr>
+<tr>
+<td><strong>SD_ID</strong></td>
+<td>分区存储ID</td>
+<td>21</td>
+</tr>
+<tr>
+<td><strong>TBL_ID</strong></td>
+<td>表ID</td>
+<td>2</td>
+</tr>
+</tbody></table>
+<ol start="2">
+<li><p>PARTITION_KEYS</p>
+<p>该表存储分区的字段信息</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>TBL_ID</strong></td>
+<td>表ID</td>
+<td>2</td>
+</tr>
+<tr>
+<td><strong>PKEY_COMMENT</strong></td>
+<td>分区字段说明</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>PKEY_NAME</strong></td>
+<td>分区字段名</td>
+<td>pt</td>
+</tr>
+<tr>
+<td><strong>PKEY_TYPE</strong></td>
+<td>分区字段类型</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>INTEGER_IDX</strong></td>
+<td>分区字段顺序</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<ol start="3">
+<li><p>PARTITION_KEY_VALS</p>
+<p>该表存储分区字段值。</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PART_ID</strong></td>
+<td>分区ID</td>
+<td>2</td>
+</tr>
+<tr>
+<td><strong>PART_KEY_VAL</strong></td>
+<td>分区字段值</td>
+<td>2015-06-12</td>
+</tr>
+<tr>
+<td><strong>INTEGER_IDX</strong></td>
+<td>分区字段值顺序</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<ol start="4">
+<li><p>PARTITION_PARAMS</p>
+<p>该表存储分区的属性信息。</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong>元数据表字段</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例数据</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PART_ID</strong></td>
+<td>分区ID</td>
+<td>2</td>
+</tr>
+<tr>
+<td><strong>PARAM_KEY</strong></td>
+<td>分区属性名</td>
+<td>numFiles、numRows</td>
+</tr>
+<tr>
+<td><strong>PARAM_VALUE</strong></td>
+<td>分区属性值</td>
+<td>15、502195</td>
+</tr>
+</tbody></table>
+<h3 id="8-4-8-其他不常用的元数据表"><a href="#8-4-8-其他不常用的元数据表" class="headerlink" title="8.4.8 其他不常用的元数据表"></a>8.4.8 其他不常用的元数据表</h3><ol>
+<li><p><strong>DB_PRIVS</strong></p>
+<p>数据库权限信息表。通过GRANT语句对数据库授权后，将会在这里存储。</p>
+</li>
+<li><p><strong>IDXS</strong></p>
+<p>索引表，存储Hive索引相关的元数据</p>
+</li>
+<li><p><strong>INDEX_PARAMS</strong></p>
+<p>索引相关的属性信息。</p>
+</li>
+<li><p><strong>TAB_COL_STATS</strong></p>
+<p>表字段的统计信息。使用ANALYZE语句对表字段分析后记录在这里。</p>
+</li>
+<li><p><strong>TBL_COL_PRIVS</strong></p>
+<p>表字段的授权信息</p>
+</li>
+<li><p><strong>PART_PRIVS</strong></p>
+<p>分区的授权信息</p>
+</li>
+<li><p><strong>PART_COL_STATS</strong></p>
+<p>分区字段的统计信息。</p>
+</li>
+<li><p><strong>PART_COL_PRIVS</strong></p>
+<p>分区字段的权限信息。</p>
+</li>
+<li><p><strong>FUNCS</strong></p>
+<p>用户注册的函数信息</p>
+</li>
+<li><p><strong>FUNC_RU</strong></p>
+<p>用户注册函数的资源信息</p>
+</li>
+</ol>
+<h1 id="九-报错"><a href="#九-报错" class="headerlink" title="九 报错"></a>九 报错</h1><h2 id="8-1-MismatchedTokenException-318-326"><a href="#8-1-MismatchedTokenException-318-326" class="headerlink" title="8.1 MismatchedTokenException(318!=326)"></a>8.1 MismatchedTokenException(318!=326)</h2><p>这个问题是因为没有使用dt=’2020-02-13’这个格式。</p>
 <h2 id="8-2-cannot-recognize-input-near-‘2020’-‘-‘-‘09’-in-function-specification"><a href="#8-2-cannot-recognize-input-near-‘2020’-‘-‘-‘09’-in-function-specification" class="headerlink" title="8.2 cannot recognize input near ‘2020’ ‘-‘ ‘09’ in function specification"></a>8.2 cannot recognize input near ‘2020’ ‘-‘ ‘09’ in function specification</h2><p>对半是因为少逗号之类的</p>
 <h2 id="8-3-7-missing-EOF-at-‘by’-near-‘group’"><a href="#8-3-7-missing-EOF-at-‘by’-near-‘group’" class="headerlink" title="8.3 7 missing EOF at ‘by’ near ‘group’"></a>8.3 7 missing EOF at ‘by’ near ‘group’</h2><p>hive本身缺陷，需要在每个子查询后面加别名。</p>
 <h2 id="8-经验"><a href="#8-经验" class="headerlink" title="8. 经验"></a>8. 经验</h2><h3 id="8-2-1-hive和MySQL之间数据对不上"><a href="#8-2-1-hive和MySQL之间数据对不上" class="headerlink" title="8.2.1 hive和MySQL之间数据对不上"></a>8.2.1 hive和MySQL之间数据对不上</h3><ol>
@@ -885,14 +1929,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
